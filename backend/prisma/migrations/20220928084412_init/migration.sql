@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE `residents` MODIFY `birthPlace` VARCHAR(191) NOT NULL,
+    MODIFY `OSCAId` VARCHAR(191) NULL;

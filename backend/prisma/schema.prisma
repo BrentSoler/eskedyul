@@ -1,0 +1,122 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model announcements {
+  id          Int      @id @default(autoincrement())
+  dateAdded   DateTime @default(now())
+  dateUpdated DateTime @default(now())
+  details     String
+  barangay    String
+}
+
+model barangay {
+  id          String        @id
+  zone        String
+  districtId  Int
+  district    district      @relation(fields: [districtId], references: [id], map: "Barangay_districtId_fkey")
+  program     program[]
+  transaction transaction[]
+  users       users[]
+
+  @@index([districtId], map: "Barangay_districtId_fkey")
+}
+
+model district {
+  id       Int        @id @default(autoincrement())
+  name     String
+  barangay barangay[]
+}
+
+model program {
+  id            String        @id
+  details       String
+  view          String
+  qualification String
+  brgyId        String
+  status        String
+  type          String
+  name          String
+  barangay      barangay      @relation(fields: [brgyId], references: [id], map: "Program_brgyId_fkey")
+  schedule      schedule[]
+  transactions  transaction[]
+
+  @@index([brgyId], map: "Program_brgyId_fkey")
+}
+
+model residents {
+  id              Int           @id
+  seniorType      String
+  emgContNum      String
+  emgContName     String
+  civilStatus     String
+  birthdate       String
+  birthPlace      String
+  OSCAId          String?
+  empStatus       String
+  residencyStatus String
+  userId          Int
+  users           users         @relation(fields: [userId], references: [id], map: "Residents_userId_fkey")
+  transaction     transaction[]
+
+  @@index([userId], map: "Residents_userId_fkey")
+}
+
+model schedule {
+  id          Int           @id @default(autoincrement())
+  startTime   String
+  endTime     String
+  date        String
+  location    String
+  programId   String?
+  program     program?      @relation(fields: [programId], references: [id], onDelete: Cascade, map: "Schedule_programId_fkey")
+  transaction transaction[]
+
+  @@index([programId], map: "Schedule_programId_fkey")
+}
+
+model transaction {
+  id         Int       @id @default(autoincrement())
+  residentId Int
+  scheduleId Int
+  programId  String
+  status     String
+  brgyId     String
+  barangay   barangay  @relation(fields: [brgyId], references: [id], map: "Transaction_brgyId_fkey")
+  program    program   @relation(fields: [programId], references: [id], map: "Transaction_programId_fkey")
+  residents  residents @relation(fields: [residentId], references: [id], map: "Transaction_residentId_fkey")
+  schedule   schedule  @relation(fields: [scheduleId], references: [id], onDelete: Cascade, map: "Transaction_scheduleId_fkey")
+
+  @@index([brgyId], map: "Transaction_brgyId_fkey")
+  @@index([programId], map: "Transaction_programId_fkey")
+  @@index([residentId], map: "Transaction_residentId_fkey")
+  @@index([scheduleId], map: "Transaction_scheduleId_fkey")
+}
+
+model users {
+  id        Int         @id @default(autoincrement())
+  role      String
+  fname     String
+  mname     String
+  lname     String
+  suffix    String
+  sex       String
+  mobileNo  String
+  presAdd   String
+  permAdd   String
+  brgyId    String
+  idType    String
+  idNo      String
+  status    Int         @default(0)
+  password  String?
+  email     String?
+  barangay  barangay    @relation(fields: [brgyId], references: [id], map: "Users_brgyId_fkey")
+  residents residents[]
+
+  @@index([brgyId], map: "Users_brgyId_fkey")
+}
