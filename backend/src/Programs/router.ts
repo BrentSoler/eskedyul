@@ -6,6 +6,7 @@ import {
   deleteProgram,
   findProgram,
   getPrograms,
+  getReports,
   updateProgram,
 } from "./controller";
 
@@ -91,7 +92,7 @@ export default function ProgramsRouter(router: Router) {
         throw new Error("Provide a Program ID");
       }
 
-      const data = await findProgram(req.query.id.toString());
+      const data = await getReports(req.query.id.toString());
 
       res.json({ ...data });
     })

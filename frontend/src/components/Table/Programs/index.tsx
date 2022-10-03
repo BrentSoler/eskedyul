@@ -9,59 +9,47 @@ const ProgramsTable = () => {
 
 	const { data, isSuccess, isLoading } = controller.getPrograms(brgyId);
 
-	console.log("GAME:", data);
-
-	const [getData, setGetData] = useState(data);
-
-	console.log("NYE?",getData);
+	// const [getData, setGetData] = useState(data);
 
 	const [searchFilter, setSearchFilter] = useState("");
 
 	// filter function useMemo
 	const handleFilteredData = useMemo(() => {
-		console.log("TINGIN NGA ULIT?:", getData)
-		console.log("BAKA NAMAN?", data);
-		if (data !== undefined) {
-			const sorted = data?.data;
+		if (isSuccess) {
+			if (data.data !== "No Data") {
+				const sorted = data?.data;
 
-			const nameSort = sorted?.filter((d) => 
-				d.name.toLowerCase().includes(searchFilter.toLowerCase())
-			)
+				const nameSort = sorted?.filter((d: any) =>
+					d.name.toLowerCase().includes(searchFilter.toLowerCase())
+				);
 
-			const typeSort = sorted?.filter((d) => 
-				d.type.toString().includes(searchFilter.toString())
-			)
+				const typeSort = sorted?.filter((d: any) =>
+					d.type.toString().includes(searchFilter.toString())
+				);
 
-			const qualificationSort = sorted?.filter((d) => 
-				d.qualification.toString().toLowerCase().includes(searchFilter.toString().toLowerCase())
-			)
-			
-			return searchFilter === "" 
-				? sorted 
-				: [...new Set([...nameSort, ...typeSort, ...qualificationSort])];
-		} 
-		return [
-			{
-				name: "",
-				type: "",
-				qualification: "",
-				view: "",
-				status: "",
+				const qualificationSort = sorted?.filter((d: any) =>
+					d.qualification.toString().toLowerCase().includes(searchFilter.toString().toLowerCase())
+				);
+
+				return searchFilter === ""
+					? sorted
+					: [...new Set([...nameSort, ...typeSort, ...qualificationSort])];
 			}
-		]
-	}, [getData, searchFilter])
+			return "No Data";
+		}
+	}, [isSuccess, data, searchFilter]);
 
 	return (
 		<>
-			<div className="overflow-x-auto max-h-[20rem] min-h-[20rem] relative w-full p-4">
+			<div className="overflow-x-auto relative w-full p-4 gap-4 flex flex-col">
 				<input
-					placeholder="Search"
+					placeholder="Search Name, Type or Qualification"
 					type="text"
 					onChange={(e) => {
 						setSearchFilter(e.target.value);
-						console.log(handleFilteredData, searchFilter);
 					}}
 					value={searchFilter}
+					className="input input-bordered"
 				/>
 				<table className="table w-full m-auto">
 					<thead>

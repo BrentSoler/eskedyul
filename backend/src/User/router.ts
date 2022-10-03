@@ -44,7 +44,12 @@ export default function userRoutes(router: Router) {
   );
 
   router.route("/register/:role").post(
+    authHandler,
     expressAsyncHandler(async (req: Request, res: Response) => {
+      if (req.user.role !== "Master Admin") {
+        throw new Error("Master Admin can only use this");
+      }
+
       const role = req.params.role;
 
       if (role.toString() === "admin") {

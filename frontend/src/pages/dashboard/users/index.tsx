@@ -18,9 +18,14 @@ const ProgramsPage = () => {
 		<div className="p-4">
 			<div className="flex justify-between items-center">
 				<h1 className="font-bold text-3xl">Users</h1>
-				<Link href="/dashboard/users/add/resident" className="btn btn-primary">
-					<a className="btn btn-primary rounded-md">ADD RESIDENT</a>
-				</Link>
+				<div className="flex gap-3">
+					<Link href="/dashboard/users/add/admin" className="btn btn-primary">
+						<a className="btn btn-primary rounded-md">ADD ADMIN</a>
+					</Link>
+					<Link href="/dashboard/users/add/resident" className="btn btn-primary">
+						<a className="btn btn-primary rounded-md">ADD RESIDENT</a>
+					</Link>
+				</div>
 			</div>
 			<UsersTable />
 		</div>

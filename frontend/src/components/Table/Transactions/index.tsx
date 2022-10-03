@@ -9,68 +9,61 @@ const TransactionTable = () => {
 
 	const { data, isSuccess, isLoading } = controller.getTransaction(brgyId);
 
-	const [getData, setGetData] = useState(data);
 	const [searchFilter, setSearchFilter] = useState("");
-
-	console.log("DATA: ", data)
-	console.log("GET:", getData)
 
 	// filter function useMemo
 	const handleFilteredData = useMemo(() => {
-		console.log("TINGIN NGA ULIT?:", getData)
-		console.log("BAKA NAMAN?", data);
-		if (data !== undefined) {
-			const sorted = data?.data;
+		if (isSuccess) {
+			if (data.data !== "No Data") {
+				const sorted = data?.data;
 
-			const fnameSort = sorted?.filter((d) => 
-				d.residents.users.fname.toLowerCase().includes(searchFilter.toLowerCase())
-			)
+				const fnameSort = sorted?.filter((d: any) =>
+					d.residents.users.fname.toLowerCase().includes(searchFilter.toLowerCase())
+				);
 
-			const mnameSort = sorted?.filter((d) => 
-				d.residents.users.mname.toLowerCase().includes(searchFilter.toLowerCase())
-			)
+				const mnameSort = sorted?.filter((d: any) =>
+					d.residents.users.mname.toLowerCase().includes(searchFilter.toLowerCase())
+				);
 
-			const lnameSort = sorted?.filter((d) => 
-				d.residents.users.lname.toLowerCase().includes(searchFilter.toLowerCase())
-			)
+				const lnameSort = sorted?.filter((d: any) =>
+					d.residents.users.lname.toLowerCase().includes(searchFilter.toLowerCase())
+				);
 
-			const programNameSort = sorted?.filter((d) => 
-				d.program.name.toLowerCase().includes(searchFilter.toLowerCase())
-			)
+				const programNameSort = sorted?.filter((d: any) =>
+					d.program.name.toLowerCase().includes(searchFilter.toLowerCase())
+				);
 
-			const locationSort = sorted?.filter((d) => 
-				d.schedule.location.toLowerCase().includes(searchFilter.toLowerCase())
-			)
-			
-			return searchFilter === "" 
-				? sorted 
-				: [...new Set([...fnameSort,...mnameSort,...lnameSort, ...programNameSort, ...locationSort])];
-		} 
-		return [
-			{
-				id: "",
-				fname: "",
-				mname: "",
-				lname: "",
-				programName: "",
-				location: "",
-				view: "",
-				status: "",
+				const locationSort = sorted?.filter((d: any) =>
+					d.schedule.location.toLowerCase().includes(searchFilter.toLowerCase())
+				);
+
+				return searchFilter === ""
+					? sorted
+					: [
+							...new Set([
+								...fnameSort,
+								...mnameSort,
+								...lnameSort,
+								...programNameSort,
+								...locationSort,
+							]),
+					  ];
 			}
-		]
-	}, [data, searchFilter])
+			return "No Data";
+		}
+	}, [data, isSuccess, searchFilter]);
 
 	return (
 		<>
-			<div className="relative w-full p-4">
+			<div className="relative w-full p-4 gap-4 flex flex-col">
 				<input
-					placeholder="Search"
+					placeholder="Search Name, Program or Location"
 					type="text"
 					onChange={(e) => {
 						setSearchFilter(e.target.value);
-						console.log(handleFilteredData, searchFilter);
 					}}
 					value={searchFilter}
+					className="input input-bordered"
 				/>
 				<table className="table w-full m-auto">
 					<thead>

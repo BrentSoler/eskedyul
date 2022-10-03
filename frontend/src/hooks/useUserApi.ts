@@ -22,3 +22,34 @@ export async function activateUser({ id, token }: { id: string; token: string })
 
 	return res.data;
 }
+
+export async function postResident({
+	data,
+	residentData,
+	token,
+}: {
+	data: any;
+	residentData: any;
+	token: string;
+}) {
+	const res = await api.post(
+		"/user/register/resident",
+		{ data: data, residentData: residentData },
+		{
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		}
+	);
+
+	return res.data;
+}
+export async function postAdmin({ data, token }: { data: any; token: string }) {
+	const res = await api.post("/user/register/admin", data, {
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
+	});
+
+	return res.data;
+}

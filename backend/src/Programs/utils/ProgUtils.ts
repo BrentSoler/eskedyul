@@ -92,6 +92,15 @@ export class ProgUtils extends Prisma {
 
   public async getReport(id: string) {
     try {
+      const prog = await this.prisma.program.findUnique({
+        where: {
+          id: id,
+        },
+        select: {
+          name: true,
+        },
+      });
+
       const pending = await this.prisma.transaction.findMany({
         where: {
           status: "Pending",
@@ -126,7 +135,7 @@ export class ProgUtils extends Prisma {
       });
 
       return {
-        prog: pending,
+        program: prog,
         pending: pending.length,
         completed: completed.length,
         cancelled: cancelled.length,

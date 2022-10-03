@@ -12,66 +12,53 @@ const UsersTable = () => {
 
 	const { data, isSuccess, isLoading } = userController.getUsers(brgyId);
 
-	console.log("AYOS!", data);
-
-	const [getData, setGetData] = useState(data);
-
 	const [searchFilter, setSearchFilter] = useState("");
 
 	// filter function useMemo
 	const handleFilteredData = useMemo(() => {
-		console.log("TINGIN NGA ULIT?:", getData)
-		if (getData !== undefined) {
-			const sorted = getData?.data;
+		if (isSuccess) {
+			if (data.data !== "No Data") {
+				const sorted = data.data;
 
-			const fnameSort = sorted?.filter((d) => 
-				d.fname.toLowerCase().includes(searchFilter.toLowerCase())
-			)
+				const fnameSort = sorted?.filter((d: any) =>
+					d.fname.toLowerCase().includes(searchFilter.toLowerCase())
+				);
 
-			const mnameSort = sorted?.filter((d) => 
-				d.mname.toLowerCase().includes(searchFilter.toLowerCase())
-			)
+				const mnameSort = sorted?.filter((d: any) =>
+					d.mname.toLowerCase().includes(searchFilter.toLowerCase())
+				);
 
-			const lnameSort = sorted?.filter((d) => 
-				d.lname.toLowerCase().includes(searchFilter.toLowerCase())
-			)
-			
-			const roleSort = sorted?.filter((d) => 
-				d.role.toLowerCase().includes(searchFilter.toLowerCase())
-			)
+				const lnameSort = sorted?.filter((d: any) =>
+					d.lname.toLowerCase().includes(searchFilter.toLowerCase())
+				);
 
-			const mobileNoSort = sorted?.filter((d) => 
-				d.mobileNo.toString().includes(searchFilter.toString())
-			)
-			
-			return searchFilter === 
-				"" ? 
-				sorted : [...new Set([...fnameSort,...mnameSort,...lnameSort,...roleSort,...mobileNoSort])];
-		}
-		return [
-			{
-				id: "",
-				fname: "",
-				mname: "",
-				lname: "",
-				mobileNo: "",
-				role: "",
+				const roleSort = sorted?.filter((d: any) =>
+					d.role.toLowerCase().includes(searchFilter.toLowerCase())
+				);
 
+				const mobileNoSort = sorted?.filter((d: any) =>
+					d.mobileNo.toString().includes(searchFilter.toString())
+				);
+
+				return searchFilter === ""
+					? sorted
+					: [...new Set([...fnameSort, ...mnameSort, ...lnameSort, ...roleSort, ...mobileNoSort])];
 			}
-		]
-	}, [data, searchFilter])
+			return "No Data";
+		}
+	}, [data, isSuccess, searchFilter]);
 
 	return (
 		<>
-			<div className="relative w-full p-4">
+			<div className="relative w-full p-4 gap-4 flex flex-col">
 				<input
-					placeholder="Search"
+					placeholder="Search Name, Role or Mobile No."
 					type="text"
 					onChange={(e) => {
 						setSearchFilter(e.target.value);
-						console.log(handleFilteredData, searchFilter);
 					}}
 					value={searchFilter}
+					className="input input-bordered"
 				/>
 				<table className="table w-full m-auto">
 					<thead>

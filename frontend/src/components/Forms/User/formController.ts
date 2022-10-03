@@ -1,51 +1,118 @@
-import { useQuery } from "react-query";
 import { toast } from "react-toastify";
-import { getTransactionID } from "../../../hooks/useTransactionApi";
-import { getUsers } from "../../../hooks/useUserApi";
 import useFormModel from "./formModel";
 
 const useFormController = () => {
 	const model = useFormModel();
 
 	return {
-		getUsers(id: string) {
-			return useQuery(["user", id], () => getUsers(id), {
-				refetchOnWindowFocus: false,
-				onError: (err: any) => {
-					toast.error(err.response.data.message || err.message);
-				},
-			});
-		},
-		getTransaction(id: string) {
-			return useQuery(["transaction", id], () => getTransactionID(id), {
-				refetchOnWindowFocus: false,
-				onError: (err: any) => {
-					toast.error(err.response.data.message || err.message);
-				},
-			});
-		},
-		async postTransaction(data: any) {
-			if (!data.residentId || !data.programId || !data.scheduleId) {
+		async postResident(data: any, residentData: any) {
+			const {
+				role,
+				fname,
+				mname,
+				lname,
+				suffix,
+				sex,
+				mobileNo,
+				presAdd,
+				permAdd,
+				brgyId,
+				idType,
+				idNo,
+			} = data;
+			const {
+				seniorType,
+				emgContNum,
+				emgContName,
+				civilStatus,
+				birthdate,
+				birthPlace,
+				empStatus,
+				residencyStatus,
+				OSCAId,
+			} = residentData;
+
+			if (seniorType === "NEW" && OSCAId === "") {
+				delete residentData.OSCAId;
+			}
+
+			console.log(data, residentData);
+
+			if (
+				!role ||
+				!fname ||
+				!mname ||
+				!lname ||
+				!suffix ||
+				!sex ||
+				!mobileNo ||
+				!presAdd ||
+				!permAdd ||
+				!brgyId ||
+				!idType ||
+				!idNo ||
+				!seniorType ||
+				!emgContNum ||
+				!emgContName ||
+				!civilStatus ||
+				!birthdate ||
+				!birthPlace ||
+				!empStatus ||
+				!residencyStatus
+			) {
 				toast.error("Missing Fields");
 				return;
 			}
 
-			data.scheduleId = Number(data.scheduleId);
-			data.residentId = Number(data.residentId);
-
-			await model.postTransaction(data);
+			await model.postResident(data, residentData);
 		},
+		async postAdmin(data: any) {
+			const {
+				role,
+				email,
+				password,
+				confPassword,
+				fname,
+				mname,
+				lname,
+				suffix,
+				sex,
+				mobileNo,
+				presAdd,
+				permAdd,
+				brgyId,
+				idType,
+				idNo,
+			} = data;
 
-		async updateTransaction(data: any) {
-			if (!data.status) {
+			if (
+				!role ||
+				!email ||
+				!password ||
+				!confPassword ||
+				!fname ||
+				!mname ||
+				!lname ||
+				!suffix ||
+				!sex ||
+				!mobileNo ||
+				!presAdd ||
+				!permAdd ||
+				!brgyId ||
+				!idType ||
+				!idNo
+			) {
 				toast.error("Missing Fields");
 				return;
 			}
 
-			data.scheduleId = Number(data.scheduleId);
-			data.residentId = Number(data.residentId);
+			if (password !== confPassword) {
+				toast.error("Passowrd does not match");
+			}
 
-			await model.updateTransaction(data);
+			delete data.confPassword;
+
+			await model.postAdmin(data);
 		},
 	};
 };

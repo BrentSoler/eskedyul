@@ -1,15 +1,14 @@
 import { useRouter } from "next/router";
 import { useMutation } from "react-query";
 import { toast } from "react-toastify";
-
-import { postTransaction, updateTransaction } from "../../../hooks/useTransactionApi";
+import { postAdmin, postResident } from "../../../hooks/useUserApi";
 import AuthStore from "../../../store/authStore";
 
 const useFormModel = () => {
 	const router = useRouter();
 	const token = AuthStore((state) => state.userData.token);
 
-	const { mutate } = useMutation(postTransaction, {
+	const { mutate } = useMutation(postResident, {
 		onMutate: () => {
 			toast.loading("Loading...", { toastId: "loadSched" });
 		},
@@ -22,7 +21,7 @@ const useFormModel = () => {
 				closeOnClick: true,
 			});
 
-			router.push("/dashboard/transactions");
+			router.push("/dashboard/users");
 		},
 		onError: (err: any) => {
 			toast.update("loadSched", {
@@ -34,8 +33,7 @@ const useFormModel = () => {
 			});
 		},
 	});
-
-	const { mutate: update } = useMutation(updateTransaction, {
+	const { mutate: mutateAdmin } = useMutation(postAdmin, {
 		onMutate: () => {
 			toast.loading("Loading...", { toastId: "loadSched" });
 		},
@@ -48,7 +46,7 @@ const useFormModel = () => {
 				closeOnClick: true,
 			});
 
-			router.push("/dashboard/transactions");
+			router.push("/dashboard/users");
 		},
 		onError: (err: any) => {
 			toast.update("loadSched", {
@@ -62,11 +60,11 @@ const useFormModel = () => {
 	});
 
 	return {
-		async postTransaction(transacData: any) {
-			await mutate({ data: transacData, token: token });
+		async postResident(data: any, residentData: any) {
+			await mutate({ data: data, residentData: residentData, token: token });
 		},
-		async updateTransaction(transacData: any) {
-			await update({ data: transacData, token: token });
+		async postAdmin(data: any) {
+			await mutateAdmin({ data: data, token: token });
 		},
 	};
 };
