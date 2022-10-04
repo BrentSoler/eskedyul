@@ -1,4 +1,4 @@
-import { FormEvent, useMemo, useState } from "react";
+import { FormEvent, useEffect, useMemo, useState } from "react";
 import handleChange from "../../../hooks/handleChange";
 import useFormController from "./formController";
 import ComboBox from "react-responsive-combo-box";
@@ -30,7 +30,13 @@ const AddTransac = () => {
 				return user.role === "Resident" && user.status === 1;
 			});
 
-			const namesArr = residentFilter.map((user: any) => {
+			const qualificationFilter = residentFilter.filter((user: any) => {
+				return schedSuccess && schedData !== "No Data"
+					? schedData.qualification === user.residents[0].residencyStatus
+					: user.role === "Resident" && user.status === 1;
+			});
+
+			const namesArr = qualificationFilter.map((user: any) => {
 				return `${user.id}~${user.lname}, ${user.fname} ${user.mname}`;
 			});
 
@@ -38,7 +44,7 @@ const AddTransac = () => {
 		}
 
 		return [];
-	}, [users, userSuccess]);
+	}, [users, userSuccess, schedData, schedSuccess, transactionData.programId]);
 
 	function submit(e: FormEvent<HTMLFormElement>) {
 		e.preventDefault();
@@ -49,14 +55,6 @@ const AddTransac = () => {
 	return (
 		<div className="card bg-base-100 shadow-xl p-5 w-[30rem] rounded-md ">
 			<form className="w-full flex flex-col" onSubmit={submit}>
-				<h1>Benfeciary:</h1>
-				<ComboBox
-					options={names}
-					enableAutocomplete
-					style={{ width: "100%" }}
-					onSelect={(e) => setTransactionData((data) => ({ ...data, residentId: e.split("~")[0] }))}
-				/>
-
 				<h1>Programs:</h1>
 				<select
 					className="select select-bordered w-full "
@@ -75,6 +73,20 @@ const AddTransac = () => {
 						<option value=""></option>
 					)}
 				</select>
+
+				{transactionData.programId && (
+					<>
+						<h1>Benfeciary:</h1>
+						<ComboBox
+							options={names}
+							enableAutocomplete
+							style={{ width: "100%" }}
+							onSelect={(e) =>
+								setTransactionData((data) => ({ ...data, residentId: e.split("~")[0] }))
+							}
+						/>
+					</>
+				)}
 
 				<h1>Schedule:</h1>
 				<select

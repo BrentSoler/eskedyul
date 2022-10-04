@@ -2,7 +2,6 @@ import { FormEvent, useEffect, useState } from "react";
 import handleChange from "../../../hooks/handleChange";
 import "react-responsive-combo-box/dist/index.css";
 import AuthStore from "../../../store/authStore";
-import { toast } from "react-toastify";
 import useFormController from "./formController";
 
 const AddAdm = () => {

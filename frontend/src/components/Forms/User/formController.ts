@@ -36,8 +36,6 @@ const useFormController = () => {
 				delete residentData.OSCAId;
 			}
 
-			console.log(data, residentData);
-
 			if (
 				!role ||
 				!fname ||

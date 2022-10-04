@@ -11,7 +11,13 @@ const Dahsboard = () => {
 			router.push("/");
 		}
 	}, [token, router]);
-	return <div>Dahsboard</div>;
+	return (
+		<div className="p-4">
+			<div className="flex justify-between items-center">
+				<h1 className="font-bold text-3xl">Dashboard</h1>
+			</div>
+		</div>
+	);
 };
 
 export default Dahsboard;
