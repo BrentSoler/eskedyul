@@ -1,5 +1,4 @@
 import { useMemo, useState } from "react";
-import { MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
 import Link from "next/link";
 import AuthStore from "../../../store/authStore";
 import useFormController from "../../Forms/Transaction/formController";
@@ -8,13 +7,14 @@ import useTransactionController from "./userController";
 const UsersTable = () => {
 	const brgyId = AuthStore((state) => state.userData.brgyId);
 	const userId = AuthStore((state) => state.userData.id);
+	const role = AuthStore((state) => state.userData.role);
 	const controller = useTransactionController(brgyId);
 	const userController = useFormController();
-	
+
 	const { data, isSuccess, isLoading } = userController.getUsers(brgyId);
 
 	const [searchFilter, setSearchFilter] = useState("");
-	
+	const [roleFilter, setRoleFilter] = useState("");
 
 	// filter function useMemo
 	const handleFilteredData = useMemo(() => {
@@ -22,38 +22,42 @@ const UsersTable = () => {
 			if (data.data !== "No Data") {
 				const sorted = data.data;
 
-				const fnameSort = sorted?.filter((d: any) =>
+				const roleSort = sorted?.filter((d: any) =>
+					roleFilter ? d.role.toLowerCase() === roleFilter.toLowerCase() : d
+				);
+
+				if (!searchFilter) {
+					return roleSort;
+				}
+
+				const fnameSort = roleSort?.filter((d: any) =>
 					d.fname.toLowerCase().includes(searchFilter.toLowerCase())
 				);
 
-				const mnameSort = sorted?.filter((d: any) =>
+				const mnameSort = roleSort?.filter((d: any) =>
 					d.mname.toLowerCase().includes(searchFilter.toLowerCase())
 				);
 
-				const lnameSort = sorted?.filter((d: any) =>
+				const lnameSort = roleSort?.filter((d: any) =>
 					d.lname.toLowerCase().includes(searchFilter.toLowerCase())
 				);
 
-				const roleSort = sorted?.filter((d: any) =>
-					d.role.toLowerCase().includes(searchFilter.toLowerCase())
-				);
-
-				const mobileNoSort = sorted?.filter((d: any) =>
+				const mobileNoSort = roleSort?.filter((d: any) =>
 					d.mobileNo.toString().includes(searchFilter.toString())
 				);
-				
+
 				return searchFilter === ""
 					? sorted
-					: [...new Set([...fnameSort, ...mnameSort, ...lnameSort, ...roleSort, ...mobileNoSort])];
+					: [...new Set([...fnameSort, ...mnameSort, ...lnameSort, ...mobileNoSort])];
 			}
-			
+
 			return "No Data";
 		}
-	}, [data, isSuccess, searchFilter]);
-	console.log(data)	
+	}, [data, isSuccess, searchFilter, roleFilter]);
+
 	return (
 		<>
-			<div className="relative w-full p-4 gap-4 flex flex-col">
+			<div className="flex gap-3">
 				<input
 					placeholder="Search Name, Role or Mobile No."
 					type="text"
@@ -61,10 +65,25 @@ const UsersTable = () => {
 						setSearchFilter(e.target.value);
 					}}
 					value={searchFilter}
-					className="input input-bordered"
+					className="input input-bordered w-full mt-3"
 				/>
-			<div className="table-responsive">
-				<table className="table w-90% m-auto">
+				<select
+					placeholder="Role"
+					onChange={(e) => {
+						setRoleFilter(e.target.value);
+					}}
+					value={roleFilter}
+					className="input input-bordered w-full mt-3"
+				>
+					<option value=""></option>
+					<option value="Resident">Resident</option>
+					<option value="Brgy. Admin">Brgy. Admin</option>
+					<option value="Admin">Admin</option>
+					<option value="Master Admin">Master Admin</option>
+				</select>
+			</div>
+			<div className="w-full mt-4 overflow-x-auto m-auto">
+				<table className="table w-[10rem]">
 					<thead>
 						<tr>
 							<th className="sticky top-0 px-6 py-3">NAME</th>
@@ -97,19 +116,19 @@ const UsersTable = () => {
 									<td className="w-[15rem] truncate">{user.presAdd}</td>
 									<td className="w-[15rem] truncate">{user.mobileNo}</td>
 									<td className="w-[15rem] truncate">
-										{user.residents.length > 0 ? user.residents[0].emgContName: "Not Available"}
+										{user.residents.length > 0 ? user.residents[0].emgContName : "Not Available"}
 									</td>
 									<td className="w-[15rem] truncate">
-										{user.residents.length > 0 ? user.residents[0].emgContNum: "Not Available"}
+										{user.residents.length > 0 ? user.residents[0].emgContNum : "Not Available"}
 									</td>
 									<td className="w-[15rem] truncate">
-										{user.residents.length > 0 ? user.residents[0].civilStatus: "Not Available"}
+										{user.residents.length > 0 ? user.residents[0].civilStatus : "Not Available"}
 									</td>
 									<td className="w-[15rem] truncate">
-										{user.residents.length > 0 ? user.residents[0].birthdate: "Not Available"}
+										{user.residents.length > 0 ? user.residents[0].birthdate : "Not Available"}
 									</td>
 									<td className="w-[15rem] truncate">
-										{user.residents.length > 0 ? user.residents[0].birthPlace: "Not Available"}
+										{user.residents.length > 0 ? user.residents[0].birthPlace : "Not Available"}
 									</td>
 
 									<td className="w-[15rem] truncate">{user.role}</td>
@@ -119,7 +138,17 @@ const UsersTable = () => {
 											checked={user.status > 0 ? true : false}
 											className="checkbox"
 											onClick={() => controller.activateUser(user.id)}
-											disabled={userId === user.id ? true : false}
+											disabled={
+												role === "Brgy. Admin" && user.role === "Resident"
+													? userId === user.id
+														? true
+														: false
+													: userId === user.id
+													? true
+													: role === "Master Admin"
+													? false
+													: true
+											}
 										/>
 									</td>
 
@@ -135,7 +164,6 @@ const UsersTable = () => {
 						)}
 					</tbody>
 				</table>
-				</div>
 			</div>
 		</>
 	);

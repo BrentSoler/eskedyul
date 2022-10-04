@@ -6,39 +6,44 @@ import useTransactionController from "./transactionController";
 const TransactionTable = () => {
 	const brgyId = AuthStore((state) => state.userData.brgyId);
 	const controller = useTransactionController();
-
+	const role = AuthStore((state) => state.userData.role);
 	const { data, isSuccess, isLoading } = controller.getTransaction(brgyId);
 
 	const [searchFilter, setSearchFilter] = useState("");
+	const [statusFilter, setStatusFilter] = useState("");
 
 	// filter function useMemo
 	const handleFilteredData = useMemo(() => {
 		if (isSuccess) {
 			if (data.data !== "No Data") {
-				const sorted = data?.data;
+				const sorted = data.data;
 
-				const fnameSort = sorted?.filter((d: any) =>
+				const statusSort = sorted.filter((d: any) => {
+					return d.status.includes(statusFilter);
+				});
+
+				const fnameSort = statusSort.filter((d: any) =>
 					d.residents.users.fname.toLowerCase().includes(searchFilter.toLowerCase())
 				);
 
-				const mnameSort = sorted?.filter((d: any) =>
+				const mnameSort = statusSort.filter((d: any) =>
 					d.residents.users.mname.toLowerCase().includes(searchFilter.toLowerCase())
 				);
 
-				const lnameSort = sorted?.filter((d: any) =>
+				const lnameSort = statusSort.filter((d: any) =>
 					d.residents.users.lname.toLowerCase().includes(searchFilter.toLowerCase())
 				);
 
-				const programNameSort = sorted?.filter((d: any) =>
+				const programNameSort = statusSort?.filter((d: any) =>
 					d.program.name.toLowerCase().includes(searchFilter.toLowerCase())
 				);
 
-				const locationSort = sorted?.filter((d: any) =>
+				const locationSort = statusSort.filter((d: any) =>
 					d.schedule.location.toLowerCase().includes(searchFilter.toLowerCase())
 				);
 
 				return searchFilter === ""
-					? sorted
+					? statusSort
 					: [
 							...new Set([
 								...fnameSort,
@@ -51,20 +56,35 @@ const TransactionTable = () => {
 			}
 			return "No Data";
 		}
-	}, [data, isSuccess, searchFilter]);
+	}, [data, isSuccess, searchFilter, statusFilter]);
 
 	return (
 		<>
-			<div className="relative w-full p-4 gap-4 flex flex-col">
+			<div className="flex gap-3">
 				<input
-					placeholder="Search Name, Program or Location"
+					placeholder="Search Name, Role or Mobile No."
 					type="text"
 					onChange={(e) => {
 						setSearchFilter(e.target.value);
 					}}
 					value={searchFilter}
-					className="input input-bordered"
+					className="input input-bordered w-full mt-3"
 				/>
+				<select
+					placeholder="Role"
+					onChange={(e) => {
+						setStatusFilter(e.target.value);
+					}}
+					value={statusFilter}
+					className="input input-bordered w-full mt-3"
+				>
+					<option value=""></option>
+					<option value="Pending">Pending</option>
+					<option value="Completed">Completed</option>
+					<option value="Cancelled">Cancelled</option>
+				</select>
+			</div>
+			<div className="w-full mt-4 overflow-x-auto m-auto">
 				<table className="table w-full m-auto">
 					<thead>
 						<tr>
@@ -74,7 +94,7 @@ const TransactionTable = () => {
 							<th className="sticky top-0 px-6 py-3">Date</th>
 							<th className="sticky top-0 px-6 py-3 w-[5rem]">time</th>
 							<th className="sticky top-0 px-6 py-3 w-[8rem]">STATUS</th>
-							<th className="sticky top-0 px-6 py-3 w-6"></th>
+							{role !== "Master Admin" && <th className="sticky top-0 px-6 py-3 w-6"></th>}
 						</tr>
 					</thead>
 					<tbody>
@@ -104,12 +124,14 @@ const TransactionTable = () => {
 											: "Deleted"}
 									</td>
 									<td className="text-center">{transaction.status}</td>
-									{transaction.program && (
+									{transaction.program && role === "Brgy. Admin" ? (
 										<td>
 											<Link href={`/dashboard/transactions/edit/${transaction.id}`}>
 												<a className="btn btn-ghost">Edit</a>
 											</Link>
 										</td>
+									) : (
+										<></>
 									)}
 								</tr>
 							))

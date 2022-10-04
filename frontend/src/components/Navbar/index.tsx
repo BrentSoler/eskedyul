@@ -18,7 +18,10 @@ const NavBar = () => {
 			</div>
 			<div className="flex gap-5 items-center">
 				<h1 className="justify-self-end text-right">
-					Welcome, <span className="italic"> {userData.fname} </span>({userData.brgyId})
+					Welcome, <span className="italic"> {userData.fname} </span>(
+					{`${userData.role} |
+					${userData.brgyId}`}
+					)
 				</h1>
 				<div className="flex">
 					<button

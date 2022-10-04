@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useMemo, useState } from "react";
+import { FormEvent, useMemo, useState } from "react";
 import handleChange from "../../../hooks/handleChange";
 import useFormController from "./formController";
 import ComboBox from "react-responsive-combo-box";

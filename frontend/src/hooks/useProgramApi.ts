@@ -21,6 +21,12 @@ export async function getProgramsID(id: string) {
 	return res.data;
 }
 
+export async function getReport(id: string) {
+	const res = await api.get("/program/reports", { params: { id: id } });
+
+	return res.data;
+}
+
 export async function updatePrograms({ data, token }: { data: any; token: string }) {
 	const res = await api.put("/program", data, {
 		params: { id: data.id },

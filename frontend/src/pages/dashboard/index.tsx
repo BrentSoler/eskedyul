@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import StatsContainer from "../../components/Stats/container";
 import AuthStore from "../../store/authStore";
 
 const Dahsboard = () => {
@@ -16,6 +17,7 @@ const Dahsboard = () => {
 			<div className="flex justify-between items-center">
 				<h1 className="font-bold text-3xl">Dashboard</h1>
 			</div>
+			<StatsContainer />
 		</div>
 	);
 };

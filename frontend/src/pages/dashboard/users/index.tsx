@@ -7,6 +7,7 @@ import AuthStore from "../../../store/authStore";
 const ProgramsPage = () => {
 	const router = useRouter();
 	const token = AuthStore((state) => state.userData.token);
+	const role = AuthStore((state) => state.userData.role);
 
 	useEffect(() => {
 		if (token === "") {
@@ -19,9 +20,11 @@ const ProgramsPage = () => {
 			<div className="flex justify-between items-center">
 				<h1 className="font-bold text-3xl">Users</h1>
 				<div className="flex gap-3">
-					<Link href="/dashboard/users/add/admin" className="btn btn-primary">
-						<a className="btn btn-primary rounded-md">ADD ADMIN</a>
-					</Link>
+					{role !== "Brgy. Admin" && (
+						<Link href="/dashboard/users/add/admin" className="btn btn-primary">
+							<a className="btn btn-primary rounded-md">ADD ADMIN</a>
+						</Link>
+					)}
 					<Link href="/dashboard/users/add/resident" className="btn btn-primary">
 						<a className="btn btn-primary rounded-md">ADD RESIDENT</a>
 					</Link>
