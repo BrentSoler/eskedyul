@@ -134,15 +134,20 @@ export async function getReports(id: string) {
   try {
     const Program = new ProgUtils();
 
-    const findId = await Program.findId(id);
+    const programs = await Program.getProgram(id);
 
-    if (!findId) {
-      throw new Error("Program does not exists");
+    if (programs.length <= 0) {
+      return { data: "No Data" };
     }
 
-    const report = await Program.getReport(id);
+    const arr: any[] = await Promise.all(
+      programs.map(async (program) => {
+        const report = await Program.getReport(program.id);
+        return report;
+      })
+    );
 
-    return report;
+    return { data: arr };
   } catch (err: any) {
     if (err instanceof ZodError) {
       throw new Error(
