@@ -121,7 +121,7 @@ const AddAdm = () => {
 				</div>
 				<div className="flex gap-3">
 					<div className="w-full">
-						<h1>Preffix:</h1>
+						<h1>Suffix:</h1>
 						<select
 							className="select select-bordered w-full "
 							name="suffix"
@@ -129,7 +129,10 @@ const AddAdm = () => {
 							onChange={(e) => handleChange(e, setData)}
 						>
 							<option value=""></option>
-							<option value="Mr./Mrs.">Mr./Mrs.</option>
+							<option value="jr">jr</option>
+							<option value="Jr.">Jr.</option>
+							<option value="II">II</option>
+							<option value="III">III</option>
 							<option value="None">None</option>
 						</select>
 					</div>
