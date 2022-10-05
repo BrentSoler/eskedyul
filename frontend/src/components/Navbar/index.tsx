@@ -14,7 +14,7 @@ const NavBar = () => {
 						<path d="M64,384H448V341.33H64Zm0-106.67H448V234.67H64ZM64,128v42.67H448V128Z" />
 					</svg>
 				</label>
-				<h1 className="font-bold text-lg lg:text-3xl">Eskedyul</h1>
+				<h1 className="font-bold text-lg lg:text-3xl">E-SKEDYUL</h1>
 			</div>
 			<div className="flex gap-5 items-center">
 				<h1 className="justify-self-end text-right">

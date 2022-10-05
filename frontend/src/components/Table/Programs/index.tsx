@@ -49,7 +49,7 @@ const ProgramsTable = () => {
 		<>
 			<div className="flex gap-3">
 				<input
-					placeholder="Search Name, Role or Mobile No."
+					placeholder="Search Name, Type or Qualifications."
 					type="text"
 					onChange={(e) => {
 						setSearchFilter(e.target.value);

@@ -14,6 +14,15 @@ const Links = () => {
 					Home
 				</a>
 			</Link>
+			<Link href="/dashboard/users">
+				<a
+					className={`${
+						router.pathname.includes("/dashboard/users") ? "font-bold" : "font-light"
+					} transition all`}
+				>
+					Users
+				</a>
+			</Link>
 			<Link href="/dashboard/programs">
 				<a
 					className={`${
@@ -30,15 +39,6 @@ const Links = () => {
 					} transition all`}
 				>
 					Transactions
-				</a>
-			</Link>
-			<Link href="/dashboard/users">
-				<a
-					className={`${
-						router.pathname.includes("/dashboard/users") ? "font-bold" : "font-light"
-					} transition all`}
-				>
-					Users
 				</a>
 			</Link>
 		</div>
