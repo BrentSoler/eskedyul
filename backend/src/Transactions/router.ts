@@ -15,8 +15,8 @@ export default function TransactionRoutes(router: Router) {
     .post(
       authHandler,
       expressAsyncHandler(async (req: Request, res: Response) => {
-        if (req.user.role !== "Master Admin") {
-          throw new Error("Master Admin can only use this");
+        if (req.user.role !== "Brgy. Admin") {
+          throw new Error("Only Brgy. Admin can use this.");
         }
 
         req.body.status = "Pending";
@@ -41,8 +41,8 @@ export default function TransactionRoutes(router: Router) {
     .put(
       authHandler,
       expressAsyncHandler(async (req: Request, res: Response) => {
-        if (req.user.role !== "Master Admin") {
-          throw new Error("Master Admin can only use this");
+        if (req.user.role !== "Brgy. Admin") {
+          throw new Error("Only Brgy. Admin can use this.");
         }
 
         if (!req.query.id) {
