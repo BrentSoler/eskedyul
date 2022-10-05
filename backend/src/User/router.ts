@@ -5,8 +5,10 @@ import {
   activateUser,
   getResidents,
   getUsers,
+  findUser,
   login,
   registerAdmin,
+  updateAdmin,
   registerResident,
 } from "./controller";
 
@@ -18,6 +20,18 @@ export default function userRoutes(router: Router) {
       }
 
       const data = await getUsers(req.query.id.toString());
+
+      res.json({ ...data });
+    })
+  );
+
+  router.route("/findId").get(
+    expressAsyncHandler(async (req: Request, res: Response) => {
+      if (!req.query.id) {
+        throw new Error("Provide an ID");
+      }
+
+      const data = await findUser(parseInt(req.query.id.toString()));
 
       res.json({ ...data });
     })
@@ -57,6 +71,39 @@ export default function userRoutes(router: Router) {
       if (req.user.role === "Brgy. Admin") {
         throw new Error("Master Admin & Admin can only use this");
       }
+
+      if (role.toString() === "resident") {
+        const data = await registerResident({
+          data: req.body.data,
+          residentData: req.body.residentData,
+        });
+
+        res.json({ ...data });
+
+        return;
+      }
+    })
+  );
+
+  router.route("/update/:role").put(
+    authHandler,
+    expressAsyncHandler(async (req: Request, res: Response) => {
+      const role = req.params.role;
+
+      if (req.user.role === "Brgy. Admin") {
+        throw new Error("Master Admin & Admin can only use this");
+      }
+      
+      if(!req.query.id){
+        throw new Error("Provide an id");
+      }
+
+      if (role.toString() === "admin") {
+        const data = await updateAdmin(req.body,parseInt(req.query.id.toString()));
+        res.json({ ...data });
+        return;
+      }
+
 
       if (role.toString() === "resident") {
         const data = await registerResident({
