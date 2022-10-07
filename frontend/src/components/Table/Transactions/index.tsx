@@ -62,7 +62,7 @@ const TransactionTable = () => {
 		<>
 			<div className="flex gap-3">
 				<input
-					placeholder="Search Name, Role or Mobile No."
+					placeholder="Search Name, Program Name or Location."
 					type="text"
 					onChange={(e) => {
 						setSearchFilter(e.target.value);
@@ -70,8 +70,9 @@ const TransactionTable = () => {
 					value={searchFilter}
 					className="input input-bordered w-full mt-3"
 				/>
+				<label> View </label>
 				<select
-					placeholder="Role"
+					placeholder="Status"
 					onChange={(e) => {
 						setStatusFilter(e.target.value);
 					}}

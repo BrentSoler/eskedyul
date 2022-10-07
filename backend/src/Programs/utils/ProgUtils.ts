@@ -96,9 +96,6 @@ export class ProgUtils extends Prisma {
         where: {
           id: id,
         },
-        select: {
-          name: true,
-        },
       });
 
       const pending = await this.prisma.transaction.findMany({

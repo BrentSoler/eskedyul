@@ -93,6 +93,94 @@ export async function registerAdmin(data: TRegister) {
   }
 }
 
+export async function updateAdmin(data: TRegister, id: number) {
+  try {
+    SRegister.parse(data);
+
+    const Validator = new Validation(data);
+
+    const User = new UserUtil({ data: data });
+
+    Validator.register(["email"]);
+    Validator.validate();
+
+    const findId = await User.findUserId(id);
+
+    if (!findId) {
+      throw new Error("User does not Exists");
+    }
+
+    const userNameAvailable = await User.isNameAvailable();
+    const mobileAvailable = await User.isNumberAvailable();
+
+    if (userNameAvailable && userNameAvailable.id !== id) {
+      throw new Error("Name is already taken");
+    }
+    if (mobileAvailable && mobileAvailable.id !== id) {
+      throw new Error("Mobile No. is already taken");
+    }
+
+    const postUser = await User.updateUser(id);
+
+    return postUser;
+  } catch (err: any) {
+    if (err instanceof ZodError) {
+      throw new Error(
+        err.issues[0].message || err.message || "There was an Error"
+      );
+    }
+
+    throw new Error(err.message || "There was an Error");
+  }
+}
+
+export async function updateResident({ data,
+  residentData,
+}: {
+  data: TRegister;
+  residentData: TRegisterResident;
+}, id: number) {
+  try {
+    SRegister.parse(data);
+    SRegisterResident.parse(residentData);
+
+    const User = new UserUtil({ data: data });
+
+    const findId = await User.findUserId(id);
+
+    if (!findId) {
+      throw new Error("User does not Exists");
+    }
+
+    const userNameAvailable = await User.isNameAvailable();
+    const mobileAvailable = await User.isNumberAvailable();
+
+    console.log({...userNameAvailable}, id)
+    console.log({...mobileAvailable}, id)
+
+    if (userNameAvailable && userNameAvailable.id !== id) {
+      throw new Error("Name is already taken");
+    }
+
+    if (mobileAvailable && mobileAvailable.id !== id) {
+      throw new Error("Mobile No. is already taken");
+    }
+
+    const postUser = await User.updateUser(id);
+    const postResident = await User.updateResident(id, residentData);
+
+    return { postUser, postResident };
+  } catch (err: any) {
+    if (err instanceof ZodError) {
+      throw new Error(
+        err.issues[0].message || err.message || "There was an Error"
+      );
+    }
+
+    throw new Error(err.message || "There was an Error");
+  }
+}
+
 export async function registerResident({
   data,
   residentData,
@@ -109,7 +197,7 @@ export async function registerResident({
     const userNameAvailable = await User.isNameAvailable();
     const mobileAvailable = await User.isNumberAvailable();
 
-    if (!userNameAvailable) {
+    if (userNameAvailable) {
       throw new Error("Name is already taken");
     }
     if (mobileAvailable) {
@@ -169,6 +257,28 @@ export async function getUsers(id: string) {
     const users = await User.getUsers(id);
 
     return users.length > 0 ? { data: users } : { data: "No Data" };
+  } catch (err: any) {
+    if (err instanceof ZodError) {
+      throw new Error(
+        err.issues[0].message || err.message || "There was an Error"
+      );
+    }
+
+    throw new Error(err.message || "There was an Error");
+  }
+}
+
+export async function findUser(id: number) {
+  try {
+    const User = new UserUtil({ data: undefined });
+
+    const users = await User.findId(id);
+
+    if (!users) {
+      throw new Error("User does not Exists")
+    }
+
+    return { ...users };
   } catch (err: any) {
     if (err instanceof ZodError) {
       throw new Error(

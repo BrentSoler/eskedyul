@@ -15,6 +15,7 @@ const UsersTable = () => {
 
 	const [searchFilter, setSearchFilter] = useState("");
 	const [roleFilter, setRoleFilter] = useState("");
+	const [statusFilter, setStatusFilter] = useState("");
 
 	// filter function useMemo
 	const handleFilteredData = useMemo(() => {
@@ -22,27 +23,32 @@ const UsersTable = () => {
 			if (data.data !== "No Data") {
 				const sorted = data.data;
 
+
 				const roleSort = sorted?.filter((d: any) =>
 					roleFilter ? d.role.toLowerCase() === roleFilter.toLowerCase() : d
 				);
 
+				const statusSort = roleSort?.filter((d: any) =>
+					statusFilter ? d.status.toString() === statusFilter.toString() : d
+				);
+
 				if (!searchFilter) {
-					return roleSort;
+					return statusSort;
 				}
 
-				const fnameSort = roleSort?.filter((d: any) =>
+				const fnameSort = statusSort?.filter((d: any) =>
 					d.fname.toLowerCase().includes(searchFilter.toLowerCase())
 				);
 
-				const mnameSort = roleSort?.filter((d: any) =>
+				const mnameSort = statusSort?.filter((d: any) =>
 					d.mname.toLowerCase().includes(searchFilter.toLowerCase())
 				);
 
-				const lnameSort = roleSort?.filter((d: any) =>
+				const lnameSort = statusSort?.filter((d: any) =>
 					d.lname.toLowerCase().includes(searchFilter.toLowerCase())
 				);
 
-				const mobileNoSort = roleSort?.filter((d: any) =>
+				const mobileNoSort = statusSort?.filter((d: any) =>
 					d.mobileNo.toString().includes(searchFilter.toString())
 				);
 
@@ -53,7 +59,7 @@ const UsersTable = () => {
 
 			return "No Data";
 		}
-	}, [data, isSuccess, searchFilter, roleFilter]);
+	}, [data, isSuccess, searchFilter, roleFilter, statusFilter]);
 
 	return (
 		<>
@@ -67,6 +73,9 @@ const UsersTable = () => {
 					value={searchFilter}
 					className="input input-bordered w-full mt-3"
 				/>
+				<label>
+					Role
+				</label>
 				<select
 					placeholder="Role"
 					onChange={(e) => {
@@ -80,6 +89,21 @@ const UsersTable = () => {
 					<option value="Brgy. Admin">Brgy. Admin</option>
 					<option value="Admin">Admin</option>
 					<option value="Master Admin">Master Admin</option>
+				</select>
+				<label>
+					Status
+				</label>
+				<select
+					placeholder="Status"
+					onChange={(e) => {
+						setStatusFilter(e.target.value);
+					}}
+					value={statusFilter}
+					className="input input-bordered w-full mt-3"
+				>
+					<option value=""></option>
+					<option value="1">Activated</option>
+					<option value="0">Inactivated</option>
 				</select>
 			</div>
 			<div className="w-full mt-4 overflow-x-auto m-auto">
@@ -139,21 +163,12 @@ const UsersTable = () => {
 											className="checkbox"
 											onClick={() => controller.activateUser(user.id)}
 											disabled={
-												role === "Brgy. Admin" && user.role === "Resident"
-													? userId === user.id
-														? true
-														: false
-													: userId === user.id
-													? true
-													: role === "Master Admin"
-													? false
-													: true
-											}
+												role === "Brgy. Admin" ? true : user.id === userId ? true : false}
 										/>
 									</td>
 
 									<td>
-										<Link href={`/dashboard/users/edit/${user.id}`}>
+										<Link href={`/dashboard/users/edit/${user.role === "Resident" ? "resident" : "admin"}/${user.id}`}>
 											<a className="btn btn-ghost">Edit</a>
 										</Link>
 									</td>

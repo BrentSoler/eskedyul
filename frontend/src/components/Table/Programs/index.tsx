@@ -10,6 +10,7 @@ const ProgramsTable = () => {
 
 	const { data, isSuccess, isLoading } = controller.getPrograms(brgyId);
 	const [statusFilter, setStatusFilter] = useState("");
+	const [viewFilter, setViewFilter] = useState("");
 
 	// const [getData, setGetData] = useState(data);
 
@@ -21,35 +22,43 @@ const ProgramsTable = () => {
 			if (data.data !== "No Data") {
 				const sorted = data.data;
 
-				const statusSort = sorted.filter((d: any) => {
+				const roleFilter = sorted.filter((d: any) => {
+					return role === "Brgy. Admin" ? role === d.view : d
+				})
+
+				const statusSort = roleFilter.filter((d: any) => {
 					return d.status.includes(statusFilter);
 				});
 
-				const nameSort = statusSort.filter((d: any) =>
+				const viewSort = statusSort?.filter((d: any) =>
+					viewFilter ? d.view.toLowerCase() === viewFilter.toLowerCase() : d
+				);
+
+				const nameSort = viewSort.filter((d: any) =>
 					d.name.toLowerCase().includes(searchFilter.toLowerCase())
 				);
 
-				const typeSort = statusSort.filter((d: any) =>
+				const typeSort = viewSort.filter((d: any) =>
 					d.type.toString().includes(searchFilter.toString())
 				);
 
-				const qualificationSort = statusSort.filter((d: any) =>
+				const qualificationSort = viewSort.filter((d: any) =>
 					d.qualification.toString().toLowerCase().includes(searchFilter.toString().toLowerCase())
 				);
 
 				return searchFilter === ""
-					? statusSort
+					? viewSort
 					: [...new Set([...nameSort, ...typeSort, ...qualificationSort])];
 			}
 			return "No Data";
 		}
-	}, [isSuccess, data, searchFilter, statusFilter]);
+	}, [isSuccess, data, searchFilter, statusFilter, viewFilter]);
 
 	return (
 		<>
 			<div className="flex gap-3">
 				<input
-					placeholder="Search Name, Role or Mobile No."
+					placeholder="Search Name, Type or Qualifications."
 					type="text"
 					onChange={(e) => {
 						setSearchFilter(e.target.value);
@@ -57,8 +66,27 @@ const ProgramsTable = () => {
 					value={searchFilter}
 					className="input input-bordered w-full mt-3"
 				/>
+				{role !== "Brgy. Admin" && <>
+
+					<label> View </label>
+					<select
+						placeholder="View"
+						onChange={(e) => {
+							setViewFilter(e.target.value);
+						}}
+						value={viewFilter}
+						className="input input-bordered w-full mt-3"
+					>
+						<option value=""></option>
+						<option value="Brgy. Admin">Brgy. Admin</option>
+						<option value="Admin">Admin</option>
+						<option value="Master Admin">Master Admin</option>
+					</select>
+				</>
+				}
+				<label> Status </label>
 				<select
-					placeholder="Role"
+					placeholder="Status"
 					onChange={(e) => {
 						setStatusFilter(e.target.value);
 					}}
@@ -94,6 +122,7 @@ const ProgramsTable = () => {
 						)}
 						{isSuccess && handleFilteredData !== "No Data" ? (
 							handleFilteredData.map((program: any) => (
+
 								<tr key={program.id}>
 									<td className="">{program.name}</td>
 									<td className="w-[15rem] truncate">{program.type}</td>

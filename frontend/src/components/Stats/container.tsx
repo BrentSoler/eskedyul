@@ -17,6 +17,10 @@ const StatsContainer = () => {
 						pending={report.pending}
 						complete={report.completed}
 						name={report.program.name}
+						detail={report.program.details}
+						type={report.program.type}
+						qualification={report.program.qualification}
+						status={report.program.status}
 					/>
 				))
 			) : (

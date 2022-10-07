@@ -16,6 +16,7 @@ export default class UserUtil extends Prisma {
       }
 
       const { fname, lname, mname } = this.data;
+
       const findUser = await this.prisma.users.findFirst({
         where: {
           fname: fname,
@@ -24,11 +25,12 @@ export default class UserUtil extends Prisma {
         },
       });
 
-      if (findUser) {
+      if (!findUser) {
         return false;
       }
 
-      return true;
+      return { ...findUser };
+
     } catch (err: any) {
       throw new Error(err.message);
     }
@@ -105,6 +107,48 @@ export default class UserUtil extends Prisma {
     }
   }
 
+  public async updateUser(id: number) {
+    try {
+      if (!this.data) {
+        throw new Error("Missing Fields");
+      }
+
+      const postUser = await this.prisma.users.update({
+        where: {
+          id: id
+        },
+        data: {
+          ...this.data,
+        },
+      });
+
+      return postUser;
+    } catch (err: any) {
+      throw new Error(err.message);
+    }
+  }
+
+  public async updateResident(id: number,resiData:any) {
+    try {
+      if (!this.data) {
+        throw new Error("Missing Fields");
+      }
+
+      const postUser = await this.prisma.residents.update({
+        where: {
+          id: id
+        },
+        data: {
+          ...resiData
+        },
+      });
+
+      return postUser;
+    } catch (err: any) {
+      throw new Error(err.message);
+    }
+  }
+
   public async findUserId(id: number) {
     try {
       const user = await this.prisma.users.findUnique({
@@ -125,6 +169,27 @@ export default class UserUtil extends Prisma {
         brgyId: user.brgyId,
         status: user.status,
       };
+    } catch (err: any) {
+      throw new Error(err.message);
+    }
+  }
+
+  public async findId(id: number) {
+    try {
+      const user = await this.prisma.users.findUnique({
+        where: {
+          id: Number(id),
+        },
+        include: {
+          residents: true
+        }
+      });
+
+      if (!user) {
+        return false;
+      }
+
+      return { ...user };
     } catch (err: any) {
       throw new Error(err.message);
     }
