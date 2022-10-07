@@ -1,6 +1,7 @@
 import { FormEvent, useEffect, useState } from "react";
 import handleChange from "../../../hooks/handleChange";
 import "react-responsive-combo-box/dist/index.css";
+import { toast } from "react-toastify";
 import AuthStore from "../../../store/authStore";
 import useFormController from "./formController";
 
@@ -32,6 +33,51 @@ const AddAdm = () => {
 
 	function submit(e: FormEvent<HTMLFormElement>) {
 		e.preventDefault();
+
+		const {
+			role,
+			email,
+			password,
+			confPassword,
+			fname,
+			mname,
+			lname,
+			suffix,
+			sex,
+			mobileNo,
+			presAdd,
+			permAdd,
+			brgyId,
+			idType,
+			idNo,
+		} = data;
+
+		if (
+			!role ||
+			!email ||
+			!password ||
+			!confPassword ||
+			!fname ||
+			!mname ||
+			!lname ||
+			!suffix ||
+			!sex ||
+			!mobileNo ||
+			!presAdd ||
+			!permAdd ||
+			!brgyId ||
+			!idType ||
+			!idNo
+		) {
+			toast.error("Missing Fields");
+			return;
+		}
+
+		if (password !== confPassword) {
+			toast.error("Password does not match");
+		}
+
+		console.log(data.confPassword);
 
 		controller.postAdmin(data);
 	}

@@ -68,8 +68,8 @@ export default function userRoutes(router: Router) {
         return;
       }
 
-      if (req.user.role === "Brgy. Admin") {
-        throw new Error("Master Admin & Admin can only use this");
+      if (req.user.role === "Admin") {
+        throw new Error("Only Brgy. Admin can use this.");
       }
 
       if (role.toString() === "resident") {

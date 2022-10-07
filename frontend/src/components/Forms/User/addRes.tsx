@@ -281,8 +281,8 @@ const AddRes = () => {
 						>
 							<option value=""></option>
 							<option value="Employed">Employed</option>
-							<option value="Retired w/pension">Retired w/pension</option>
-							<option value="Retired wo/ pention">Retired wo/ pention</option>
+							<option value="Retired w/ pension">Retired w/ pension</option>
+							<option value="Retired wo/ pention">Retired wo/ pension</option>
 						</select>
 					</div>
 					<div className="w-full">

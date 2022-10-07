@@ -155,9 +155,13 @@ export async function updateResident({ data,
     const userNameAvailable = await User.isNameAvailable();
     const mobileAvailable = await User.isNumberAvailable();
 
+    console.log({...userNameAvailable}, id)
+    console.log({...mobileAvailable}, id)
+
     if (userNameAvailable && userNameAvailable.id !== id) {
       throw new Error("Name is already taken");
     }
+
     if (mobileAvailable && mobileAvailable.id !== id) {
       throw new Error("Mobile No. is already taken");
     }
@@ -165,7 +169,7 @@ export async function updateResident({ data,
     const postUser = await User.updateUser(id);
     const postResident = await User.updateResident(id, residentData);
 
-    return {postUser,postResident};
+    return { postUser, postResident };
   } catch (err: any) {
     if (err instanceof ZodError) {
       throw new Error(

@@ -70,8 +70,9 @@ const TransactionTable = () => {
 					value={searchFilter}
 					className="input input-bordered w-full mt-3"
 				/>
+				<label> View </label>
 				<select
-					placeholder="Role"
+					placeholder="Status"
 					onChange={(e) => {
 						setStatusFilter(e.target.value);
 					}}
