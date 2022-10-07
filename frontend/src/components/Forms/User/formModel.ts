@@ -119,7 +119,25 @@ const useFormModel = () => {
 			await updRes({ data: data, residentData: residentData, token: token, id: id });
 		},
 		async postAdmin(data: any) {
-			await mutateAdmin({ data: data, token: token });
+			await mutateAdmin({
+				data: {
+					role: data.role,
+					email: data.email,
+					password: data.password,
+					fname: data.fname,
+					mname: data.mname,
+					lname: data.lname,
+					suffix: data.suffix,
+					sex: data.sex,
+					mobileNo: data.mobileNo,
+					presAdd: data.presAdd,
+					permAdd: data.permAdd,
+					brgyId: data.brgyId,
+					idType: data.idType,
+					idNo: data.idNo,
+				},
+				token: token,
+			});
 		},
 		async updateAdmin(data: any, id: string) {
 			await updAdmin({ data: data, token: token, id: id });

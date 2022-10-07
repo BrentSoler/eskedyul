@@ -1,5 +1,4 @@
 import { toast } from "react-toastify";
-import Dahsboard from "../../../pages/dashboard";
 import { useQuery } from "react-query";
 import { findId } from "../../../hooks/useUserApi";
 import useFormModel from "./formModel";
@@ -68,7 +67,48 @@ const useFormController = () => {
 			await model.postResident(data, residentData);
 		},
 		async postAdmin(data: any) {
-			delete data.confPassword;
+			const {
+				role,
+				email,
+				password,
+				confPassword,
+				fname,
+				mname,
+				lname,
+				suffix,
+				sex,
+				mobileNo,
+				presAdd,
+				permAdd,
+				brgyId,
+				idType,
+				idNo,
+			} = data;
+
+			if (
+				!role ||
+				!email ||
+				!password ||
+				!confPassword ||
+				!fname ||
+				!mname ||
+				!lname ||
+				!suffix ||
+				!sex ||
+				!mobileNo ||
+				!presAdd ||
+				!permAdd ||
+				!brgyId ||
+				!idType ||
+				!idNo
+			) {
+				toast.error("Missing Fields");
+				return;
+			}
+
+			if (password !== confPassword) {
+				toast.error("Password does not match");
+			}
 
 			await model.postAdmin(data);
 		},
@@ -173,10 +213,10 @@ const useFormController = () => {
 			return useQuery(["user", id], () => findId(id), {
 				refetchOnWindowFocus: false,
 				onError: (err: any) => {
-					toast.error(err.response.message || err.message)
-				}
-			})
-		}
+					toast.error(err.response.message || err.message);
+				},
+			});
+		},
 	};
 };
 

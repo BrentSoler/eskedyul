@@ -10,6 +10,7 @@ import {
   registerAdmin,
   updateAdmin,
   registerResident,
+  updateResident,
 } from "./controller";
 
 export default function userRoutes(router: Router) {
@@ -93,23 +94,28 @@ export default function userRoutes(router: Router) {
       if (req.user.role === "Brgy. Admin") {
         throw new Error("Master Admin & Admin can only use this");
       }
-      
-      if(!req.query.id){
+
+      if (!req.query.id) {
         throw new Error("Provide an id");
       }
 
       if (role.toString() === "admin") {
-        const data = await updateAdmin(req.body,parseInt(req.query.id.toString()));
+        const data = await updateAdmin(
+          req.body,
+          parseInt(req.query.id.toString())
+        );
         res.json({ ...data });
         return;
       }
 
-
       if (role.toString() === "resident") {
-        const data = await registerResident({
-          data: req.body.data,
-          residentData: req.body.residentData,
-        });
+        const data = await updateResident(
+          {
+            data: req.body.data,
+            residentData: req.body.residentData,
+          },
+          parseInt(req.query.id.toString())
+        );
 
         res.json({ ...data });
 

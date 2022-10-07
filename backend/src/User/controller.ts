@@ -63,7 +63,7 @@ export async function registerAdmin(data: TRegister) {
     const userNameAvailable = await User.isNameAvailable();
     const mobileAvailable = await User.isNumberAvailable();
 
-    if (!userNameAvailable) {
+    if (userNameAvailable) {
       throw new Error("Name is already taken");
     }
     if (mobileAvailable) {
@@ -134,12 +134,16 @@ export async function updateAdmin(data: TRegister, id: number) {
   }
 }
 
-export async function updateResident({ data,
-  residentData,
-}: {
-  data: TRegister;
-  residentData: TRegisterResident;
-}, id: number) {
+export async function updateResident(
+  {
+    data,
+    residentData,
+  }: {
+    data: TRegister;
+    residentData: TRegisterResident;
+  },
+  id: number
+) {
   try {
     SRegister.parse(data);
     SRegisterResident.parse(residentData);
@@ -154,9 +158,6 @@ export async function updateResident({ data,
 
     const userNameAvailable = await User.isNameAvailable();
     const mobileAvailable = await User.isNumberAvailable();
-
-    console.log({...userNameAvailable}, id)
-    console.log({...mobileAvailable}, id)
 
     if (userNameAvailable && userNameAvailable.id !== id) {
       throw new Error("Name is already taken");
@@ -275,7 +276,7 @@ export async function findUser(id: number) {
     const users = await User.findId(id);
 
     if (!users) {
-      throw new Error("User does not Exists")
+      throw new Error("User does not Exists");
     }
 
     return { ...users };
