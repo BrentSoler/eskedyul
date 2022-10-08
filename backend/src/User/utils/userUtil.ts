@@ -17,7 +17,7 @@ export default class UserUtil extends Prisma {
 
       const { fname, lname, mname } = this.data;
 
-      const findUser = await this.prisma.users.findFirst({
+      const findUser = await this.prisma.Users.findFirst({
         where: {
           fname: fname,
           lname: lname,
@@ -30,7 +30,6 @@ export default class UserUtil extends Prisma {
       }
 
       return { ...findUser };
-
     } catch (err: any) {
       throw new Error(err.message);
     }
@@ -115,7 +114,7 @@ export default class UserUtil extends Prisma {
 
       const postUser = await this.prisma.users.update({
         where: {
-          id: id
+          id: id,
         },
         data: {
           ...this.data,
@@ -128,7 +127,7 @@ export default class UserUtil extends Prisma {
     }
   }
 
-  public async updateResident(id: number,resiData:any) {
+  public async updateResident(id: number, resiData: any) {
     try {
       if (!this.data) {
         throw new Error("Missing Fields");
@@ -136,10 +135,10 @@ export default class UserUtil extends Prisma {
 
       const postUser = await this.prisma.residents.update({
         where: {
-          id: id
+          id: id,
         },
         data: {
-          ...resiData
+          ...resiData,
         },
       });
 
@@ -181,8 +180,8 @@ export default class UserUtil extends Prisma {
           id: Number(id),
         },
         include: {
-          residents: true
-        }
+          residents: true,
+        },
       });
 
       if (!user) {
