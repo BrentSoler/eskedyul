@@ -14,6 +14,7 @@ const UsersTable = () => {
 	const { data, isSuccess, isLoading } = userController.getUsers(brgyId);
 
 	const [searchFilter, setSearchFilter] = useState("");
+	const [sort, setSort] = useState("asc");
 	const [roleFilter, setRoleFilter] = useState("");
 	const [statusFilter, setStatusFilter] = useState("");
 
@@ -21,8 +22,9 @@ const UsersTable = () => {
 	const handleFilteredData = useMemo(() => {
 		if (isSuccess) {
 			if (data.data !== "No Data") {
-				const sorted = data.data;
-
+				const sorted = data.data.sort((a: any, b: any) => {
+					return sort === "asc" ? a.lname.localeCompare(b.lname) : -a.lname.localeCompare(b.lname);
+				});
 
 				const roleSort = sorted?.filter((d: any) =>
 					roleFilter ? d.role.toLowerCase() === roleFilter.toLowerCase() : d
@@ -59,7 +61,7 @@ const UsersTable = () => {
 
 			return "No Data";
 		}
-	}, [data, isSuccess, searchFilter, roleFilter, statusFilter]);
+	}, [data, isSuccess, searchFilter, roleFilter, statusFilter, sort]);
 
 	return (
 		<>
@@ -73,9 +75,7 @@ const UsersTable = () => {
 					value={searchFilter}
 					className="input input-bordered w-full mt-3"
 				/>
-				<label>
-					Role
-				</label>
+				<label>Role</label>
 				<select
 					placeholder="Role"
 					onChange={(e) => {
@@ -90,9 +90,7 @@ const UsersTable = () => {
 					<option value="Admin">Admin</option>
 					<option value="Master Admin">Master Admin</option>
 				</select>
-				<label>
-					Status
-				</label>
+				<label>Status</label>
 				<select
 					placeholder="Status"
 					onChange={(e) => {
@@ -110,7 +108,42 @@ const UsersTable = () => {
 				<table className="table w-[10rem]">
 					<thead>
 						<tr>
-							<th className="sticky top-0 px-6 py-3">NAME</th>
+							<th className="sticky top-0 px-6 py-3 flex justify-between items-center">
+								NAME
+								<label className="swap swap-rotate">
+									<input type="checkbox" onClick={() => setSort(sort === "asc" ? "desc" : "asc")} />
+
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										fill="none"
+										viewBox="0 0 24 24"
+										strokeWidth={1.5}
+										stroke="currentColor"
+										className="w-6 h-6 swap-off"
+									>
+										<path
+											strokeLinecap="round"
+											strokeLinejoin="round"
+											d="M4.5 15.75l7.5-7.5 7.5 7.5"
+										/>
+									</svg>
+
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										fill="none"
+										viewBox="0 0 24 24"
+										strokeWidth={1.5}
+										stroke="currentColor"
+										className="w-6 h-6 swap-on"
+									>
+										<path
+											strokeLinecap="round"
+											strokeLinejoin="round"
+											d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+										/>
+									</svg>
+								</label>
+							</th>
 							<th className="sticky top-0 px-6 py-3">PERMANENT ADDRESS</th>
 							<th className="sticky top-0 px-6 py-3">PRESENT ADDRESS</th>
 							<th className="sticky top-0 px-6 py-3">MOBILE NO.</th>
@@ -162,13 +195,16 @@ const UsersTable = () => {
 											checked={user.status > 0 ? true : false}
 											className="checkbox"
 											onClick={() => controller.activateUser(user.id)}
-											disabled={
-												role === "Brgy. Admin" ? true : user.id === userId ? true : false}
+											disabled={role === "Brgy. Admin" ? true : user.id === userId ? true : false}
 										/>
 									</td>
 
 									<td>
-										<Link href={`/dashboard/users/edit/${user.role === "Resident" ? "resident" : "admin"}/${user.id}`}>
+										<Link
+											href={`/dashboard/users/edit/${
+												user.role === "Resident" ? "resident" : "admin"
+											}/${user.id}`}
+										>
 											<a className="btn btn-ghost">Edit</a>
 										</Link>
 									</td>

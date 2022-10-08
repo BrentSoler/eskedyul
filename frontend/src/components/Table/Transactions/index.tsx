@@ -11,12 +11,17 @@ const TransactionTable = () => {
 
 	const [searchFilter, setSearchFilter] = useState("");
 	const [statusFilter, setStatusFilter] = useState("");
+	const [sort, setSort] = useState("asc");
 
 	// filter function useMemo
 	const handleFilteredData = useMemo(() => {
 		if (isSuccess) {
 			if (data.data !== "No Data") {
-				const sorted = data.data;
+				const sorted = data.data.sort((a: any, b: any) => {
+					return sort === "asc"
+						? a.residents.users.lname.localeCompare(b.residents.users.lname)
+						: -a.residents.users.lname.localeCompare(b.residents.users.lname);
+				});
 
 				const statusSort = sorted.filter((d: any) => {
 					return d.status.includes(statusFilter);
@@ -56,7 +61,7 @@ const TransactionTable = () => {
 			}
 			return "No Data";
 		}
-	}, [data, isSuccess, searchFilter, statusFilter]);
+	}, [data, isSuccess, searchFilter, statusFilter, sort]);
 
 	return (
 		<>
@@ -89,7 +94,42 @@ const TransactionTable = () => {
 				<table className="table w-full m-auto">
 					<thead>
 						<tr>
-							<th className="sticky top-0 px-6 py-3">BENEFICIARY</th>
+							<th className="sticky top-0 px-6 py-3 flex justify-between items-center">
+								BENEFICIARY
+								<label className="swap swap-rotate">
+									<input type="checkbox" onClick={() => setSort(sort === "asc" ? "desc" : "asc")} />
+
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										fill="none"
+										viewBox="0 0 24 24"
+										strokeWidth={1.5}
+										stroke="currentColor"
+										className="w-6 h-6 swap-off"
+									>
+										<path
+											strokeLinecap="round"
+											strokeLinejoin="round"
+											d="M4.5 15.75l7.5-7.5 7.5 7.5"
+										/>
+									</svg>
+
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										fill="none"
+										viewBox="0 0 24 24"
+										strokeWidth={1.5}
+										stroke="currentColor"
+										className="w-6 h-6 swap-on"
+									>
+										<path
+											strokeLinecap="round"
+											strokeLinejoin="round"
+											d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+										/>
+									</svg>
+								</label>
+							</th>
 							<th className="sticky top-0 px-6 py-3">Program Name</th>
 							<th className="sticky top-0 px-6 py-3">LOCATION</th>
 							<th className="sticky top-0 px-6 py-3">Date</th>

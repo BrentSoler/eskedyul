@@ -11,8 +11,7 @@ const ProgramsTable = () => {
 	const { data, isSuccess, isLoading } = controller.getPrograms(brgyId);
 	const [statusFilter, setStatusFilter] = useState("");
 	const [viewFilter, setViewFilter] = useState("");
-
-	// const [getData, setGetData] = useState(data);
+	const [sort, setSort] = useState("asc");
 
 	const [searchFilter, setSearchFilter] = useState("");
 
@@ -20,11 +19,13 @@ const ProgramsTable = () => {
 	const handleFilteredData = useMemo(() => {
 		if (isSuccess) {
 			if (data.data !== "No Data") {
-				const sorted = data.data;
+				const sorted = data.data.sort((a: any, b: any) => {
+					return sort === "asc" ? a.name.localeCompare(b.name) : -a.name.localeCompare(b.name);
+				});
 
 				const roleFilter = sorted.filter((d: any) => {
-					return role === "Brgy. Admin" ? role === d.view : d
-				})
+					return role === "Brgy. Admin" ? role === d.view : d;
+				});
 
 				const statusSort = roleFilter.filter((d: any) => {
 					return d.status.includes(statusFilter);
@@ -52,7 +53,7 @@ const ProgramsTable = () => {
 			}
 			return "No Data";
 		}
-	}, [isSuccess, data, searchFilter, statusFilter, viewFilter]);
+	}, [isSuccess, data, searchFilter, statusFilter, viewFilter, sort]);
 
 	return (
 		<>
@@ -66,24 +67,24 @@ const ProgramsTable = () => {
 					value={searchFilter}
 					className="input input-bordered w-full mt-3"
 				/>
-				{role !== "Brgy. Admin" && <>
-
-					<label> View </label>
-					<select
-						placeholder="View"
-						onChange={(e) => {
-							setViewFilter(e.target.value);
-						}}
-						value={viewFilter}
-						className="input input-bordered w-full mt-3"
-					>
-						<option value=""></option>
-						<option value="Brgy. Admin">Brgy. Admin</option>
-						<option value="Admin">Admin</option>
-						<option value="Master Admin">Master Admin</option>
-					</select>
-				</>
-				}
+				{role !== "Brgy. Admin" && (
+					<>
+						<label> View </label>
+						<select
+							placeholder="View"
+							onChange={(e) => {
+								setViewFilter(e.target.value);
+							}}
+							value={viewFilter}
+							className="input input-bordered w-full mt-3"
+						>
+							<option value=""></option>
+							<option value="Brgy. Admin">Brgy. Admin</option>
+							<option value="Admin">Admin</option>
+							<option value="Master Admin">Master Admin</option>
+						</select>
+					</>
+				)}
 				<label> Status </label>
 				<select
 					placeholder="Status"
@@ -103,7 +104,42 @@ const ProgramsTable = () => {
 				<table className="table w-full m-auto">
 					<thead>
 						<tr>
-							<th className="sticky top-0 px-6 py-3">NAME</th>
+							<th className="sticky top-0 px-6 py-3 flex justify-between items-center">
+								NAME
+								<label className="swap swap-rotate">
+									<input type="checkbox" onClick={() => setSort(sort === "asc" ? "desc" : "asc")} />
+
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										fill="none"
+										viewBox="0 0 24 24"
+										strokeWidth={1.5}
+										stroke="currentColor"
+										className="w-6 h-6 swap-off"
+									>
+										<path
+											strokeLinecap="round"
+											strokeLinejoin="round"
+											d="M4.5 15.75l7.5-7.5 7.5 7.5"
+										/>
+									</svg>
+
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										fill="none"
+										viewBox="0 0 24 24"
+										strokeWidth={1.5}
+										stroke="currentColor"
+										className="w-6 h-6 swap-on"
+									>
+										<path
+											strokeLinecap="round"
+											strokeLinejoin="round"
+											d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+										/>
+									</svg>
+								</label>
+							</th>
 							<th className="sticky top-0 px-6 py-3">TYPE</th>
 							<th className="sticky top-0 px-6 py-3">QUALIFICATIONS</th>
 							<th className="sticky top-0 px-6 py-3 w-[5rem]">VIEW</th>
@@ -122,7 +158,6 @@ const ProgramsTable = () => {
 						)}
 						{isSuccess && handleFilteredData !== "No Data" ? (
 							handleFilteredData.map((program: any) => (
-
 								<tr key={program.id}>
 									<td className="">{program.name}</td>
 									<td className="w-[15rem] truncate">{program.type}</td>
