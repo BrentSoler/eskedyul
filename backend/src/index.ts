@@ -12,7 +12,7 @@ app.use("/program", ProgramsRoutes(server.Router()));
 app.use("/schedule", ScheduleRoutes(server.Router()));
 app.use("/transaction", TransactionRoutes(server.Router()));
 
-app.listen(PORT, () => {
+app.listen(process.env.PORT || PORT, () => {
   console.log("CONNECTED");
 });
 
