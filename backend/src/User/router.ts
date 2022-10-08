@@ -59,7 +59,6 @@ export default function userRoutes(router: Router) {
   );
 
   router.route("/register/:role").post(
-    authHandler,
     expressAsyncHandler(async (req: Request, res: Response) => {
       const role = req.params.role;
 
@@ -67,10 +66,6 @@ export default function userRoutes(router: Router) {
         const data = await registerAdmin(req.body);
         res.json({ ...data });
         return;
-      }
-
-      if (req.user.role === "Admin") {
-        throw new Error("Only Brgy. Admin can use this.");
       }
 
       if (role.toString() === "resident") {
