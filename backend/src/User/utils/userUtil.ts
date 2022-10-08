@@ -17,7 +17,7 @@ export default class UserUtil extends Prisma {
 
       const { fname, lname, mname } = this.data;
 
-      const findUser = await this.prisma.Users.findFirst({
+      const findUser = await this.prisma.users.findFirst({
         where: {
           fname: fname,
           lname: lname,
