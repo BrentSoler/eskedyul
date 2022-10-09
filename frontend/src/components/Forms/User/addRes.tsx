@@ -300,6 +300,19 @@ const AddRes = () => {
 					</div>
 				</div>
 
+				<div className="form-control">
+					<label className="cursor-pointer label">
+						<input type="checkbox" className="checkbox checkbox-primary" id="agreement" />
+							<label> I have <b>read</b>, 
+							<b> understood</b>, and 
+							<b> accepted </b>the  
+								<a href= "/dashboard/privacypolicy" className="text-primary"> Privacy Policy </a> 
+								and 
+								<a href= "/dashboard/termsconditions" className="text-primary"> Terms & Conditions.</a>
+						</label>
+					</label>
+				</div>
+
 				<button className="btn-primary mt-10 rounded-lg py-2 px-3 w-max self-end" type="submit">
 					Submit
 				</button>
