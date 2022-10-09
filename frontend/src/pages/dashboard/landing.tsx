@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 const LandingPage = () => {
 	return (
 		<div>
@@ -36,16 +34,6 @@ const LandingPage = () => {
 									assistances offered by the Office of Manila to its senior citizens.
 								</p>
 								<div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
-									<div className="rounded-md shadow">
-										<Link href="/login">
-											<a
-												href="#"
-												className="flex w-full items-center justify-center rounded-md border border-transparent bg-[#1e40af] px-8 py-3 text-base font-medium text-white hover:bg-[#1b327e] md:py-4 md:px-10 md:text-lg"
-											>
-												Login
-											</a>
-										</Link>
-									</div>
 									<div className="mt-3 sm:mt-0 sm:ml-3">
 										<a
 											href="#learn-more"
