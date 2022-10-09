@@ -23,6 +23,7 @@ const TransactionTable = () => {
 						: -a.residents.users.lname.localeCompare(b.residents.users.lname);
 				});
 
+				
 				const statusSort = sorted.filter((d: any) => {
 					return d.status.includes(statusFilter);
 				});
@@ -75,7 +76,7 @@ const TransactionTable = () => {
 					value={searchFilter}
 					className="input input-bordered w-full mt-3"
 				/>
-				<label> View </label>
+				<label className="flex items-center"> View </label>
 				<select
 					placeholder="Status"
 					onChange={(e) => {

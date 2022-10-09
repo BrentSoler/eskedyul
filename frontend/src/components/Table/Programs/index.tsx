@@ -69,7 +69,7 @@ const ProgramsTable = () => {
 				/>
 				{role !== "Brgy. Admin" && (
 					<>
-						<label> View </label>
+						<label className="flex items-center"> View </label>
 						<select
 							placeholder="View"
 							onChange={(e) => {
@@ -85,7 +85,7 @@ const ProgramsTable = () => {
 						</select>
 					</>
 				)}
-				<label> Status </label>
+				<label className="flex items-center"> Status </label>
 				<select
 					placeholder="Status"
 					onChange={(e) => {

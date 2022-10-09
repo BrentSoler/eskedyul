@@ -29,11 +29,11 @@ const LandingPage = () => {
 						<main className="mx-auto mt-10 max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
 							<div className="sm:text-center lg:text-left">
 								<h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl md:text-6xl">
-									<span className="block text-[#1e40af] xl:inline text-[5rem]">ESKEDYUL</span>
+									<span className="block text-[#1e40af] xl:inline text-[5rem]">E-SKEDYUL</span>
 								</h1>
 								<p className="mt-3 text-base text-gray-500 sm:mx-auto sm:mt-5 sm:max-w-xl sm:text-lg md:mt-5 md:text-xl lg:mx-0">
-									Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat
-									commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.
+									E-Skedyul is an e-government website that aims to help the Office of Senior Citizens Affairs of Manila to organize and
+									distribute the financial and goods assistances offered by the Office of Manila to its senior citizens.
 								</p>
 								<div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
 									<div className="rounded-md shadow">
@@ -66,7 +66,7 @@ const LandingPage = () => {
 						<div id="slide1" className="carousel-item relative w-full">
 							<img
 								className="h-56 w-full object-cover sm:h-72 md:h-96 lg:h-full lg:w-full"
-								src="/senior4.jpg"
+								src="/Osca-logo.jpg"
 								alt=""
 							/>
 							<div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
@@ -81,7 +81,7 @@ const LandingPage = () => {
 						<div id="slide2" className="carousel-item relative w-full">
 							<img
 								className="h-56 w-full object-cover sm:h-72 md:h-96 lg:h-full lg:w-full"
-								src="/senior5.webp"
+								src="/lungsod-ng-maynila.jpg"
 								alt=""
 							/>
 							<div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
@@ -97,7 +97,7 @@ const LandingPage = () => {
 						<div id="slide3" className="carousel-item relative w-full">
 							<img
 								className="h-56 w-full object-cover sm:h-72 md:h-96 lg:h-full lg:w-full"
-								src="/senior3.jpg"
+								src="/osca-manila.jpg"
 								alt=""
 							/>
 							<div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
@@ -118,13 +118,12 @@ const LandingPage = () => {
 			<div className="bg-white py-12 h-[100vh] flex items-center" id="learn-more">
 				<div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 					<div className="lg:text-center">
-						<h2 className="text-lg font-semibold text-[#1e40af]">OSCA</h2>
+						<h2 className="text-lg font-semibold text-[#1e40af]">Office of Senior Citizen Affairs - Manila</h2>
 						<p className="mt-2 text-3xl font-bold leading-8 tracking-tight text-gray-900 sm:text-4xl">
-							Lorem, ipsum.
+						Tanggapan ng mga Ugnayang Pangnakatandang Mamamayan
 						</p>
 						<p className="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
-							Lorem ipsum dolor sit amet consect adipisicing elit. Possimus magnam voluptatum
-							cupiditate veritatis in accusamus quisquam.
+						Rm. 115 Ground Floor, Manila City Hall Building
 						</p>
 					</div>
 
@@ -149,11 +148,11 @@ const LandingPage = () => {
 											/>
 										</svg>
 									</div>
-									<p className="ml-16 text-lg font-medium leading-6 text-gray-900">Lorem</p>
+									<p className="ml-16 text-lg font-medium leading-6 text-gray-900">VISION</p>
 								</dt>
 								<dd className="mt-2 ml-16 text-base text-gray-500">
-									Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit
-									perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.
+								To provide quality service to our elderly and monitor compliance of the
+								 provision of RA 9994 particularly the grant of discounts and their privileges.
 								</dd>
 							</div>
 
@@ -176,11 +175,11 @@ const LandingPage = () => {
 											/>
 										</svg>
 									</div>
-									<p className="ml-16 text-lg font-medium leading-6 text-gray-900">Lorem</p>
+									<p className="ml-16 text-lg font-medium leading-6 text-gray-900">BISYON</p>
 								</dt>
 								<dd className="mt-2 ml-16 text-base text-gray-500">
-									Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit
-									perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.
+								Magbigay ng kalidad na serbisyo sa mga nakatatanda at subaybayan ang pagtalima sa mga probisyon ng RA9994 
+								lalo na ang pagkakaloob ng mga deskuwento at kanilang mga pribilehiyo.
 								</dd>
 							</div>
 
@@ -203,11 +202,11 @@ const LandingPage = () => {
 											/>
 										</svg>
 									</div>
-									<p className="ml-16 text-lg font-medium leading-6 text-gray-900">Lorem</p>
+									<p className="ml-16 text-lg font-medium leading-6 text-gray-900">MISSION</p>
 								</dt>
 								<dd className="mt-2 ml-16 text-base text-gray-500">
-									Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit
-									perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.
+								To encourage active participation of the senior citizens in the affairs of the city giving 
+								unequivocal recognition to their outstanding contribution to the society.
 								</dd>
 							</div>
 
@@ -230,11 +229,11 @@ const LandingPage = () => {
 											/>
 										</svg>
 									</div>
-									<p className="ml-16 text-lg font-medium leading-6 text-gray-900">Lorem</p>
+									<p className="ml-16 text-lg font-medium leading-6 text-gray-900">MISYON</p>
 								</dt>
 								<dd className="mt-2 ml-16 text-base text-gray-500">
-									Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit
-									perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.
+								Hikayatin ang aktibong pakikilahok ng mga senior citizen sa mga gawain ng lungsod bilang pagbibigay 
+								ng di-matatawarang pagkilala sa kanilang natatanging kontribusyon sa lipunan.
 								</dd>
 							</div>
 						</dl>
