@@ -75,7 +75,7 @@ const UsersTable = () => {
 					value={searchFilter}
 					className="input input-bordered w-full mt-3"
 				/>
-				<label>Role</label>
+				<label className="flex items-center">Role</label>
 				<select
 					placeholder="Role"
 					onChange={(e) => {
@@ -90,7 +90,7 @@ const UsersTable = () => {
 					<option value="Admin">Admin</option>
 					<option value="Master Admin">Master Admin</option>
 				</select>
-				<label>Status</label>
+				<label className="flex items-center">Status</label>
 				<select
 					placeholder="Status"
 					onChange={(e) => {

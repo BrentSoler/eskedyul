@@ -84,7 +84,7 @@ const Stats = ({
 					</svg>
 				</div>
 				<div className="stat-title">Pending</div>
-				<div className="stat-value">{pending}</div>
+				<div className="stat-value text-secondary">{pending}</div>
 			</div>
 
 			<div className="stat">
@@ -101,7 +101,7 @@ const Stats = ({
 					</svg>
 				</div>
 				<div className="stat-title">Completed</div>
-				<div className="stat-value">{complete}</div>
+				<div className="stat-value text-accent">{complete}</div>
 			</div>
 
 			<div className="stat">
@@ -118,7 +118,7 @@ const Stats = ({
 					</svg>
 				</div>
 				<div className="stat-title">Cancelled</div>
-				<div className="stat-value">{cancel}</div>
+				<div className="stat-value text-error">{cancel}</div>
 			</div>
 		</div>
 	);
