@@ -107,6 +107,15 @@ const Links = () => {
 					Transactions
 				</a>
 			</Link>
+			<Link href="/dashboard/privacypolicy">
+				<a
+					className={`${
+						router.pathname.includes("/dashboard/privacypolicy") ? "font-bold" : "font-light"
+					} transition all`}
+				>	
+				</a>
+			</Link>
+
 		</div>
 	);
 };

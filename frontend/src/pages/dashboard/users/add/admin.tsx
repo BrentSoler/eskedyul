@@ -14,7 +14,7 @@ const AddPrograms = () => {
 	}, [token, router]);
 	return (
 		<div className="flex flex-col justify-center items-center gap-6 p-5 mt-5">
-			<h1 className="font-extrabold text-4xl">ADD A ADMIN</h1>
+			<h1 className="font-extrabold text-4xl">ADD AN ADMIN</h1>
 			<AddAdm />
 		</div>
 	);
