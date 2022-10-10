@@ -41,7 +41,6 @@ const useFormController = () => {
 			if (
 				!role ||
 				!fname ||
-				!mname ||
 				!lname ||
 				!suffix ||
 				!sex ||
@@ -52,8 +51,6 @@ const useFormController = () => {
 				!idType ||
 				!idNo ||
 				!seniorType ||
-				!emgContNum ||
-				!emgContName ||
 				!civilStatus ||
 				!birthdate ||
 				!birthPlace ||
@@ -91,7 +88,6 @@ const useFormController = () => {
 				!password ||
 				!confPassword ||
 				!fname ||
-				!mname ||
 				!lname ||
 				!suffix ||
 				!sex ||
@@ -133,7 +129,6 @@ const useFormController = () => {
 				!role ||
 				!email ||
 				!fname ||
-				!mname ||
 				!lname ||
 				!suffix ||
 				!sex ||
@@ -184,7 +179,6 @@ const useFormController = () => {
 			if (
 				!role ||
 				!fname ||
-				!mname ||
 				!lname ||
 				!suffix ||
 				!sex ||
@@ -195,8 +189,6 @@ const useFormController = () => {
 				!idType ||
 				!idNo ||
 				!seniorType ||
-				!emgContNum ||
-				!emgContName ||
 				!civilStatus ||
 				!birthdate ||
 				!birthPlace ||

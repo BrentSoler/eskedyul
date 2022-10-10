@@ -20,7 +20,8 @@ export const SRegister = z.object({
   mname: z
     .string()
     .min(3, { message: "Name needs to be atleast 3 letters" })
-    .regex(/^[A-Za-z]+$/, { message: "Name should only consist of letters" }),
+    .regex(/^[A-Za-z]+$/, { message: "Name should only consist of letters" })
+    .optional(),
   lname: z
     .string()
     .min(3, { message: "Name needs to be atleast 3 letters" })
@@ -39,11 +40,15 @@ export const SRegisterResident = z.object({
   id: z.number().optional(),
   userId: z.number().optional(),
   seniorType: z.enum(["OLD", "NEW"]),
-  emgContNum: z.string().regex(/^0(9)\d{9}$/, { message: "Invalid Phone No." }),
+  emgContNum: z
+    .string()
+    .regex(/^0(9)\d{9}$/, { message: "Invalid Phone No." })
+    .optional(),
   emgContName: z
     .string()
     .min(3, { message: "Name needs to be atleast 3 letters" })
-    .regex(/^[A-Za-z]+$/, { message: "Name should only consist of letters" }),
+    .regex(/^[A-Za-z]+$/, { message: "Name should only consist of letters" })
+    .optional(),
   civilStatus: z.enum(["Single", "Married", "Divorced"]),
   birthdate: z.string(),
   birthPlace: z.string(),
