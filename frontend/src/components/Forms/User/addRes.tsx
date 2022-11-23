@@ -376,9 +376,16 @@ const AddRes = () => {
 							</div>
 						</div>
 				
-				<button className="btn-primary mt-10 rounded-lg py-2 px-3 w-max self-end" type="submit">
-					Submit
-				</button>
+				<div>
+					<Link href={`/dashboard/users`}>
+						<button className="btn-primary mt-10 rounded-lg py-2 px-3 w-max self-start" type="submit">
+							Back
+						</button>
+					</Link>
+					<button className="btn-primary mt-10 rounded-lg py-2 px-3 w-max self-end" type="submit">
+						Submit
+					</button>
+				</div>
 			</form>
 		</div>
 	);

@@ -105,7 +105,7 @@ const UsersTable = () => {
 				</select>
 			</div>
 			<div className="w-full mt-4 overflow-x-auto m-auto">
-				<table className="table w-[10rem]">
+				<table className="table w-full m-auto">
 					<thead>
 						<tr>
 							<th className="sticky top-0 px-6 py-3 flex justify-between items-center">
@@ -144,16 +144,10 @@ const UsersTable = () => {
 									</svg>
 								</label>
 							</th>
-							<th className="sticky top-0 px-6 py-3">PERMANENT ADDRESS</th>
-							<th className="sticky top-0 px-6 py-3">PRESENT ADDRESS</th>
 							<th className="sticky top-0 px-6 py-3">MOBILE NO.</th>
-							<th className="sticky top-0 px-6 py-3">EMERGENCY CONTACT NAME</th>
-							<th className="sticky top-0 px-6 py-3">EMERGENCY CONTACT NUMBER</th>
-							<th className="sticky top-0 px-6 py-3">CIVIL STATUS</th>
-							<th className="sticky top-0 px-6 py-3">BIRTHDATE</th>
-							<th className="sticky top-0 px-6 py-3">BIRTHPLACE</th>
 							<th className="sticky top-0 px-6 py-3">ROLE</th>
 							<th className="sticky top-0 px-6 py-3 w-[2rem]">is activated</th>
+							<th className="sticky top-0 px-6 py-3">REMARKS</th>
 							<th className="sticky top-0 px-6 py-3 w-6"></th>
 						</tr>
 					</thead>
@@ -169,24 +163,7 @@ const UsersTable = () => {
 							handleFilteredData.map((user: any) => (
 								<tr key={user.id}>
 									<td className="">{`${user.lname}, ${user.fname} ${user.mname}`}</td>
-									<td className="w-[15rem] truncate">{user.permAdd}</td>
-									<td className="w-[15rem] truncate">{user.presAdd}</td>
 									<td className="w-[15rem] truncate">{user.mobileNo}</td>
-									<td className="w-[15rem] truncate">
-										{user.residents.length > 0 ? user.residents[0].emgContName : "Not Available"}
-									</td>
-									<td className="w-[15rem] truncate">
-										{user.residents.length > 0 ? user.residents[0].emgContNum : "Not Available"}
-									</td>
-									<td className="w-[15rem] truncate">
-										{user.residents.length > 0 ? user.residents[0].civilStatus : "Not Available"}
-									</td>
-									<td className="w-[15rem] truncate">
-										{user.residents.length > 0 ? user.residents[0].birthdate : "Not Available"}
-									</td>
-									<td className="w-[15rem] truncate">
-										{user.residents.length > 0 ? user.residents[0].birthPlace : "Not Available"}
-									</td>
 
 									<td className="w-[15rem] truncate">{user.role}</td>
 									<td className="text-center">
@@ -198,6 +175,7 @@ const UsersTable = () => {
 											disabled={role === "Brgy. Admin" ? true : user.id === userId ? true : false}
 										/>
 									</td>
+									<td className="w-[15rem] truncate">Remark</td>
 
 									<td>
 										<Link

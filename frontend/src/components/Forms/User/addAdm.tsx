@@ -269,32 +269,39 @@ const AddAdm = () => {
 						</div>
 
 				<input type="checkbox" id="termsCondition" className="modal-toggle" />
-					<div className="modal">
-						<div className="modal-box w-11/12 max-w-5xl">
-							<h3 className="font-bold text-lg ">TERMS & CONDTIONS</h3>
-									<p className="py-2 text-jusitfy">
-										I hereby authorize the Office of Senior Affairs City of Manila, to collect and process the data 
-										indicated herein to properly distribute the financial or goods aid by providing schedules and programs
-										and other relevant steps to ensure a transparent distribution. I understand that my personal information 
-										is protected by RA 10173, Data Privacy Act of 2012, and that I am required by RA 11469, Bayanihan 
-										Heal as One Act, to provide truthful information.
+				<div className="modal">
+					<div className="modal-box w-11/12 max-w-5xl">
+						<h3 className="font-bold text-lg ">TERMS & CONDTIONS</h3>
+						<p className="py-2 text-jusitfy">
+							I hereby authorize the Office of Senior Affairs City of Manila, to collect and process the data 
+							indicated herein to properly distribute the financial or goods aid by providing schedules and programs
+							and other relevant steps to ensure a transparent distribution. I understand that my personal information 
+							is protected by RA 10173, Data Privacy Act of 2012, and that I am required by RA 11469, Bayanihan 
+							Heal as One Act, to provide truthful information.
 
-										Pinahihintulutan ko ang Tanggapan ng mga Ugnayang Pangnakatandang Mamamayan Lungsod ng Taguig upang 
-										mangolekta at iproseso ang datos na ipinahihiwatig dito upang maayos na mapamigay ang mga ayuda sa 
-										pamamagitan ng pagbibigay ng mga iskedyul at programa at iba pang hakbang upang maisigurado ang isang
-										malinis na distribusyon ng ayuda. Naiintindihan ko na ang aking personal na impormasyon ay protektado 
-										ng RA 10173 o Data Privacy Act of 2012, at ako ay tatalima sa RA 11469 o ang Bayanihan Heal as One 
-										Act, upang magbigay ng makatotohanang impormasyon.
-									</p>
-									<div className="modal-action">
-										<label htmlFor="termsCondition" className="btn btn-primary">Okay</label>
-									</div>
-							</div>
+							Pinahihintulutan ko ang Tanggapan ng mga Ugnayang Pangnakatandang Mamamayan Lungsod ng Taguig upang 
+							mangolekta at iproseso ang datos na ipinahihiwatig dito upang maayos na mapamigay ang mga ayuda sa 
+							pamamagitan ng pagbibigay ng mga iskedyul at programa at iba pang hakbang upang maisigurado ang isang
+							malinis na distribusyon ng ayuda. Naiintindihan ko na ang aking personal na impormasyon ay protektado 
+							ng RA 10173 o Data Privacy Act of 2012, at ako ay tatalima sa RA 11469 o ang Bayanihan Heal as One 
+							Act, upang magbigay ng makatotohanang impormasyon.
+						</p>
+						<div className="modal-action">
+							<label htmlFor="termsCondition" className="btn btn-primary">Okay</label>
 						</div>
-				
-				<button className="btn-primary mt-10 rounded-lg py-2 px-3 w-max self-end" type="submit">
-					Submit
-				</button>
+					</div>
+				</div>
+			
+				<div>
+					<Link href={`/dashboard/users`}>
+						<button className="btn-primary mt-10 rounded-lg py-2 px-3 w-max self-start" type="submit">
+							Back
+						</button>
+					</Link>
+					<button className="btn-primary mt-10 rounded-lg py-2 px-3 w-max self-end" type="submit">
+						Submit
+					</button>
+				</div>
 			</form>
 		</div>
 	);
