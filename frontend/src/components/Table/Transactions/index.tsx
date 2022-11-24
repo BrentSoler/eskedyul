@@ -23,7 +23,7 @@ const TransactionTable = () => {
 						: -a.residents.users.lname.localeCompare(b.residents.users.lname);
 				});
 
-				
+
 				const statusSort = sorted.filter((d: any) => {
 					return d.status.includes(statusFilter);
 				});
@@ -51,14 +51,14 @@ const TransactionTable = () => {
 				return searchFilter === ""
 					? statusSort
 					: [
-							...new Set([
-								...fnameSort,
-								...mnameSort,
-								...lnameSort,
-								...programNameSort,
-								...locationSort,
-							]),
-					  ];
+						...new Set([
+							...fnameSort,
+							...mnameSort,
+							...lnameSort,
+							...programNameSort,
+							...locationSort,
+						]),
+					];
 			}
 			return "No Data";
 		}
@@ -165,7 +165,13 @@ const TransactionTable = () => {
 											? `${transaction.schedule.startTime}-${transaction.schedule.endTime}`
 											: "Deleted"}
 									</td>
-									<td className="text-center">{transaction.status}</td>
+									<td className={`text-center 
+											${transaction.status === "Pending" && "text-warning"}
+											${transaction.status === "Completed" && "text-success"}
+											${transaction.status === "Cancelled" && "text-error"}
+										`}>
+										{transaction.status}
+									</td>
 									{transaction.program && role === "Brgy. Admin" ? (
 										<td>
 											<Link href={`/dashboard/transactions/edit/${transaction.id}`}>

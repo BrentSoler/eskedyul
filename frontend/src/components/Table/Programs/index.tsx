@@ -163,7 +163,12 @@ const ProgramsTable = () => {
 									<td className="w-[15rem] truncate">{program.type}</td>
 									<td className="">{program.qualification}</td>
 									<td className="">{program.view}</td>
-									<td className="text-center">{program.status}</td>
+									<td className={`text-center
+											${program.status === "Pending" && "text-warning"}
+											${program.status === "Completed" && "text-success"}
+											${program.status === "Ongoing" && "text-info"}
+										`}>
+										{program.status}</td>
 									{role === "Master Admin" && (
 										<td>
 											<Link href={`/dashboard/programs/edit/${program.id}`}>
