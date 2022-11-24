@@ -95,6 +95,7 @@ const TransactionTable = () => {
 				<table className="table w-full m-auto">
 					<thead>
 						<tr>
+							<th className="sticky top-0 px-6 py-3">ID</th>
 							<th className="sticky top-0 px-6 py-3 flex justify-between items-center">
 								BENEFICIARY
 								<label className="swap swap-rotate">
@@ -131,6 +132,7 @@ const TransactionTable = () => {
 									</svg>
 								</label>
 							</th>
+							<th className="sticky top-0 px-6 py-3">BGRY. ID</th>
 							<th className="sticky top-0 px-6 py-3">Program Name</th>
 							<th className="sticky top-0 px-6 py-3">LOCATION</th>
 							<th className="sticky top-0 px-6 py-3">Date</th>
@@ -150,7 +152,9 @@ const TransactionTable = () => {
 						{isSuccess && handleFilteredData !== "No Data" ? (
 							handleFilteredData.map((transaction: any) => (
 								<tr key={transaction.id}>
+									<td className="w-[15rem] truncate">{transaction.id}</td>
 									<td className="">{`${transaction.residents.users.lname}, ${transaction.residents.users.fname} ${transaction.residents.users.mname}`}</td>
+									<td className="w-[15rem] truncate">{transaction.residents.users.brgyId}</td>
 									<td className="w-[15rem] truncate">
 										{transaction.program ? transaction.program.name : "Deleted"}
 									</td>

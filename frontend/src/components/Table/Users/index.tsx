@@ -144,6 +144,7 @@ const UsersTable = () => {
 									</svg>
 								</label>
 							</th>
+							<th className="sticky top-0 px-6 py-3">BGRY. ID</th>
 							<th className="sticky top-0 px-6 py-3">MOBILE NO.</th>
 							<th className="sticky top-0 px-6 py-3">ROLE</th>
 							<th className="sticky top-0 px-6 py-3 w-[2rem]">is activated</th>
@@ -163,6 +164,7 @@ const UsersTable = () => {
 							handleFilteredData.map((user: any) => (
 								<tr key={user.id}>
 									<td className="">{`${user.lname}, ${user.fname} ${user.mname}`}</td>
+									<td className="w-[15rem] truncate">{user.brgyId}</td>
 									<td className="w-[15rem] truncate">{user.mobileNo}</td>
 
 									<td className="w-[15rem] truncate">{user.role}</td>
@@ -179,9 +181,8 @@ const UsersTable = () => {
 
 									<td>
 										<Link
-											href={`/dashboard/users/edit/${
-												user.role === "Resident" ? "resident" : "admin"
-											}/${user.id}`}
+											href={`/dashboard/users/edit/${user.role === "Resident" ? "resident" : "admin"
+												}/${user.id}`}
 										>
 											<a className="btn btn-ghost">Edit</a>
 										</Link>

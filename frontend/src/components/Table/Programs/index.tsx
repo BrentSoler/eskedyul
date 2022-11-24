@@ -140,6 +140,7 @@ const ProgramsTable = () => {
 									</svg>
 								</label>
 							</th>
+							<th className="sticky top-0 px-6 py-3">BGRY. ID</th>
 							<th className="sticky top-0 px-6 py-3">TYPE</th>
 							<th className="sticky top-0 px-6 py-3">QUALIFICATIONS</th>
 							<th className="sticky top-0 px-6 py-3 w-[5rem]">VIEW</th>
@@ -160,6 +161,7 @@ const ProgramsTable = () => {
 							handleFilteredData.map((program: any) => (
 								<tr key={program.id}>
 									<td className="">{program.name}</td>
+									<td className="">{program.brgyId}</td>
 									<td className="w-[15rem] truncate">{program.type}</td>
 									<td className="">{program.qualification}</td>
 									<td className="">{program.view}</td>
