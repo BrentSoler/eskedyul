@@ -128,8 +128,8 @@ const EditAdm = ({ id }: { id?: string }) => {
 							onChange={(e) => handleChange(e, setData)}
 						>
 							<option value=""></option>
-							<option value="jr">jr</option>
-							<option value="Jr.">Jr.</option>
+							<option value="jr">Jr.</option>
+							<option value="Jr.">Sr.</option>
 							<option value="II">II</option>
 							<option value="III">III</option>
 							<option value="None">None</option>
@@ -214,14 +214,13 @@ const EditAdm = ({ id }: { id?: string }) => {
 						/>
 					</div>
 				</div>
-
-				<div>
+				<div className="flex gap-3">
 					<Link href={`/dashboard/users`}>
-						<button className="btn-primary mt-10 rounded-lg py-2 px-3 w-max self-start" type="submit">
+						<button className="btn-secondary mt-10 rounded-lg py-2 px-3 w-max" type="submit">
 							Back
 						</button>
 					</Link>
-					<button className="btn-primary mt-10 rounded-lg py-2 px-3 w-max self-end" type="submit">
+					<button className="btn-primary mt-10 rounded-lg py-2 px-3 w-max" type="submit">
 						Submit
 					</button>
 				</div>
