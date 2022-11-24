@@ -163,12 +163,15 @@ const ProgramsTable = () => {
 									<td className="w-[15rem] truncate">{program.type}</td>
 									<td className="">{program.qualification}</td>
 									<td className="">{program.view}</td>
-									<td className={`text-center
-											${program.status === "Pending" && "text-warning"}
-											${program.status === "Completed" && "text-success"}
-											${program.status === "Ongoing" && "text-info"}
-										`}>
-										{program.status}</td>
+									<td className="text-center text-white text-sm">
+										<div className={`card p-0 px-1 py-1  
+												${program.status === "Pending" && "bg-warning"}
+												${program.status === "Completed" && "bg-success"}
+												${program.status === "Ongoing" && "bg-info"}
+											`}>
+											{program.status}
+										</div>
+									</td>
 									{role === "Master Admin" && (
 										<td>
 											<Link href={`/dashboard/programs/edit/${program.id}`}>

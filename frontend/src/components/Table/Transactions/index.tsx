@@ -165,12 +165,15 @@ const TransactionTable = () => {
 											? `${transaction.schedule.startTime}-${transaction.schedule.endTime}`
 											: "Deleted"}
 									</td>
-									<td className={`text-center 
-											${transaction.status === "Pending" && "text-warning"}
-											${transaction.status === "Completed" && "text-success"}
-											${transaction.status === "Cancelled" && "text-error"}
-										`}>
-										{transaction.status}
+
+									<td className="text-center text-white text-sm">
+										<div className={`card p-0 px-1 py-1  
+												${transaction.status === "Pending" && "bg-warning"}
+												${transaction.status === "Completed" && "bg-success"}
+												${transaction.status === "Cancelled" && "bg-error"}
+											`}>
+											{transaction.status}
+										</div>
 									</td>
 									{transaction.program && role === "Brgy. Admin" ? (
 										<td>
@@ -180,7 +183,8 @@ const TransactionTable = () => {
 										</td>
 									) : (
 										<></>
-									)}
+									)
+									}
 								</tr>
 							))
 						) : (
