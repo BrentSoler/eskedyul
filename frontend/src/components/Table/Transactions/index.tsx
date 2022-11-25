@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import AuthStore from "../../../store/authStore";
 import useTransactionController from "./transactionController";
-
+import { getStatusColor } from "../../../hooks/useTransactionApi";
 const TransactionTable = () => {
 	const brgyId = AuthStore((state) => state.userData.brgyId);
 	const controller = useTransactionController();
@@ -91,6 +91,7 @@ const TransactionTable = () => {
 					<option value="Cancelled">Cancelled</option>
 				</select>
 			</div>
+			<div className="w-full mt-4 mb-4 p-1 bg-base-200" />
 			<div className="w-full mt-4 overflow-x-auto m-auto">
 				<table className="table w-full m-auto">
 					<thead>
@@ -169,13 +170,8 @@ const TransactionTable = () => {
 											? `${transaction.schedule.startTime}-${transaction.schedule.endTime}`
 											: "Deleted"}
 									</td>
-
 									<td className="text-center text-white text-sm">
-										<div className={`card p-0 px-1 py-1  
-												${transaction.status === "Pending" && "bg-warning"}
-												${transaction.status === "Completed" && "bg-success"}
-												${transaction.status === "Cancelled" && "bg-error"}
-											`}>
+										<div className={`card p-0 px-1 py-1 ${getStatusColor(`${transaction.status}`)}`}>
 											{transaction.status}
 										</div>
 									</td>
