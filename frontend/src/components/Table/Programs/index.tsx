@@ -46,10 +46,13 @@ const ProgramsTable = () => {
 				const qualificationSort = viewSort.filter((d: any) =>
 					d.qualification.toString().toLowerCase().includes(searchFilter.toString().toLowerCase())
 				);
+				const brgyIdSort = statusSort?.filter((d: any) =>
+					d.brgyId.toString().includes(searchFilter.toString())
+				);
 
 				return searchFilter === ""
 					? viewSort
-					: [...new Set([...nameSort, ...typeSort, ...qualificationSort])];
+					: [...new Set([...nameSort, ...typeSort, ...qualificationSort, ...brgyIdSort])];
 			}
 			return "No Data";
 		}
@@ -59,7 +62,7 @@ const ProgramsTable = () => {
 		<>
 			<div className="flex gap-3">
 				<input
-					placeholder="Search Name, Type or Qualifications."
+					placeholder="Search Name, Brgy ID, Type or Qualifications."
 					type="text"
 					onChange={(e) => {
 						setSearchFilter(e.target.value);

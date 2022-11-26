@@ -53,10 +53,13 @@ const UsersTable = () => {
 				const mobileNoSort = statusSort?.filter((d: any) =>
 					d.mobileNo.toString().includes(searchFilter.toString())
 				);
+				const brgyIdSort = statusSort?.filter((d: any) =>
+					d.brgyId.toString().includes(searchFilter.toString())
+				);
 
 				return searchFilter === ""
 					? sorted
-					: [...new Set([...fnameSort, ...mnameSort, ...lnameSort, ...mobileNoSort])];
+					: [...new Set([...fnameSort, ...mnameSort, ...lnameSort, ...mobileNoSort, ...brgyIdSort])];
 			}
 
 			return "No Data";
@@ -68,7 +71,7 @@ const UsersTable = () => {
 		<>
 			<div className="flex gap-3">
 				<input
-					placeholder="Search Name, Role or Mobile No."
+					placeholder="Search Name, Brgy ID, Role or Mobile No."
 					type="text"
 					onChange={(e) => {
 						setSearchFilter(e.target.value);
@@ -83,7 +86,7 @@ const UsersTable = () => {
 						setRoleFilter(e.target.value);
 					}}
 					value={roleFilter}
-					className="input input-bordered w-full mt-3"
+					className="input input-bordered mt-3"
 				>
 					<option value=""></option>
 					<option value="Resident">Resident</option>
@@ -98,7 +101,7 @@ const UsersTable = () => {
 						setStatusFilter(e.target.value);
 					}}
 					value={statusFilter}
-					className="input input-bordered w-full mt-3"
+					className="input input-bordered mt-3"
 				>
 					<option value=""></option>
 					<option value="1">Activated</option>
