@@ -46,10 +46,16 @@ const ProgramsTable = () => {
 				const qualificationSort = viewSort.filter((d: any) =>
 					d.qualification.toString().toLowerCase().includes(searchFilter.toString().toLowerCase())
 				);
+				let brgyIdSort = [];
+				if (role === "Master Admin") {
+					brgyIdSort = statusSort?.filter((d: any) =>
+						d.brgyId.toString().includes(searchFilter.toString())
+					);
+				}
 
 				return searchFilter === ""
 					? viewSort
-					: [...new Set([...nameSort, ...typeSort, ...qualificationSort])];
+					: [...new Set([...nameSort, ...typeSort, ...qualificationSort, ...brgyIdSort])];
 			}
 			return "No Data";
 		}
@@ -59,7 +65,7 @@ const ProgramsTable = () => {
 		<>
 			<div className="flex gap-3">
 				<input
-					placeholder="Search Name, Type or Qualifications."
+					placeholder={`Search Name, ${role === "Master Admin" ? "Brgy ID," : ""} Type or Qualifications.`}
 					type="text"
 					onChange={(e) => {
 						setSearchFilter(e.target.value);
@@ -76,7 +82,7 @@ const ProgramsTable = () => {
 								setViewFilter(e.target.value);
 							}}
 							value={viewFilter}
-							className="input input-bordered w-full mt-3"
+							className="input input-bordered mt-3"
 						>
 							<option value=""></option>
 							<option value="Brgy. Admin">Brgy. Admin</option>
@@ -92,7 +98,7 @@ const ProgramsTable = () => {
 						setStatusFilter(e.target.value);
 					}}
 					value={statusFilter}
-					className="input input-bordered w-full mt-3"
+					className="input input-bordered mt-3"
 				>
 					<option value=""></option>
 					<option value="Pending">Pending</option>

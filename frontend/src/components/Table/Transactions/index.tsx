@@ -47,6 +47,12 @@ const TransactionTable = () => {
 				const locationSort = statusSort.filter((d: any) =>
 					d.schedule.location.toLowerCase().includes(searchFilter.toLowerCase())
 				);
+				let brgyIdSort = [];
+				if (role === "Master Admin") {
+					brgyIdSort = statusSort?.filter((d: any) =>
+						d.brgyId.toString().includes(searchFilter.toString())
+					);
+				}
 
 				return searchFilter === ""
 					? statusSort
@@ -57,6 +63,7 @@ const TransactionTable = () => {
 							...lnameSort,
 							...programNameSort,
 							...locationSort,
+							...brgyIdSort
 						]),
 					];
 			}
@@ -68,7 +75,7 @@ const TransactionTable = () => {
 		<>
 			<div className="flex gap-3">
 				<input
-					placeholder="Search Name, Program Name or Location."
+					placeholder={`Search Name, ${role === "Master Admin" ? "Brgy ID," : ""} Program Name or Location.`}
 					type="text"
 					onChange={(e) => {
 						setSearchFilter(e.target.value);
