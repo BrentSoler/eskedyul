@@ -95,9 +95,7 @@ export default class UserUtil extends Prisma {
       }
 
       const postUser = await this.prisma.users.create({
-        data: {
-          ...this.data,
-        },
+        data: { ...this.data },
       });
 
       return postUser;
@@ -202,8 +200,10 @@ export default class UserUtil extends Prisma {
           birthdate: resData.birthdate.toString(),
           birthPlace: resData.birthPlace.toString(),
           civilStatus: resData.civilStatus.toString(),
-          emgContName: resData.emgContName.toString(),
-          emgContNum: resData.emgContNum.toString(),
+          emgContName: resData.emgContName
+            ? resData.emgContName.toString()
+            : "",
+          emgContNum: resData.emgContNum ? resData.emgContNum.toString() : "",
           empStatus: resData.empStatus.toString(),
           OSCAId: resData.OSCAId ? resData.OSCAId.toString() : "",
           residencyStatus: resData.residencyStatus.toString(),
