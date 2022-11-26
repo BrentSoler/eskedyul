@@ -26,6 +26,10 @@ const UsersTable = () => {
 					return sort === "asc" ? a.lname.localeCompare(b.lname) : -a.lname.localeCompare(b.lname);
 				});
 
+				if (role === "Brgy. Admin") {
+					setRoleFilter("Resident");
+				}
+
 				const roleSort = sorted?.filter((d: any) =>
 					roleFilter ? d.role.toLowerCase() === roleFilter.toLowerCase() : d
 				);
@@ -82,21 +86,27 @@ const UsersTable = () => {
 					value={searchFilter}
 					className="input input-bordered w-full mt-3"
 				/>
-				<label className="flex items-center">Role</label>
-				<select
-					placeholder="Role"
-					onChange={(e) => {
-						setRoleFilter(e.target.value);
-					}}
-					value={roleFilter}
-					className="input input-bordered mt-3"
-				>
-					<option value=""></option>
-					<option value="Resident">Resident</option>
-					<option value="Brgy. Admin">Brgy. Admin</option>
-					<option value="Admin">Admin</option>
-					<option value="Master Admin">Master Admin</option>
-				</select>
+				{role !== "Brgy. Admin" ?
+					<>
+						<label className="flex items-center">Role</label>
+						<select
+							placeholder="Role"
+							onChange={(e) => {
+								setRoleFilter(e.target.value);
+							}}
+							value={roleFilter}
+							className="input input-bordered mt-3"
+						>
+							<option value=""></option>
+							<option value="Resident">Resident</option>
+							<option value="Brgy. Admin">Brgy. Admin</option>
+							<option value="Admin">Admin</option>
+							<option value="Master Admin">Master Admin</option>
+						</select>
+					</>
+					:
+					<></>
+				}
 				<label className="flex items-center">Status</label>
 				<select
 					placeholder="Status"
