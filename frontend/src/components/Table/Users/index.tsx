@@ -101,7 +101,7 @@ const UsersTable = () => {
 							<option value="Resident">Resident</option>
 							<option value="Brgy. Admin">Brgy. Admin</option>
 							<option value="Admin">Admin</option>
-							<option value="Master Admin">Master Admin</option>
+							{role === "Admin" ? <></> : <option value="Master Admin">Master Admin</option>}
 						</select>
 					</>
 					:
