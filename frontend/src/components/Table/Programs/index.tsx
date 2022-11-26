@@ -140,6 +140,7 @@ const ProgramsTable = () => {
 									</svg>
 								</label>
 							</th>
+							<th className="sticky top-0 px-6 py-3">BGRY. ID</th>
 							<th className="sticky top-0 px-6 py-3">TYPE</th>
 							<th className="sticky top-0 px-6 py-3">QUALIFICATIONS</th>
 							<th className="sticky top-0 px-6 py-3 w-[5rem]">VIEW</th>
@@ -160,10 +161,19 @@ const ProgramsTable = () => {
 							handleFilteredData.map((program: any) => (
 								<tr key={program.id}>
 									<td className="">{program.name}</td>
+									<td className="">{program.brgyId}</td>
 									<td className="w-[15rem] truncate">{program.type}</td>
 									<td className="">{program.qualification}</td>
 									<td className="">{program.view}</td>
-									<td className="text-center">{program.status}</td>
+									<td className="text-center text-white text-sm">
+										<div className={`card p-0 px-1 py-1  
+												${program.status === "Pending" && "bg-warning"}
+												${program.status === "Completed" && "bg-success"}
+												${program.status === "Ongoing" && "bg-info"}
+											`}>
+											{program.status}
+										</div>
+									</td>
 									{role === "Master Admin" && (
 										<td>
 											<Link href={`/dashboard/programs/edit/${program.id}`}>

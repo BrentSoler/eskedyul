@@ -4,6 +4,7 @@ import "react-responsive-combo-box/dist/index.css";
 import AuthStore from "../../../store/authStore";
 import { toast } from "react-toastify";
 import useFormController from "./formController";
+import Link from "next/link";
 
 const EditRes = ({ id }: { id?: string }) => {
 	const [data, setData] = useState({
@@ -126,8 +127,8 @@ const EditRes = ({ id }: { id?: string }) => {
 							onChange={(e) => handleChange(e, setData)}
 						>
 							<option value=""></option>
-							<option value="jr">jr</option>
-							<option value="Jr.">Jr.</option>w2
+							<option value="jr">Jr.</option>
+							<option value="Jr.">Sr.</option>w2
 							<option value="II">II</option>
 							<option value="III">III</option>
 							<option value="None">None</option>
@@ -331,10 +332,26 @@ const EditRes = ({ id }: { id?: string }) => {
 						</select>
 					</div>
 				</div>
-
-				<button className="btn-primary mt-10 rounded-lg py-2 px-3 w-max self-end" type="submit">
-					Submit
-				</button>
+				<div className="flex gap-3">
+					<div className="w-full">
+						<h1>Remarks</h1>
+						<input
+							type="text"
+							className="input input-bordered w-full"
+							name="remarks"
+						/>
+					</div>
+				</div>
+				<div className="flex gap-3">
+					<Link href={`/dashboard/users`}>
+						<button className="btn-secondary mt-10 rounded-lg py-2 px-3 w-max" type="submit">
+							Back
+						</button>
+					</Link>
+					<button className="btn-primary mt-10 rounded-lg py-2 px-3 w-max" type="submit">
+						Submit
+					</button>
+				</div>
 			</form>
 		</div>
 	);

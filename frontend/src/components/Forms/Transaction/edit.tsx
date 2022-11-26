@@ -1,4 +1,5 @@
 import { FormEvent, useEffect, useState } from "react";
+import Link from "next/link";
 import handleChange from "../../../hooks/handleChange";
 import useFormController from "./formController";
 
@@ -47,10 +48,16 @@ const EditTransac = ({ id }: { id?: string }) => {
 					<option value="Completed">Completed</option>
 					<option value="Cancelled">Cancelled</option>
 				</select>
-
-				<button className="btn-primary mt-10 rounded-lg py-2 px-3 w-max self-end" type="submit">
-					Submit
-				</button>
+				<div>
+					<Link href={`/dashboard/transactions`}>
+						<button className="btn-primary mt-10 rounded-lg py-2 px-3 w-max self-start" type="submit">
+							Back
+						</button>
+					</Link>
+					<button className="btn-primary mt-10 rounded-lg py-2 px-3 w-max self-end" type="submit">
+						Submit
+					</button>
+				</div>
 			</form>
 		</div>
 	);

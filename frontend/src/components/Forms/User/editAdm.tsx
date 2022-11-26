@@ -3,6 +3,7 @@ import handleChange from "../../../hooks/handleChange";
 import "react-responsive-combo-box/dist/index.css";
 import AuthStore from "../../../store/authStore";
 import useFormController from "./formController";
+import Link from "next/link";
 
 const EditAdm = ({ id }: { id?: string }) => {
 	const [data, setData] = useState({
@@ -127,8 +128,8 @@ const EditAdm = ({ id }: { id?: string }) => {
 							onChange={(e) => handleChange(e, setData)}
 						>
 							<option value=""></option>
-							<option value="jr">jr</option>
-							<option value="Jr.">Jr.</option>
+							<option value="jr">Jr.</option>
+							<option value="Jr.">Sr.</option>
 							<option value="II">II</option>
 							<option value="III">III</option>
 							<option value="None">None</option>
@@ -213,10 +214,16 @@ const EditAdm = ({ id }: { id?: string }) => {
 						/>
 					</div>
 				</div>
-
-				<button className="btn-primary mt-10 rounded-lg py-2 px-3 w-max self-end" type="submit">
-					Submit
-				</button>
+				<div className="flex gap-3">
+					<Link href={`/dashboard/users`}>
+						<button className="btn-secondary mt-10 rounded-lg py-2 px-3 w-max" type="submit">
+							Back
+						</button>
+					</Link>
+					<button className="btn-primary mt-10 rounded-lg py-2 px-3 w-max" type="submit">
+						Submit
+					</button>
+				</div>
 			</form>
 		</div>
 	);

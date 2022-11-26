@@ -14,7 +14,7 @@ const AddPrograms = () => {
 	}, [token, router]);
 
 	return (
-		<div className="flex justify-center items-center gap-6 p-5 min-h-[90vh]">
+		<div className="flex justify-center items-center gap-6 p-5">
 			<h1 className="font-extrabold text-4xl">EDIT ADMIN</h1>
 			<EditAdm id={router.query.id?.toString()} />
 		</div>
@@ -22,3 +22,4 @@ const AddPrograms = () => {
 };
 
 export default AddPrograms;
+

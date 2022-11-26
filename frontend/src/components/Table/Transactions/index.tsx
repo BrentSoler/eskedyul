@@ -23,7 +23,7 @@ const TransactionTable = () => {
 						: -a.residents.users.lname.localeCompare(b.residents.users.lname);
 				});
 
-				
+
 				const statusSort = sorted.filter((d: any) => {
 					return d.status.includes(statusFilter);
 				});
@@ -51,14 +51,14 @@ const TransactionTable = () => {
 				return searchFilter === ""
 					? statusSort
 					: [
-							...new Set([
-								...fnameSort,
-								...mnameSort,
-								...lnameSort,
-								...programNameSort,
-								...locationSort,
-							]),
-					  ];
+						...new Set([
+							...fnameSort,
+							...mnameSort,
+							...lnameSort,
+							...programNameSort,
+							...locationSort,
+						]),
+					];
 			}
 			return "No Data";
 		}
@@ -95,6 +95,7 @@ const TransactionTable = () => {
 				<table className="table w-full m-auto">
 					<thead>
 						<tr>
+							<th className="sticky top-0 px-6 py-3">ID</th>
 							<th className="sticky top-0 px-6 py-3 flex justify-between items-center">
 								BENEFICIARY
 								<label className="swap swap-rotate">
@@ -131,6 +132,7 @@ const TransactionTable = () => {
 									</svg>
 								</label>
 							</th>
+							<th className="sticky top-0 px-6 py-3">BGRY. ID</th>
 							<th className="sticky top-0 px-6 py-3">Program Name</th>
 							<th className="sticky top-0 px-6 py-3">LOCATION</th>
 							<th className="sticky top-0 px-6 py-3">Date</th>
@@ -150,7 +152,9 @@ const TransactionTable = () => {
 						{isSuccess && handleFilteredData !== "No Data" ? (
 							handleFilteredData.map((transaction: any) => (
 								<tr key={transaction.id}>
+									<td className="w-[15rem] truncate">{transaction.id}</td>
 									<td className="">{`${transaction.residents.users.lname}, ${transaction.residents.users.fname} ${transaction.residents.users.mname}`}</td>
+									<td className="w-[15rem] truncate">{transaction.residents.users.brgyId}</td>
 									<td className="w-[15rem] truncate">
 										{transaction.program ? transaction.program.name : "Deleted"}
 									</td>
@@ -165,7 +169,16 @@ const TransactionTable = () => {
 											? `${transaction.schedule.startTime}-${transaction.schedule.endTime}`
 											: "Deleted"}
 									</td>
-									<td className="text-center">{transaction.status}</td>
+
+									<td className="text-center text-white text-sm">
+										<div className={`card p-0 px-1 py-1  
+												${transaction.status === "Pending" && "bg-warning"}
+												${transaction.status === "Completed" && "bg-success"}
+												${transaction.status === "Cancelled" && "bg-error"}
+											`}>
+											{transaction.status}
+										</div>
+									</td>
 									{transaction.program && role === "Brgy. Admin" ? (
 										<td>
 											<Link href={`/dashboard/transactions/edit/${transaction.id}`}>
@@ -174,7 +187,8 @@ const TransactionTable = () => {
 										</td>
 									) : (
 										<></>
-									)}
+									)
+									}
 								</tr>
 							))
 						) : (

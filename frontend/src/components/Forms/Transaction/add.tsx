@@ -6,6 +6,7 @@ import "react-responsive-combo-box/dist/index.css";
 import AuthStore from "../../../store/authStore";
 import progFormController from "../Programs/formController";
 import programsController from "../../Table/Programs/programController";
+import Link from "next/link";
 
 const AddTransac = () => {
 	const [transactionData, setTransactionData] = useState({
@@ -107,9 +108,16 @@ const AddTransac = () => {
 					)}
 				</select>
 
-				<button className="btn-primary mt-10 rounded-lg py-2 px-3 w-max self-end" type="submit">
-					Submit
-				</button>
+				<div>
+					<Link href={`/dashboard/transactions`}>
+						<button className="btn-primary mt-10 rounded-lg py-2 px-3 w-max self-start" type="submit">
+							Back
+						</button>
+					</Link>
+					<button className="btn-primary mt-10 rounded-lg py-2 px-3 w-max self-end" type="submit">
+						Submit
+					</button>
+				</div>
 			</form>
 		</div>
 	);
