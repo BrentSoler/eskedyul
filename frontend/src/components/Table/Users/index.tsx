@@ -61,6 +61,7 @@ const UsersTable = () => {
 
 			return "No Data";
 		}
+		console.log("check data", data)
 	}, [data, isSuccess, searchFilter, roleFilter, statusFilter, sort]);
 
 	return (

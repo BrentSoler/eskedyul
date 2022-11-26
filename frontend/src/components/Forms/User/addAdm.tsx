@@ -22,7 +22,7 @@ const AddAdm = () => {
 		idType: "",
 		idNo: "",
 	});
-
+	const role = AuthStore((state) => state.userData.role);
 	const brgyId = AuthStore((state) => state.userData.brgyId);
 	const controller = useFormController();
 
@@ -228,7 +228,18 @@ const AddAdm = () => {
 						</label>
 					</label>
 				</div>
-
+				{role === "Brgy. Admin" &&
+					<div className="flex gap-3">
+						<div className="w-full">
+							<h1>Remarks</h1>
+							<input
+								type="text"
+								className="input input-bordered w-full"
+								name="remarks"
+							/>
+						</div>
+					</div>
+				}
 				<input type="checkbox" id="privacyPolicy" className="modal-toggle" />
 				<div className="modal">
 					<div className="modal-box w-11/12 max-w-5xl">
@@ -292,13 +303,13 @@ const AddAdm = () => {
 					</div>
 				</div>
 
-				<div>
+				<div className="flex gap-3">
 					<Link href={`/dashboard/users`}>
-						<button className="btn-primary mt-10 rounded-lg py-2 px-3 w-max self-start" type="submit">
+						<button className="btn-secondary mt-10 rounded-lg py-2 px-3 w-max" type="submit">
 							Back
 						</button>
 					</Link>
-					<button className="btn-primary mt-10 rounded-lg py-2 px-3 w-max self-end" type="submit">
+					<button className="btn-primary mt-10 rounded-lg py-2 px-3 w-max" type="submit">
 						Submit
 					</button>
 				</div>
