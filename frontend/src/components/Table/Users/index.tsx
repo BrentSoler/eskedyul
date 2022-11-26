@@ -53,9 +53,12 @@ const UsersTable = () => {
 				const mobileNoSort = statusSort?.filter((d: any) =>
 					d.mobileNo.toString().includes(searchFilter.toString())
 				);
-				const brgyIdSort = statusSort?.filter((d: any) =>
-					d.brgyId.toString().includes(searchFilter.toString())
-				);
+				let brgyIdSort = [];
+				if (role === "Master Admin") {
+					brgyIdSort = statusSort?.filter((d: any) =>
+						d.brgyId.toString().includes(searchFilter.toString())
+					);
+				}
 
 				return searchFilter === ""
 					? sorted
@@ -71,7 +74,7 @@ const UsersTable = () => {
 		<>
 			<div className="flex gap-3">
 				<input
-					placeholder="Search Name, Brgy ID, Role or Mobile No."
+					placeholder={`Search Name, ${role === "Master Admin" ? "Brgy ID," : ""} Role or Mobile No.`}
 					type="text"
 					onChange={(e) => {
 						setSearchFilter(e.target.value);
