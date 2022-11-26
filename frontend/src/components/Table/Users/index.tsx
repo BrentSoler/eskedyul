@@ -104,6 +104,7 @@ const UsersTable = () => {
 					<option value="0">Inactivated</option>
 				</select>
 			</div>
+			<div className="w-full mt-4 mb-4 p-1 bg-base-200" />
 			<div className="w-full mt-4 overflow-x-auto m-auto">
 				<table className="table w-full m-auto">
 					<thead>

@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import AuthStore from "../../../store/authStore";
 import useProgramController from "./programController";
-
+import { getStatusColor } from "../../../hooks/useProgramApi";
 const ProgramsTable = () => {
 	const brgyId = AuthStore((state) => state.userData.brgyId);
 	const role = AuthStore((state) => state.userData.role);
@@ -100,6 +100,7 @@ const ProgramsTable = () => {
 					<option value="Cancelled">Cancelled</option>
 				</select>
 			</div>
+			<div className="w-full mt-4 mb-4 p-1 bg-base-200" />
 			<div className="w-full mt-4 overflow-x-auto m-auto">
 				<table className="table w-full m-auto">
 					<thead>
@@ -166,11 +167,7 @@ const ProgramsTable = () => {
 									<td className="">{program.qualification}</td>
 									<td className="">{program.view}</td>
 									<td className="text-center text-white text-sm">
-										<div className={`card p-0 px-1 py-1  
-												${program.status === "Pending" && "bg-warning"}
-												${program.status === "Completed" && "bg-success"}
-												${program.status === "Ongoing" && "bg-info"}
-											`}>
+										<div className={`card p-0 px-1 py-1 ${getStatusColor(`${program.status}`)}`}>
 											{program.status}
 										</div>
 									</td>
