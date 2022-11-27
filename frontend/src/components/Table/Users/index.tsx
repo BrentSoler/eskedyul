@@ -74,6 +74,11 @@ const UsersTable = () => {
 		console.log("check data", data)
 	}, [data, isSuccess, searchFilter, roleFilter, statusFilter, sort]);
 
+	const handleRoleChange = (index: number, role: string) => {
+		handleClick(index);
+		setRoleFilter(role);
+	}
+
 	return (
 		<>
 			<div className="flex gap-3">
@@ -107,17 +112,21 @@ const UsersTable = () => {
 					<div className='w-full  mt-4 mb-4 p-1'>
 						<div className='p-0 grid'>
 							<div className="tabs z-10 -mb-px">
-								<a className={`tab tab-lg gap-2 ${checkActive(1, "tab-active  tab-bordered")}`} onClick={() => { handleClick(1); setRoleFilter("Resident"); }}>
+								<a className={`tab tab-lg gap-2 ${checkActive(1, "tab-active  tab-bordered")}`}
+									onClick={() => { handleRoleChange(1, "Resident") }}>
 									Resident
 								</a>
-								<a className={`tab tab-lg gap-2 ${checkActive(2, "tab-active tab-bordered")}`} onClick={() => { handleClick(2); setRoleFilter("Brgy. Admin"); }}>
+								<a className={`tab tab-lg gap-2 ${checkActive(2, "tab-active tab-bordered")}`}
+									onClick={() => { handleRoleChange(2, "Brgy. Admin") }}>
 									Brgy. Admin
 								</a>
-								<a className={`tab tab-lg gap-2 ${checkActive(3, "tab-active tab-bordered")}`} onClick={() => { handleClick(3); setRoleFilter("Admin"); }}>
+								<a className={`tab tab-lg gap-2 ${checkActive(3, "tab-active tab-bordered")}`}
+									onClick={() => { handleRoleChange(3, "Admin") }}>
 									Admin
 								</a>
 								{role === "Admin" ? <></> :
-									<a className={`tab tab-lg gap-2 ${checkActive(4, "tab-active tab-bordered")}`} onClick={() => { handleClick(4); setRoleFilter("Master Admin"); }}>
+									<a className={`tab tab-lg gap-2 ${checkActive(4, "tab-active tab-bordered")}`}
+										onClick={() => { handleRoleChange(1, "Master Admin") }}>
 										Master Admin
 									</a>
 								}
