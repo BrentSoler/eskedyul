@@ -3,11 +3,15 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import UsersTable from "../../../components/Table/Users";
 import AuthStore from "../../../store/authStore";
-
+import useFormController from "../../../components/Forms/User/formController";
+import exportPDF from "../../../hooks/useExportPdf";
 const ProgramsPage = () => {
 	const router = useRouter();
 	const token = AuthStore((state) => state.userData.token);
 	const role = AuthStore((state) => state.userData.role);
+	const userController = useFormController();
+	const brgyId = AuthStore((state) => state.userData.brgyId);
+	const { data } = userController.getUser(brgyId);
 
 	useEffect(() => {
 		if (token === "") {
@@ -28,6 +32,7 @@ const ProgramsPage = () => {
 					<Link href="/dashboard/users/add/resident" className="btn btn-primary">
 						<a className="btn btn-primary rounded-md">ADD RESIDENT</a>
 					</Link>
+					<button className="btn btn-primary" onClick={() => { exportPDF(data) }}>Export PDF</button>
 				</div>
 			</div>
 			<UsersTable />
