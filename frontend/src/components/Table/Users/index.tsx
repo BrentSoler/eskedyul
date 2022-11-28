@@ -15,8 +15,12 @@ const UsersTable = () => {
 
 	const [searchFilter, setSearchFilter] = useState("");
 	const [sort, setSort] = useState("asc");
-	const [roleFilter, setRoleFilter] = useState("");
+	const [roleFilter, setRoleFilter] = useState("Resident");
 	const [statusFilter, setStatusFilter] = useState("");
+
+	const [activeIndex, setActiveIndex] = useState(1);
+	const handleClick = (index: number) => setActiveIndex(index);
+	const checkActive = (index: number, className: string) => activeIndex === index ? className : "";
 
 	// filter function useMemo
 	const handleFilteredData = useMemo(() => {
@@ -70,6 +74,11 @@ const UsersTable = () => {
 		console.log("check data", data)
 	}, [data, isSuccess, searchFilter, roleFilter, statusFilter, sort]);
 
+	const handleRoleChange = (index: number, role: string) => {
+		handleClick(index);
+		setRoleFilter(role);
+	}
+
 	return (
 		<>
 			<div className="flex gap-3">
@@ -82,21 +91,6 @@ const UsersTable = () => {
 					value={searchFilter}
 					className="input input-bordered w-full mt-3"
 				/>
-				<label className="flex items-center">Role</label>
-				<select
-					placeholder="Role"
-					onChange={(e) => {
-						setRoleFilter(e.target.value);
-					}}
-					value={roleFilter}
-					className="input input-bordered mt-3"
-				>
-					<option value=""></option>
-					<option value="Resident">Resident</option>
-					<option value="Brgy. Admin">Brgy. Admin</option>
-					<option value="Admin">Admin</option>
-					<option value="Master Admin">Master Admin</option>
-				</select>
 				<label className="flex items-center">Status</label>
 				<select
 					placeholder="Status"
@@ -112,6 +106,37 @@ const UsersTable = () => {
 				</select>
 			</div>
 			<div className="w-full mt-4 mb-4 p-1 bg-base-200" />
+
+			{role !== "Brgy. Admin" ?
+				<>
+					<div className='w-full  mt-4 mb-4 p-1'>
+						<div className='p-0 grid'>
+							<div className="tabs z-10 -mb-px">
+								<a className={`tab tab-lg gap-2 ${checkActive(1, "tab-active  tab-bordered")}`}
+									onClick={() => { handleRoleChange(1, "Resident") }}>
+									Resident
+								</a>
+								<a className={`tab tab-lg gap-2 ${checkActive(2, "tab-active tab-bordered")}`}
+									onClick={() => { handleRoleChange(2, "Brgy. Admin") }}>
+									Brgy. Admin
+								</a>
+								<a className={`tab tab-lg gap-2 ${checkActive(3, "tab-active tab-bordered")}`}
+									onClick={() => { handleRoleChange(3, "Admin") }}>
+									Admin
+								</a>
+								{role === "Admin" ? <></> :
+									<a className={`tab tab-lg gap-2 ${checkActive(4, "tab-active tab-bordered")}`}
+										onClick={() => { handleRoleChange(1, "Master Admin") }}>
+										Master Admin
+									</a>
+								}
+							</div>
+						</div>
+					</div>
+				</>
+				:
+				<></>
+			}
 			<div className="w-full mt-4 overflow-x-auto m-auto">
 				<table className="table w-full m-auto">
 					<thead>

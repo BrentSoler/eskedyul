@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import AuthStore from "../../../store/authStore";
 import useTransactionController from "./transactionController";
-import { getStatusColor } from "../../../hooks/useTransactionApi";
+import getStatusColor from "../../../hooks/useStatusColor";
 const TransactionTable = () => {
 	const brgyId = AuthStore((state) => state.userData.brgyId);
 	const controller = useTransactionController();
