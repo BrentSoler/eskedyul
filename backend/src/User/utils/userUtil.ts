@@ -234,4 +234,19 @@ export default class UserUtil extends Prisma {
       throw new Error(err.message);
     }
   }
+
+  public async UpdtPassword(mobileNo: string, newPass: string) {
+    try {
+      const updatedPass = await this.prisma.users.updateMany({
+        where: { mobileNo: mobileNo },
+        data: {
+          password: newPass,
+        },
+      });
+
+      return updatedPass;
+    } catch (err: any) {
+      throw new Error(err.message);
+    }
+  }
 }

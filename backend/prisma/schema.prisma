@@ -11,6 +11,7 @@ model announcements {
   id          Int      @id @default(autoincrement())
   dateAdded   DateTime @default(now())
   dateUpdated DateTime @default(now())
+  title       String
   details     String
   barangay    String
 }
