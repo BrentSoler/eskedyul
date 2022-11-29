@@ -1,3 +1,4 @@
+import AnnouncementRoutes from "./Announcement/router";
 import BrgyRoutes from "./Brgy/router";
 import db from "./config/db";
 import ErrHandler from "./middleWare/errHandler";
@@ -13,6 +14,7 @@ app.use("/program", ProgramsRoutes(server.Router()));
 app.use("/schedule", ScheduleRoutes(server.Router()));
 app.use("/transaction", TransactionRoutes(server.Router()));
 app.use("/brgy", BrgyRoutes(server.Router()));
+app.use("/announcements", AnnouncementRoutes(server.Router()));
 
 app.listen(process.env.PORT || PORT, () => {
   console.log("CONNECTED");

@@ -1,14 +1,33 @@
 import { ZodError } from "zod";
-import { BrgyUtils } from "./util/BrgyUtils";
-import { SBrgy, TBrgy } from "./util/BrgyZod";
+import AnnouncementsUtils from "./utils/AnnouncementUtils";
+import { SAnnouncements, TAnnouncements } from "./utils/Zod";
 
-export async function getBrgy() {
+export async function getAnnouncements() {
   try {
-    const brgy = new BrgyUtils(undefined);
+    const annUtils = new AnnouncementsUtils(undefined);
 
-    const postData = brgy.getBrgy();
+    const annData = await annUtils.getAnn();
 
-    return postData;
+    return { ...annData };
+  } catch (err: any) {
+    if (err instanceof ZodError) {
+      throw new Error(
+        err.issues[0].message || err.message || "There was an Error"
+      );
+    }
+
+    throw new Error(err.message || "There was an Error");
+  }
+}
+export async function postAnnouncements(data: TAnnouncements) {
+  try {
+    SAnnouncements.parse(data);
+
+    const annUtils = new AnnouncementsUtils(data);
+
+    const annData = await annUtils.postAnn();
+
+    return { ...annData };
   } catch (err: any) {
     if (err instanceof ZodError) {
       throw new Error(
@@ -20,33 +39,13 @@ export async function getBrgy() {
   }
 }
 
-export async function postBrgy(data: TBrgy) {
+export async function deleteAnnouncements(id: string) {
   try {
-    SBrgy.parse(data);
+    const annUtils = new AnnouncementsUtils(undefined);
 
-    const brgy = new BrgyUtils(data);
+    const annData = await annUtils.deleteAnn(id);
 
-    const postData = brgy.postBrgy();
-
-    return postData;
-  } catch (err: any) {
-    if (err instanceof ZodError) {
-      throw new Error(
-        err.issues[0].message || err.message || "There was an Error"
-      );
-    }
-
-    throw new Error(err.message || "There was an Error");
-  }
-}
-
-export async function deleteBrgy(id: string) {
-  try {
-    const brgy = new BrgyUtils(undefined);
-
-    const postData = brgy.deleteBrgy(id);
-
-    return postData;
+    return { ...annData };
   } catch (err: any) {
     if (err instanceof ZodError) {
       throw new Error(

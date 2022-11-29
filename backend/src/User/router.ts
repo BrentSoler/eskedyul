@@ -11,6 +11,7 @@ import {
   updateAdmin,
   registerResident,
   updateResident,
+  changePasswordUser,
 } from "./controller";
 
 export default function userRoutes(router: Router) {
@@ -131,6 +132,14 @@ export default function userRoutes(router: Router) {
       }
 
       const activate = await activateUser(Number(req.query.id));
+
+      res.json({ ...activate });
+    })
+  );
+
+  router.route("/forgot_password").post(
+    expressAsyncHandler(async (req: Request, res: Response) => {
+      const activate = await changePasswordUser(req.body);
 
       res.json({ ...activate });
     })

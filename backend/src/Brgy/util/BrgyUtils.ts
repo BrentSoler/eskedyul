@@ -9,13 +9,23 @@ export class BrgyUtils extends Prisma {
     this.data = data;
   }
 
-  postBrgy() {
+  async getBrgy() {
+    try {
+      const brgyData = await this.prisma.barangay.findMany();
+
+      return { data: brgyData };
+    } catch (err: any) {
+      throw new Error(err.message);
+    }
+  }
+
+  async postBrgy() {
     try {
       if (!this.data) {
         throw new Error("Missing fields");
       }
 
-      const brgyData = this.prisma.barangay.create({
+      const brgyData = await this.prisma.barangay.create({
         data: {
           ...this.data,
         },

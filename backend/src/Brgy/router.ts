@@ -1,9 +1,15 @@
 import { Request, Response, Router } from "express";
 import expressAsyncHandler from "express-async-handler";
-import authHandler from "../middleWare/authHandler";
-import { deleteBrgy, postBrgy } from "./controller";
+import { deleteBrgy, getBrgy, postBrgy } from "./controller";
 
 export default function BrgyRoutes(router: Router) {
+  router.route("/").get(
+    expressAsyncHandler(async (req: Request, res: Response) => {
+      const data = await getBrgy();
+
+      res.json({ ...data });
+    })
+  );
   router.route("/post").post(
     expressAsyncHandler(async (req: Request, res: Response) => {
       const data = await postBrgy(req.body);

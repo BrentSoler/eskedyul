@@ -65,6 +65,21 @@ export const SLoginAdmin = z.object({
   password: z.string(),
 });
 
+export const SForgotPass = z.object({
+  mobileNo: z.string().regex(/^0(9)\d{9}$/, { message: "Invalid Phone No." }),
+  password: z.string(),
+  newPassword: z
+    .string()
+    .regex(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+      {
+        message:
+          "Password must be at least 8 characters with uppercase and lowercase with number and special characters",
+      }
+    ),
+});
+
 export type TRegister = z.infer<typeof SRegister>;
 export type TLoginAdmin = z.infer<typeof SLoginAdmin>;
 export type TRegisterResident = z.infer<typeof SRegisterResident>;
+export type TForgotPassword = z.infer<typeof SForgotPass>;
