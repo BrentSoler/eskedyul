@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import UsersTable from "../../../components/Table/Users";
 import AuthStore from "../../../store/authStore";
 import useFormController from "../../../components/Forms/User/formController";
-import exportPDF from "../../../hooks/useExportPdf";
+import { exportUsersPDF } from "../../../hooks/useExportPDF";
 const ProgramsPage = () => {
 	const router = useRouter();
 	const token = AuthStore((state) => state.userData.token);
@@ -32,7 +32,9 @@ const ProgramsPage = () => {
 					<Link href="/dashboard/users/add/resident" className="btn btn-primary">
 						<a className="btn btn-primary rounded-md">ADD RESIDENT</a>
 					</Link>
-					<button className="btn btn-primary" onClick={() => { exportPDF(data) }}>Export PDF</button>
+					{role === "Master Admin" && (
+						<button className="btn btn-primary" onClick={() => { exportUsersPDF(data) }}>Export PDF</button>
+					)}
 				</div>
 			</div>
 			<UsersTable />
