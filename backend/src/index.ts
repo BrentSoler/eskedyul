@@ -1,3 +1,4 @@
+import BrgyRoutes from "./Brgy/router";
 import db from "./config/db";
 import ErrHandler from "./middleWare/errHandler";
 import ProgramsRoutes from "./Programs/router";
@@ -11,6 +12,7 @@ app.use("/user", UserRoutes(server.Router()));
 app.use("/program", ProgramsRoutes(server.Router()));
 app.use("/schedule", ScheduleRoutes(server.Router()));
 app.use("/transaction", TransactionRoutes(server.Router()));
+app.use("/brgy", BrgyRoutes(server.Router()));
 
 app.listen(process.env.PORT || PORT, () => {
   console.log("CONNECTED");
