@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import Carousel from "../../components/carousel";
 import StatsContainer from "../../components/Stats/container";
 import AuthStore from "../../store/authStore";
 
@@ -17,6 +18,7 @@ const Dahsboard = () => {
 			<div className="flex justify-between items-center">
 				<h1 className="font-bold text-3xl">Dashboard</h1>
 			</div>
+			<Carousel />
 			<StatsContainer />
 		</div>
 	);
