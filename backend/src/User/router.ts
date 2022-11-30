@@ -119,9 +119,9 @@ export default function userRoutes(router: Router) {
   router.route("/activate").post(
     authHandler,
     expressAsyncHandler(async (req: Request, res: Response) => {
-      if (req.user.role === "Brgy. Admin") {
-        throw new Error("Master Admin & Admin can only use this");
-      }
+      // if (req.user.role === "Brgy. Admin") {
+      //   throw new Error("Master Admin & Admin can only use this");
+      // }
 
       if (!req.query.id) {
         throw new Error("Please provide an ID");
