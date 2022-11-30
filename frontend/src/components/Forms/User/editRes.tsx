@@ -20,6 +20,7 @@ const EditRes = ({ id }: { id?: string }) => {
 		brgyId: "",
 		idType: "",
 		idNo: "",
+		remarks: "",
 	});
 	const [residentData, setResidentData] = useState({
 		seniorType: "",
@@ -52,7 +53,8 @@ const EditRes = ({ id }: { id?: string }) => {
 				permAdd: userData.permAdd,
 				brgyId: userData.brgyId,
 				idType: userData.idType,
-				idNo: userData.idNo
+				idNo: userData.idNo,
+				remarks: userData.residents[0].remarks
 			})
 			setResidentData({
 				seniorType: userData.residents[0].seniorType,
@@ -341,6 +343,7 @@ const EditRes = ({ id }: { id?: string }) => {
 								type="text"
 								className="input input-bordered w-full"
 								name="remarks"
+								onChange={(e) => handleChange(e, setData)}
 							/>
 						</div>
 					</div>

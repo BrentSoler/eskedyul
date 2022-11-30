@@ -1,4 +1,3 @@
-import UserUtil from "../../User/utils/userUtil";
 import { Prisma } from "../../utils/prismaClient";
 import { TTransaction } from "./transZod";
 

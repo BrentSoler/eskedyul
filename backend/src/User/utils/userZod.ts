@@ -58,6 +58,10 @@ export const SRegisterResident = z.object({
     .optional(),
   empStatus: z.enum(["Employed", "Retired w/pension", "Retired wo/ pention"]),
   residencyStatus: z.enum(["6months of Residency", "Registered Voter"]),
+  remarks: z
+    .string()
+    .min(3, { message: "Remarks needs to be atleast 3 letters" })
+    .optional(),
 });
 
 export const SLoginAdmin = z.object({
@@ -67,7 +71,6 @@ export const SLoginAdmin = z.object({
 
 export const SForgotPass = z.object({
   mobileNo: z.string().regex(/^0(9)\d{9}$/, { message: "Invalid Phone No." }),
-  password: z.string(),
   newPassword: z
     .string()
     .regex(

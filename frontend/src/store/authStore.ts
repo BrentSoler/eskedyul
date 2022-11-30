@@ -8,6 +8,7 @@ const AuthStore = create((set: any) => ({
 		token: "",
 		brgyId: "",
 	},
+	privacyStop: false,
 	loginHandler: (user: {
 		fname: string;
 		id: string;
@@ -29,6 +30,12 @@ const AuthStore = create((set: any) => ({
 				token: "",
 				brgyId: "",
 			},
+			privacyStop: false,
+		})),
+	privacyHandler: () =>
+		set((state: any) => ({
+			...state,
+			privacyStop: true,
 		})),
 }));
 

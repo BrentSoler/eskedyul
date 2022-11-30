@@ -8,7 +8,7 @@ const StatsContainer = () => {
 	const { data, isSuccess } = controller.getReport(brgyId);
 
 	return (
-		<div className="flex flex-col gap-4">
+		<div className="flex flex-col gap-4 p-5">
 			{isSuccess && data.data !== "No Data" ? (
 				data.data.map((report: any) => (
 					<Stats
