@@ -258,7 +258,6 @@ export async function changePasswordUser(data: TForgotPassword) {
     SForgotPass.parse(data);
 
     const User = new UserUtil({ data: undefined });
-    const Encrypt = new Encryption(data.password);
 
     const mobileNumber = await User.isNumberAvailable(data.mobileNo as string);
 
@@ -270,11 +269,7 @@ export async function changePasswordUser(data: TForgotPassword) {
       throw new Error("You are not an admin");
     }
 
-    if (!(await Encrypt.decryptPassword(mobileNumber.password as string))) {
-      throw new Error("Wrong Password");
-    }
-
-    Encrypt.password = data.newPassword;
+    const Encrypt = new Encryption(data.newPassword);
     const hashedPass = await Encrypt.hashPassword();
 
     data.newPassword = hashedPass;

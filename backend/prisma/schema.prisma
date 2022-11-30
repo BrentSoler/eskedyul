@@ -88,6 +88,7 @@ model transaction {
   programId  String
   status     String
   brgyId     String
+  remarks    String?
   barangay   barangay  @relation(fields: [brgyId], references: [id], map: "Transaction_brgyId_fkey")
   program    program   @relation(fields: [programId], references: [id], map: "Transaction_programId_fkey")
   residents  residents @relation(fields: [residentId], references: [id], map: "Transaction_residentId_fkey")
@@ -118,6 +119,7 @@ model users {
   email     String?
   barangay  barangay    @relation(fields: [brgyId], references: [id], map: "Users_brgyId_fkey")
   residents residents[]
+  remarks   String?
 
   @@index([brgyId], map: "Users_brgyId_fkey")
 }
