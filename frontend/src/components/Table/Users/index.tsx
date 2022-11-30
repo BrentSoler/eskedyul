@@ -210,7 +210,7 @@ const UsersTable = () => {
 											disabled={role === "Brgy. Admin" ? true : user.id === userId ? true : false}
 										/>
 									</td>
-									<td className="w-[15rem] truncate">Remark</td>
+									<td className="w-[15rem] truncate">{user.remarks}</td>
 
 									<td>
 										<Link
