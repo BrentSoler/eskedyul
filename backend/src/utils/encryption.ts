@@ -2,7 +2,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 export class Encryption {
-  private password;
+  public password;
 
   constructor(password: string) {
     this.password = password;

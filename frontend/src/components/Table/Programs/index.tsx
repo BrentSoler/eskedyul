@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import AuthStore from "../../../store/authStore";
 import useProgramController from "./programController";
-import { getStatusColor } from "../../../hooks/useProgramApi";
+import getStatusColor from "../../../hooks/useStatusColor";
 const ProgramsTable = () => {
 	const brgyId = AuthStore((state) => state.userData.brgyId);
 	const role = AuthStore((state) => state.userData.role);

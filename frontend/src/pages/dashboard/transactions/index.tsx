@@ -3,12 +3,15 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import TransactionTable from "../../../components/Table/Transactions";
 import AuthStore from "../../../store/authStore";
-
+import useTransactionController from "../../../components/Table/Transactions/transactionController";
+import { exportTransactionsPDF } from "../../../hooks/useExportPDF";
 const ProgramsPage = () => {
 	const router = useRouter();
 	const token = AuthStore((state) => state.userData.token);
 	const role = AuthStore((state) => state.userData.role);
-
+	const brgyId = AuthStore((state) => state.userData.brgyId);
+	const controller = useTransactionController();
+	const { data } = controller.getTransaction(brgyId);
 	useEffect(() => {
 		if (token === "") {
 			router.push("/");
@@ -24,7 +27,11 @@ const ProgramsPage = () => {
 						<a className="btn btn-primary rounded-md">ADD</a>
 					</Link>
 				)}
+				{role === "Master Admin" && (
+					<button className="btn btn-primary" onClick={() => { exportTransactionsPDF(data) }}>Export PDF</button>
+				)}
 			</div>
+
 			<TransactionTable />
 		</div>
 	);

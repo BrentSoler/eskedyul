@@ -1,23 +1,18 @@
 import { Request, Response, Router } from "express";
 import expressAsyncHandler from "express-async-handler";
-import {
-  deleteAnnouncements,
-  getAnnouncements,
-  postAnnouncements,
-} from "./controller";
+import { deleteBrgy, getBrgy, postBrgy } from "./controller";
 
-export default function AnnouncementRoutes(router: Router) {
+export default function BrgyRoutes(router: Router) {
   router.route("/").get(
     expressAsyncHandler(async (req: Request, res: Response) => {
-      const data = await getAnnouncements();
+      const data = await getBrgy();
 
       res.json({ ...data });
     })
   );
-
   router.route("/post").post(
     expressAsyncHandler(async (req: Request, res: Response) => {
-      const data = await postAnnouncements(req.body);
+      const data = await postBrgy(req.body);
 
       res.json({ ...data });
     })
@@ -31,7 +26,7 @@ export default function AnnouncementRoutes(router: Router) {
         throw new Error("Provide an ID");
       }
 
-      const data = await deleteAnnouncements(id.toString());
+      const data = await deleteBrgy(id.toString());
 
       res.json({ ...data });
     })

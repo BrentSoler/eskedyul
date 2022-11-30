@@ -3,9 +3,11 @@ import { Encryption } from "../utils/encryption";
 import Validation from "../utils/validation";
 import UserUtil from "./utils/userUtil";
 import {
+  SForgotPass,
   SLoginAdmin,
   SRegister,
   SRegisterResident,
+  TForgotPassword,
   TLoginAdmin,
   TRegister,
   TRegisterResident,
@@ -240,6 +242,43 @@ export async function activateUser(id: number) {
     );
 
     return { ...activate };
+  } catch (err: any) {
+    if (err instanceof ZodError) {
+      throw new Error(
+        err.issues[0].message || err.message || "There was an Error"
+      );
+    }
+
+    throw new Error(err.message || "There was an Error");
+  }
+}
+
+export async function changePasswordUser(data: TForgotPassword) {
+  try {
+    SForgotPass.parse(data);
+
+    const User = new UserUtil({ data: undefined });
+
+    const mobileNumber = await User.isNumberAvailable(data.mobileNo as string);
+
+    if (!mobileNumber) {
+      throw new Error("MobileNo. does not exists please make an account");
+    }
+
+    if (mobileNumber.role === "Resident") {
+      throw new Error("You are not an admin");
+    }
+
+    const Encrypt = new Encryption(data.newPassword);
+    const hashedPass = await Encrypt.hashPassword();
+
+    data.newPassword = hashedPass;
+
+    const update = await User.UpdtPassword(data.mobileNo, data.newPassword);
+
+    return {
+      update,
+    };
   } catch (err: any) {
     if (err instanceof ZodError) {
       throw new Error(

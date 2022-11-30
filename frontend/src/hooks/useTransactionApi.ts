@@ -32,21 +32,3 @@ export async function updateTransaction({ data, token }: { data: any; token: str
 
 	return res.data;
 }
-
-export function getStatusColor(status: string) {
-	const statusMsg = status;
-	let color;
-	switch (statusMsg) {
-		case 'Pending':
-			color = "bg-warning";
-			break;
-		case 'Completed':
-			color = "bg-success";
-			break;
-		case 'Cancelled':
-			color = "bg-error";
-			break;
-		default:
-	}
-	return color
-}
