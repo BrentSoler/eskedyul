@@ -30,7 +30,7 @@ const useLoginModel = () => {
 				closeOnClick: true,
 			});
 
-			router.push("/dashboard/landing");
+			router.push("/dashboard/");
 		},
 		onError: (err: any) => {
 			toast.update("loadLogin", {
