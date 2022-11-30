@@ -95,6 +95,7 @@ const AnnouncementsTable = () => {
                             </th>
                             <th className="sticky top-0 px-6 py-3">DETAILS</th>
                             <th className="sticky top-0 px-6 py-3">BARANGAY</th>
+                            {role === "Master Admin" && <th className="sticky top-0 px-6 py-3 w-6"></th>}
                         </tr>
                     </thead>
                     <tbody>
@@ -138,7 +139,7 @@ const AnnouncementsTable = () => {
                                 </tr>
                             ))
                         ) : (
-                            <tr className="btn btn-ghost"><td>No Data</td></tr>
+                            <tr className="btn btn-ghost">No Data</tr>
                         )}
                     </tbody>
                 </table>
