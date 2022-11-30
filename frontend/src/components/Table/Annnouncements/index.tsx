@@ -42,7 +42,7 @@ const AnnouncementsTable = () => {
         <>
             <div className="flex gap-3">
                 <input
-                    placeholder={`Search Title, ${role === "Master Admin" ? "Brgy ID," : ""}`}
+                    placeholder={`Search Title, ${role === "Master Admin" ? "Brgy ID" : ""}`}
                     type="text"
                     onChange={(e) => {
                         setSearchFilter(e.target.value);
