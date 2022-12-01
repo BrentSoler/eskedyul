@@ -26,7 +26,7 @@ const AnnouncementsTable = () => {
                 let brgyIdSort = [];
                 if (role === "Master Admin") {
                     brgyIdSort = sorted?.filter((d: any) =>
-                        d.barangay.toString().includes(searchFilter.toString())
+                        d.barangay.toString().replace(",", " ").includes(searchFilter.toString())
                     );
                 }
 
