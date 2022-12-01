@@ -6,7 +6,7 @@ import useAnnouncementController from "./announcementController";
 const AnnouncementsTable = () => {
     const role = AuthStore((state) => state.userData.role);
     const controller = useAnnouncementController();
-
+    const brgyId = AuthStore((state) => state.userData.brgyId);
     const { data, isSuccess, isLoading } = controller.getAnnouncements();
     const [sort, setSort] = useState("asc");
 
@@ -16,15 +16,21 @@ const AnnouncementsTable = () => {
     const handleFilteredData = useMemo(() => {
         if (isSuccess) {
             if (data.data !== "No Data") {
-                const sorted = data.data.sort((a: any, b: any) => {
+
+                let sorted = data.data.sort((a: any, b: any) => {
                     return sort === "asc" ? a.title.localeCompare(b.title) : -a.title.localeCompare(b.title);
                 });
-
+                if (role === "Brgy. Admin") {
+                    sorted = data.data?.filter((d: any) =>
+                        d.barangay.toString().replace(",", " ").includes(brgyId.toString())
+                    )
+                }
                 const titleSort = sorted.filter((d: any) =>
                     d.title.toLowerCase().includes(searchFilter.toLowerCase())
                 );
                 let brgyIdSort = [];
                 if (role === "Master Admin") {
+                    console.log("test 3")
                     brgyIdSort = sorted?.filter((d: any) =>
                         d.barangay.toString().replace(",", " ").includes(searchFilter.toString())
                     );
@@ -42,7 +48,7 @@ const AnnouncementsTable = () => {
         <>
             <div className="flex gap-3">
                 <input
-                    placeholder={`Search Title, ${role === "Master Admin" ? "Brgy ID" : ""}`}
+                    placeholder={`Search Title ${role === "Master Admin" ? ", Brgy ID" : ""}`}
                     type="text"
                     onChange={(e) => {
                         setSearchFilter(e.target.value);
