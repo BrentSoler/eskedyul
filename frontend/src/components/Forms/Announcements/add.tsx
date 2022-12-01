@@ -1,7 +1,8 @@
-import { FormEvent, useEffect, useState, useMemo } from "react";
+import { FormEvent, useEffect, useState, useMemo, ChangeEvent } from "react";
 import handleChange from "../../../hooks/handleChange";
 import useFormController from "./formController";
 import brgyFormController from "../Barangays/formController";
+import { stringify } from "querystring";
 
 const AddForm = () => {
     const [announcementData, setAnnouncementData] = useState({
@@ -11,30 +12,15 @@ const AddForm = () => {
 
     });
 
-    const [brgyIDs, setBrgyIDS] = useState([]);
-    const [barangayID, setBarangayID] = useState();
     const controller = useFormController();
     const brgyFormsController = brgyFormController();
     const { data: brgyData, isSuccess: brgySuccess } = brgyFormsController.getBarangays()
-
+    const [brgyID, setbrgyID] = useState([] as any);
     function submitAnnouncement(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
-        console.log("check", announcementData)
+        announcementData.barangay = brgyID.join(', ');
         controller.postAnnouncement(announcementData)
     }
-    useEffect(() => {
-        //console.log("check brgydata: ", brgyData)
-        //console.log("barangay check: ", barangay)
-    }, [])
-
-    useEffect(() => {
-        console.log("barangay id check: ", barangayID)
-        const arr = Object.values({ barangayID });
-        const test = arr.map((brgy: any) => {
-            return `${brgy.brgyID}`;
-        });
-        //console.log("barangay id check2: ", arr, "test", test)
-    }, [barangayID])
 
     const barangay = useMemo(() => {
         if (brgySuccess) {
@@ -44,6 +30,22 @@ const AddForm = () => {
         return [];
 
     }, [brgyData, brgySuccess]);
+
+    const handleChangeID = (e: ChangeEvent<HTMLInputElement>) => {
+        if (e.target.checked === true) {
+            setbrgyID([...brgyID, e.target.value]);
+        }
+        else if (e.target.checked === false) {
+            let freshbrgyID = brgyID.filter((val: string) => val !== e.target.value);
+            setbrgyID([...freshbrgyID]);
+        }
+
+    }
+
+    useEffect(() => {
+        console.log("check brgy ids", brgyID);
+    }, [brgyID]);
+
     return (
         <div className="card bg-base-100 shadow-xl p-5 w-[30rem] rounded-md">
             <form className="w-full flex flex-col" onSubmit={submitAnnouncement}>
@@ -65,30 +67,22 @@ const AddForm = () => {
                     onChange={(e) => handleChange(e, setAnnouncementData)}
                 />
                 <h1>Barangay:</h1>
-                <input
-                    type="text"
-                    name="barangay"
-                    autoComplete="off"
-                    className="input input-bordered w-full"
-                    value={announcementData.barangay}
-                    onChange={(e) => handleChange(e, setAnnouncementData)}
-                />
-                {/*brgySuccess &&
+                {brgySuccess &&
                     barangay.map((brgy: any) => (
                         <>
                             <div className="flex flex-row gap-2 m-1">
                                 <input
                                     type="checkbox"
-                                    name="brgyID"
+                                    name="barangay"
                                     className="checkbox"
                                     value={brgy.id}
-                                    onChange={(e) => handleChange(e, setBarangayID)}
+                                    onChange={(e) => handleChangeID(e)}
                                 />
                                 <label> {brgy.id} </label>
                             </div>
                         </>
                     ))
-                    */}
+                }
 
                 <button className="btn-primary mt-10 rounded-lg py-2 px-3 w-max self-end" type="submit">
                     Submit

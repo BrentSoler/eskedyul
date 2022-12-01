@@ -15,10 +15,6 @@ const ProgramsPage = () => {
             router.push("/");
         }
     }, [token, router]);
-    useEffect(() => {
-        console.log("sucess?", brgySuccess)
-        console.log("check brgydata: ", brgyData)
-    }, [])
     return (
         <div className="p-4">
             <div className="flex justify-between items-center">
