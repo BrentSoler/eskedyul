@@ -36,8 +36,7 @@ const Dahsboard = () => {
 				</a>
 
 				<div className="modal" id="my-modal-2">
-					<div className="modal-box">
-						<h3 className="font-bold text-lg">Congratulations random Internet user!</h3>
+					<div className="modal-box w-11/12 max-w-5xl">
 						<p className="py-4">
 							<h3 className="font-bold text-lg ">PRIVACY POLICY</h3>
 							<p className="py-4">POLICY ON CONSENSUAL DATA COLLECTION OF PERSONAL INFORMATION </p>
