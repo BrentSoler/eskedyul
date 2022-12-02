@@ -26,6 +26,7 @@ const Home: NextPage = () => {
 						<h1 className="font-bold text-2xl">Login</h1>
 						<LoginForm />
 					</div>
+					
 					<p className="text-2xs text-center p-1">Copyright 2022 All Rights Reserved</p>
 				</div>
 			</div>
