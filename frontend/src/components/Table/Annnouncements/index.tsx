@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import AuthStore from "../../../store/authStore";
 import useAnnouncementController from "./announcementController";
-
+import ReactPaginate from 'react-paginate'
 const AnnouncementsTable = () => {
     const role = AuthStore((state) => state.userData.role);
     const controller = useAnnouncementController();
@@ -43,7 +43,27 @@ const AnnouncementsTable = () => {
             return "No Data";
         }
     }, [isSuccess, data, searchFilter, sort]);
-
+    //PAGINATION
+    const [itemOffset, setItemOffset] = useState(0);
+    const itemsPerPage = 5;
+    const endOffset = itemOffset + itemsPerPage;
+    console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+    console.log("check 1", handleFilteredData)
+    let currentItems: any[] = [];
+    let pageCount = 0;
+    if (isSuccess === true && handleFilteredData !== "No data") {
+        currentItems = handleFilteredData.slice(itemOffset, endOffset);
+        pageCount = Math.ceil(handleFilteredData.length / itemsPerPage);
+    }
+    // Changing page
+    //@ts-ignore
+    const handlePageClick = (event) => {
+        const newOffset = (event.selected * itemsPerPage) % handleFilteredData.length;
+        console.log(
+            `User requested page number ${event.selected}, which is offset ${newOffset}`
+        );
+        setItemOffset(newOffset);
+    };
     return (
         <>
             <div className="flex gap-3">
@@ -113,7 +133,7 @@ const AnnouncementsTable = () => {
                             </tr>
                         )}
                         {isSuccess && handleFilteredData !== "No Data" ? (
-                            handleFilteredData.map((announcement: any) => (
+                            currentItems.map((announcement: any) => (
                                 <tr key={announcement.id}>
                                     <td className="">{announcement.id}</td>
                                     <td className="">{announcement.title}</td>
@@ -149,6 +169,26 @@ const AnnouncementsTable = () => {
                         )}
                     </tbody>
                 </table>
+            </div>
+            <div className="flex flex-row justify-center pt-2">
+                <ReactPaginate
+                    breakLabel="..."
+                    breakClassName="btn btn-md p-0"
+                    breakLinkClassName="btn btn-md bg-transparent border-transparent"
+                    nextLabel="next >"
+                    nextClassName="btn btn-md p-0"
+                    nextLinkClassName="btn btn-md bg-transparent border-transparent"
+                    onPageChange={handlePageClick}
+                    pageRangeDisplayed={5}
+                    pageCount={pageCount}
+                    pageClassName="btn btn-md p-0"
+                    pageLinkClassName="btn btn-md bg-transparent border-transparent"
+                    previousLabel="< previous"
+                    previousClassName="btn btn-md p-0"
+                    previousLinkClassName="btn btn-md bg-transparent border-transparent"
+                    containerClassName="btn-group px-5"
+                    activeClassName="btn btn-md btn-primary"
+                />
             </div>
         </>
     );
