@@ -1,5 +1,6 @@
 import Link from "next/link";
 import ForgotPasswordForm from "../components/ForgotPasswordForm";
+
 const ForgotPasswordPage = () => {
     return (
         <div>

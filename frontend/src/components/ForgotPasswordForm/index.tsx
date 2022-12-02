@@ -1,6 +1,7 @@
 import { FormEvent, useState } from "react";
 import handleChange from "../../hooks/handleChange";
 import useFormController from "./formController";
+
 const ForgotPasswordForm = () => {
     const controller = useFormController()
     const [forgotLoginData, setForgotLoginData] = useState({
