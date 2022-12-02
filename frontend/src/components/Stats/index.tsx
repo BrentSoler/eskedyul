@@ -62,7 +62,7 @@ const Stats = ({
 						</div>
 					</div>
 				</div>
-				<div className="stat-title">Program</div>
+				{/* <div className="stat-title">Program</div> */}
 				<div className="stat-value truncate w-full">{name}</div>
 			</div>
 

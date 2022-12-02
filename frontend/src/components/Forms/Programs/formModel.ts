@@ -76,7 +76,7 @@ const useFormModel = (id: string) => {
 		},
 		onSuccess: () => {
 			toast.update("loadSched", {
-				render: `Successfully posted a schedule`,
+				render: `Successfully updated program's information`,
 				type: "success",
 				isLoading: false,
 				autoClose: 500,

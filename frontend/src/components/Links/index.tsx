@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 const Links = () => {
 	const router = useRouter();
 	return (
-		<div className="flex flex-col items-end justify-center text-lg gap-4">
+		<div className="flex flex-col items-start justify-center text-lg gap-4">
 			<Link href="/dashboard/landing">
 				<a
 					className={`${

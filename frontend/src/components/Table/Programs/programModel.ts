@@ -17,7 +17,7 @@ const useProgramModel = (id: string) => {
 		},
 		onSuccess: () => {
 			toast.update("loadSched", {
-				render: `Successfully seleted a program`,
+				render: `Successfully deleted a program`,
 				type: "success",
 				isLoading: false,
 				autoClose: 500,

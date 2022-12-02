@@ -19,7 +19,7 @@ const LoginForm = () => {
 		<form className="flex flex-col" onSubmit={submitHandler}>
 			<h1>Mobile Number:</h1>
 			<input
-				type="text"
+				type="number"
 				name="uid"
 				autoComplete="off"
 				className="input input-bordered"

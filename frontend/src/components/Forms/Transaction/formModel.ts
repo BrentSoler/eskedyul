@@ -41,7 +41,7 @@ const useFormModel = () => {
 		},
 		onSuccess: () => {
 			toast.update("loadSched", {
-				render: `Successfully posted a transaction`,
+				render: `Successfully updated a transaction`,
 				type: "success",
 				isLoading: false,
 				autoClose: 500,

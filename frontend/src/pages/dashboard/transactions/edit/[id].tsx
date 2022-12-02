@@ -16,7 +16,7 @@ const AddPrograms = () => {
 
 	return (
 		<div className="flex justify-center items-center gap-6 p-5 min-h-[90vh]">
-			<h1 className="font-extrabold text-4xl">EDIT PROGRAM</h1>
+			<h1 className="font-extrabold text-4xl">EDIT TRANSACTION</h1>
 			<EditForm id={router.query.id?.toString()} />
 		</div>
 	);
