@@ -24,7 +24,7 @@ export const SRegister = z.object({
       z.string().regex(/^[A-Za-z]+$/, { message: "Middle name should only consist of letters" })
     ])
     .optional()
-    .transform(e:any => e === "" ? undefined : e),
+    .transform(e => e === "" ? undefined : e),
   lname: z
     .string()
     .min(2, { message: "Last name needs to be atleast 2 letters" })
