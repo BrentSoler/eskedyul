@@ -97,7 +97,7 @@ const TransactionTable = () => {
 		<>
 			<div className="flex gap-3">
 				<input
-					placeholder={`Search Name, ${role === "Master Admin" ? "Brgy ID," : ""} Program Name or Location.`}
+					placeholder={`Search Name, ${role === "Master Admin" ? "Barangay ID," : ""} Program Name or Location.`}
 					type="text"
 					onChange={(e) => {
 						setSearchFilter(e.target.value);
@@ -162,7 +162,7 @@ const TransactionTable = () => {
 									</svg>
 								</label>
 							</th>
-							<th className="sticky top-0 px-6 py-3">BGRY. ID</th>
+							<th className="sticky top-0 px-6 py-3">BRGY. ID</th>
 							<th className="sticky top-0 px-6 py-3">Program Name</th>
 							<th className="sticky top-0 px-6 py-3">LOCATION</th>
 							<th className="sticky top-0 px-6 py-3">Date</th>

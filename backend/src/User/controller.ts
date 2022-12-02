@@ -201,10 +201,10 @@ export async function registerResident({
     const mobileAvailable = await User.isNumberAvailable();
 
     if (userNameAvailable) {
-      throw new Error("Name is already taken");
+      throw new Error("Name is already exists.");
     }
     if (mobileAvailable) {
-      throw new Error("Mobile No. is already taken");
+      throw new Error("Mobile No. is already exists");
     }
 
     const postUser = await User.registerUser();
@@ -262,7 +262,7 @@ export async function changePasswordUser(data: TForgotPassword) {
     const mobileNumber = await User.isNumberAvailable(data.mobileNo as string);
 
     if (!mobileNumber) {
-      throw new Error("MobileNo. does not exists please make an account");
+      throw new Error("Mobile No. does not exists please make an account");
     }
 
     if (mobileNumber.role === "Resident") {

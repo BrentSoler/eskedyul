@@ -15,17 +15,17 @@ export const SRegister = z.object({
   email: z.string().email().optional(),
   fname: z
     .string()
-    .min(3, { message: "Name needs to be atleast 3 letters" })
-    .regex(/^[A-Za-z]+$/, { message: "Name should only consist of letters" }),
+    .min(3, { message: "First name needs to be atleast 3 letters" })
+    .regex(/^[A-Za-z]+$/, { message: "First name should only consist of letters" }),
   mname: z
     .string()
-    .min(3, { message: "Name needs to be atleast 3 letters" })
-    .regex(/^[A-Za-z]+$/, { message: "Name should only consist of letters" })
+    .min(2, { message: "Middle name needs to be atleast 2 letters" })
+    .regex(/^[A-Za-z]+$/, { message: "Middle name should only consist of letters" })
     .optional(),
   lname: z
     .string()
-    .min(3, { message: "Name needs to be atleast 3 letters" })
-    .regex(/^[A-Za-z]+$/, { message: "Name should only consist of letters" }),
+    .min(2, { message: "Last name needs to be atleast 2 letters" })
+    .regex(/^[A-Za-z]+$/, { message: "Last name should only consist of letters" }),
   suffix: z.string(),
   sex: z.enum(["Male", "Female"]),
   mobileNo: z.string().regex(/^0(9)\d{9}$/, { message: "Invalid Phone No." }),
@@ -46,8 +46,8 @@ export const SRegisterResident = z.object({
     .optional(),
   emgContName: z
     .string()
-    .min(3, { message: "Name needs to be atleast 3 letters" })
-    .regex(/^[A-Za-z]+$/, { message: "Name should only consist of letters" })
+    .min(3, { message: "Emergency Contact Name needs to be atleast 3 letters" })
+    .regex(/^[A-Za-z]+$/, { message: "Emergency Contact Name should only consist of letters" })
     .optional(),
   civilStatus: z.enum(["Single", "Married", "Divorced"]),
   birthdate: z.string(),

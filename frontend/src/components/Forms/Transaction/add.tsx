@@ -77,7 +77,7 @@ const AddTransac = () => {
 
 				{transactionData.programId && (
 					<>
-						<h1>Benfeciary:</h1>
+						<h1>Benefeciary:</h1>
 						<ComboBox
 							options={names}
 							enableAutocomplete

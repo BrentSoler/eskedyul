@@ -16,39 +16,28 @@ const LoginForm = () => {
 	}
 
 	return (
-		<>
-			<form className="flex flex-col" onSubmit={submitHandler}>
-				<h1>Mobile Number:</h1>
-				<input
-					type="text"
-					name="uid"
-					autoComplete="off"
-					className="input input-bordered"
-					value={loginData.uid}
-					onChange={(e) => handleChange(e, setLoginData)}
-				/>
-				<h1>Password:</h1>
-				<input
-					type="password"
-					name="upswd"
-					className="input input-bordered"
-					value={loginData.upswd}
-					onChange={(e) => handleChange(e, setLoginData)}
-				/>
-				<Link href={`/forgot-password`}>
-					<div className="flex flex-start pt-1">
-						<button className="font-medium text-primary text-sm">
-							Forgot your password?
-						</button>
-					</div>
-				</Link>
-
-				<button className="btn-primary mt-10 rounded-lg py-2 px-3 w-max self-end" type="submit">
-					Submit
-				</button>
-			</form>
-
-		</>
+		<form className="flex flex-col" onSubmit={submitHandler}>
+			<h1>Mobile Number:</h1>
+			<input
+				type="number"
+				name="uid"
+				autoComplete="off"
+				className="input input-bordered"
+				value={loginData.uid}
+				onChange={(e) => handleChange(e, setLoginData)}
+			/>
+			<h1>Password:</h1>
+			<input
+				type="password"
+				name="upswd"
+				className="input input-bordered"
+				value={loginData.upswd}
+				onChange={(e) => handleChange(e, setLoginData)}
+			/>
+			<button className="btn-primary mt-10 rounded-lg py-2 px-3 w-max self-end" type="submit">
+				Submit
+			</button>
+		</form>
 	);
 };
 
