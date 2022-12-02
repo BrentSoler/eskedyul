@@ -1,7 +1,7 @@
 import { FormEvent, useState } from "react";
 import handleChange from "../../hooks/handleChange";
 import useLoginController from "./loginController";
-
+import Link from "next/link";
 const LoginForm = () => {
 	const controller = useLoginController();
 	const [loginData, setLoginData] = useState({

@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import TransactionTable from "../../../components/Table/Transactions";
 import AuthStore from "../../../store/authStore";
 import useTransactionController from "../../../components/Table/Transactions/transactionController";
-import { exportTransactionsPDF } from "../../../hooks/useExportPDF";
+import { exportTransactionsPDF } from "../../../hooks/useExportPdf";
 const ProgramsPage = () => {
 	const router = useRouter();
 	const token = AuthStore((state) => state.userData.token);

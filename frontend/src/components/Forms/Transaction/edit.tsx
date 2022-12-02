@@ -48,13 +48,13 @@ const EditTransac = ({ id }: { id?: string }) => {
 					<option value="Completed">Completed</option>
 					<option value="Cancelled">Cancelled</option>
 				</select>
-				<div>
+				<div className="flex gap-3">
 					<Link href={`/dashboard/transactions`}>
-						<button className="btn-primary mt-10 rounded-lg py-2 px-3 w-max self-start" type="submit">
+						<button className="btn-secondary mt-10 rounded-lg py-2 px-3 w-max" type="submit">
 							Back
 						</button>
 					</Link>
-					<button className="btn-primary mt-10 rounded-lg py-2 px-3 w-max self-end" type="submit">
+					<button className="btn-primary mt-10 rounded-lg py-2 px-3 w-max" type="submit">
 						Submit
 					</button>
 				</div>

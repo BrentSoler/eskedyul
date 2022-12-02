@@ -58,6 +58,14 @@ export default function userRoutes(router: Router) {
       res.json({ ...data });
     })
   );
+  //test
+  {/*router.route("/forgot-password").post(
+    expressAsyncHandler(async (req: Request, res: Response) => {
+      const data = await login(req.body);
+
+      res.json({ ...data });
+    })
+  );*/}
 
   router.route("/register/:role").post(
     expressAsyncHandler(async (req: Request, res: Response) => {
