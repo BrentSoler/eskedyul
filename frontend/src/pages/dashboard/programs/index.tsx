@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import ProgramsTable from "../../../components/Table/Programs";
 import AuthStore from "../../../store/authStore";
 import useProgramController from "../../../components/Table/Programs/programController";
-import { exportProgramsPDF } from "../../../hooks/useExportPDF";
+import { exportProgramsPDF } from "../../../hooks/useExportPdf";
 const ProgramsPage = () => {
 	const router = useRouter();
 	const token = AuthStore((state) => state.userData.token);
