@@ -238,8 +238,8 @@ const TransactionTable = () => {
 					previousLabel="< previous"
 					previousClassName="btn btn-md p-0 rounded-none border-none"
 					previousLinkClassName="btn btn-md bg-primary border-none rounded-none"
-					containerClassName="btn-group px-5"
-					activeClassName="btn btn-md bg-black"
+					containerClassName="btn-group px-5 "
+					activeClassName="btn btn-md bg-secondary"
 				/>
 			</div>
 		</>
