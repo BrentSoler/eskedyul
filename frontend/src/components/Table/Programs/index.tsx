@@ -63,7 +63,7 @@ const ProgramsTable = () => {
 	}, [isSuccess, data, searchFilter, statusFilter, viewFilter, sort]);
 	//PAGINATION
 	const [itemOffset, setItemOffset] = useState(0);
-	const itemsPerPage = 5;
+	const itemsPerPage = 10;
 	const endOffset = itemOffset + itemsPerPage;
 	console.log(`Loading items from ${itemOffset} to ${endOffset}`);
 	console.log("check 1", handleFilteredData)
@@ -237,23 +237,23 @@ const ProgramsTable = () => {
 				</table>
 			</div>
 			<div className="flex flex-row justify-center pt-2">
-				<ReactPaginate
+				<ReactPaginate className="rounded-none"
 					breakLabel="..."
-					breakClassName="btn btn-md p-0"
-					breakLinkClassName="btn btn-md bg-transparent border-transparent"
+					breakClassName="btn btn-md p-0 rounded-none border-none"
+					breakLinkClassName="btn btn-md bg-primary border-none rounded-none"
 					nextLabel="next >"
-					nextClassName="btn btn-md p-0"
-					nextLinkClassName="btn btn-md bg-transparent border-transparent"
+					nextClassName="btn btn-md p-0 rounded-none border-none"
+					nextLinkClassName="btn btn-md bg-primary border-none rounded-none"
 					onPageChange={handlePageClick}
 					pageRangeDisplayed={5}
 					pageCount={pageCount}
-					pageClassName="btn btn-md p-0"
-					pageLinkClassName="btn btn-md bg-transparent border-transparent"
+					pageClassName="btn btn-md p-0 bg-primary rounded-none border-none"
+					pageLinkClassName="btn btn-md bg-transparent border-none rounded-none"
 					previousLabel="< previous"
-					previousClassName="btn btn-md p-0"
-					previousLinkClassName="btn btn-md bg-transparent border-transparent"
-					containerClassName="btn-group px-5"
-					activeClassName="btn btn-md btn-primary"
+					previousClassName="btn btn-md p-0 rounded-none border-none"
+					previousLinkClassName="btn btn-md bg-primary border-none rounded-none"
+					containerClassName="btn-group px-5 "
+					activeClassName="btn btn-md bg-secondary"
 				/>
 			</div>
 		</>
