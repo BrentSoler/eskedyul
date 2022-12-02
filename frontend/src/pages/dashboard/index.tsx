@@ -85,8 +85,6 @@ const Dahsboard = () => {
 
 				<div className="modal" id="my-modal-3">
 					<div className="modal-box">
-						<h3 className="font-bold text-lg">Congratulations random Internet user!</h3>
-
 						<h3 className="font-bold text-lg ">TERMS & CONDTIONS</h3>
 						<p className="py-2 text-jusitfy">
 							I hereby authorize the Office of Senior Affairs City of Manila, to collect and process

@@ -17,7 +17,7 @@ const Sidebar: React.FC<{
 			{visible && (
 				<div className="drawer-side">
 					<label htmlFor="form-drawer" className="drawer-overlay"></label>
-					<div className="menu p-4 overflow-y-hidden w-80 lg:w-[13vw] bg-primary text-white h-[100vh] flex items-end justify-center">
+					<div className="menu p-4 overflow-y-hidden w-80 lg:w-[16vw] bg-primary text-white h-[100vh] flex items-end justify-center">
 						<Links />
 					</div>
 					<div className="divider-horizontal"></div>
