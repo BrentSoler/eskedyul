@@ -119,17 +119,13 @@ const AddTransac = () => {
 											console.log(resident.checked);
 											if(!resident.checked){
 												e.target.checked = true;
+												resident.checked = true;
 											}
 											if(resident.checked){
 												e.target.checked = false;
+												resident.checked = false;
 											}
 											
-											if(!resident.checked){
-												names[i].checked = true;
-											}
-											if(resident.checked){
-												names[i].checked = false;
-											}
 											handleChangeID(e);
 										}}
 									/>
