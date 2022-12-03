@@ -67,23 +67,24 @@ const AddForm = () => {
                     onChange={(e) => handleChange(e, setAnnouncementData)}
                 />
                 <h1>Barangay:</h1>
-                {brgySuccess &&
-                    barangay.map((brgy: any) => (
-                        <>
-                            <div className="flex flex-row gap-2 m-1">
-                                <input
-                                    type="checkbox"
-                                    name="barangay"
-                                    className="checkbox"
-                                    value={brgy.id}
-                                    onChange={(e) => handleChangeID(e)}
-                                />
-                                <label> {brgy.id} </label>
-                            </div>
-                        </>
-                    ))
-                }
-
+                <div className="h-5 input input-bordered overflow-y-auto h-32 ...">
+                    {brgySuccess &&
+                        barangay.map((brgy: any) => (
+                            <>
+                                <div className="flex flex-row gap-2 m-1">
+                                    <input
+                                        type="checkbox"
+                                        name="barangay"
+                                        className="checkbox"
+                                        value={brgy.id}
+                                        onChange={(e) => handleChangeID(e)}
+                                    />
+                                    <label> {brgy.id} </label>
+                                </div>
+                            </>
+                        ))
+                    }
+                </div>
                 <button className="btn-primary mt-10 rounded-lg py-2 px-3 w-max self-end" type="submit">
                     Submit
                 </button>
