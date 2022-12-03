@@ -16,19 +16,19 @@ export const SRegister = z.object({
   fname: z
     .string()
     .min(3, { message: "First name needs to be atleast 3 letters" })
-    .regex(/^[A-Za-z]+$/, { message: "First name should only consist of letters" }),
+    .regex(/^[A-Za-z ]+$/, { message: "First name should only consist of letters" }),
   mname: z
     .union([
       z.string().length(0),
       z.string().min(2,{ message: "Middle name needs to be atleast 2 letters" }),
-      z.string().regex(/^[A-Za-z]+$/, { message: "Middle name should only consist of letters" })
+      z.string().regex(/^[A-Za-z ]+$/, { message: "Middle name should only consist of letters" })
     ])
     .optional()
     .transform(e => e === "" ? undefined : e),
   lname: z
     .string()
     .min(2, { message: "Last name needs to be atleast 2 letters" })
-    .regex(/^[A-Za-z]+$/, { message: "Last name should only consist of letters" }),
+    .regex(/^[A-Za-z ]+$/, { message: "Last name should only consist of letters" }),
   suffix: z.string(),
   sex: z.enum(["Male", "Female"]),
   mobileNo: z.string().regex(/^0(9)\d{9}$/, { message: "Invalid Phone No." }),
