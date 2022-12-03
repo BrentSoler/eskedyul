@@ -1,6 +1,8 @@
 import { FormEvent, useState } from "react";
 import handleChange from "../../hooks/handleChange";
 import useFormController from "./formController";
+import Link from "next/link";
+
 
 const ForgotPasswordForm = () => {
     const controller = useFormController()
@@ -16,8 +18,6 @@ const ForgotPasswordForm = () => {
     }
 
     return (
-        <div className="min-h-full h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-            <div className="max-w-md w-full space-y-8">
                 <form className="flex flex-col" onSubmit={submitHandler}>
                     <h1>Mobile Number:</h1>
                     <input
@@ -36,13 +36,17 @@ const ForgotPasswordForm = () => {
                         value={forgotLoginData.upswd}
                         onChange={(e) => handleChange(e, setForgotLoginData)}
                     />
+                <div>
+                    <Link href={`/login`}>
+						<button className="btn-secondary mt-10 rounded-lg py-2 px-3 w-max" type="submit">
+							Back
+						</button>
+					</Link>
                     <button className="btn-primary mt-10 rounded-lg py-2 px-3 w-max self-end" type="submit">
-                        Change Password
+                        Submit
                     </button>
+                </div>  
                 </form>
-            </div>
-        </div>
-
     );
 
 };

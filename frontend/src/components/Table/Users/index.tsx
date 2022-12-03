@@ -4,6 +4,7 @@ import AuthStore from "../../../store/authStore";
 import useFormController from "../../Forms/Transaction/formController";
 import useTransactionController from "./userController";
 import ReactPaginate from 'react-paginate'
+
 const UsersTable = () => {
 	const brgyId = AuthStore((state) => state.userData.brgyId);
 	const userId = AuthStore((state) => state.userData.id);

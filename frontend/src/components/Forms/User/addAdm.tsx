@@ -240,13 +240,12 @@ const AddAdm = () => {
 					</a>
 						<div className="modal" id="confirmModal">
 						<div className="modal-box">
-							<h3 className="font-bold text-lg">Information</h3>
 							<p className="py-4">Are you sure that all the data are correct and valid?</p>
 							<div className="modal-action">
+								<a href="#" className="btn-secondary mt-10 rounded-lg py-2 px-3 w-max">BACK</a>
 								<button className="btn-primary mt-10 rounded-lg py-2 px-3 w-max" type="submit">
 									Confirm
 								</button>
-								<a href="#" className="btn-primary mt-10 rounded-lg py-2 px-3 w-max">BACK</a>
 							</div>
 						</div>
 						</div>

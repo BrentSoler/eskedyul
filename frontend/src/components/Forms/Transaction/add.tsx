@@ -114,9 +114,20 @@ const AddTransac = () => {
 							Back
 						</button>
 					</Link>
-					<button className="btn-primary mt-10 rounded-lg py-2 px-3 w-max" type="submit">
+					<a href="#confirmModal" className="btn-primary mt-10 rounded-lg py-2 px-3 w-max" type="submit">
 						Submit
-					</button>
+					</a>
+						<div className="modal" id="confirmModal">
+						<div className="modal-box">
+							<p className="py-4">Are you sure that all the data are correct and valid?</p>
+							<div className="modal-action">
+								<a href="#" className="btn-secondary mt-10 rounded-lg py-2 px-3 w-max">BACK</a>
+								<button className="btn-primary mt-10 rounded-lg py-2 px-3 w-max" type="submit">
+									Confirm
+								</button>
+							</div>
+						</div>
+						</div>
 				</div>
 			</form>
 		</div>

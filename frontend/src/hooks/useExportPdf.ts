@@ -23,12 +23,12 @@ export function exportUsersPDF({ data }) {
         "STATUS": user.status,
         "SEX": user.sex,
         "MOBILE NO.": user.mobileNo,
+        "EMAIL": user.email,
         "PRESENT ADDRESS": user.presAdd,
         "PERMANENT ADDRESS": user.permAdd,
         "BRGY ID": user.brgyId,
         "ID TYPE": user.idType,
-        "ID NO": user.idNo,
-        "EMAIL": user.email
+        "ID NO": user.idNo
     }));
     //console.log("user data", userData)
     const unit = "pt";
@@ -60,13 +60,14 @@ export function exportProgramsPDF({ data }) {
     //console.log("data: ", data)
     const programData = data.map((program, index) => ({
         " ": index + 1,
+        "NAME": program.name,
         "DETAILS": program.details,
         "VIEW": program.view,
         "QUALIFICATION": program.qualification,
         "BRGY. ID": program.brgyId,
         "STATUS": program.status,
-        "TYPE": program.type,
-        "NAME": program.name,
+        "TYPE": program.type
+        
     }));
     console.log("program data", programData)
     const unit = "pt";
@@ -98,8 +99,8 @@ export function exportTransactionsPDF({ data }) {
     //console.log("data: ", data)
     const transactionData = data.map((transaction, index) => ({
         " ": index + 1,
-        "BENIFICIARY": transaction.residents.users.fname + " " + transaction.residents.users.mname + " " + transaction.residents.users.lname,
-        "BRGY. ID": transaction.residents.users.brgyId,
+        "BENEFICIARY": transaction.residents.users.fname + " " + transaction.residents.users.mname + " " + transaction.residents.users.lname,
+        "BARANGAY ID": transaction.residents.users.brgyId,
         "PROGRAM NAME": transaction.program.name,
         "LOCATION": transaction.schedule.location,
         "DATE": transaction.schedule.date,
