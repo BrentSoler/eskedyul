@@ -70,14 +70,6 @@ const AddTransac = () => {
 
 	const handleChangeID = (e: ChangeEvent<HTMLInputElement>) => {
 		console.log("value?: ", e.target.value)
-		
-		if(!e.target.checked){
-			e.target.checked = true;
-		}
-		if(e.target.checked){
-			e.target.checked = false;
-		}
-		
 
 		if (e.target.checked !== true) {
 			setResidentID([...residentID, e.target.value]);
@@ -124,6 +116,12 @@ const AddTransac = () => {
 										className="checkbox"
 										value={resident.id}
 										onChange={(e) => {
+											if(!e.target.checked){
+												e.target.checked = true;
+											}
+											if(e.target.checked){
+												e.target.checked = false;
+											}
 											handleChangeID(e);
 											if(!resident.checked){
 												resident.checked = true;
