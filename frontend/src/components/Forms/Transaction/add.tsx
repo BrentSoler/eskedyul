@@ -1,7 +1,6 @@
-import { FormEvent, useMemo, useState } from "react";
+import { FormEvent, useMemo, useState, ChangeEvent, useEffect } from "react";
 import handleChange from "../../../hooks/handleChange";
 import useFormController from "./formController";
-import ComboBox from "react-responsive-combo-box";
 import "react-responsive-combo-box/dist/index.css";
 import AuthStore from "../../../store/authStore";
 import progFormController from "../Programs/formController";
@@ -18,7 +17,7 @@ const AddTransac = () => {
 	const controller = useFormController();
 	const progFormsController = progFormController(brgyId);
 	const progController = programsController(brgyId);
-
+	const [residentID, setResidentID] = useState([] as any);
 	const { data: users, isSuccess: userSuccess } = controller.getUsers(brgyId);
 	const { data: progData, isSuccess: progSuccess } = progController.getPrograms(brgyId);
 	const { data: schedData, isSuccess: schedSuccess } = progFormsController.getProgramById(
@@ -36,12 +35,15 @@ const AddTransac = () => {
 					? schedData.qualification === user.residents[0].residencyStatus
 					: user.role === "Resident" && user.status === 1;
 			});
+			const namesData = qualificationFilter.map((user: any) => ({
+				id: user.id,
+				lname: user.lname,
+				fname: user.fname,
+				mname: user.mname,
+				checked: false
+			}));
 
-			const namesArr = qualificationFilter.map((user: any) => {
-				return `${user.id}~${user.lname}, ${user.fname} ${user.mname}`;
-			});
-
-			return namesArr;
+			return namesData;
 		}
 
 		return [];
@@ -49,10 +51,37 @@ const AddTransac = () => {
 
 	function submit(e: FormEvent<HTMLFormElement>) {
 		e.preventDefault();
+		residentID.forEach((id: string) => {
+			const newData = {
+				residentId: id,
+				scheduleId: transactionData.scheduleId,
+				programId: transactionData.programId,
+			}
+			controller.postTransaction(newData);
+		});
 
-		controller.postTransaction(transactionData);
+
 	}
 
+	const handleChangeProgram = (e: ChangeEvent<HTMLSelectElement>) => {
+		setResidentID([])
+		handleChange(e, setTransactionData)
+	}
+
+	const handleChangeID = (e: ChangeEvent<HTMLInputElement>) => {
+		console.log("value?: ", e.target.value)
+
+		if (e.target.checked === true) {
+			setResidentID([...residentID, e.target.value]);
+		}
+		else if (e.target.checked === false) {
+			let freshbrgyID = residentID.filter((val: string) => val !== e.target.value);
+			setResidentID([...freshbrgyID]);
+		}
+		
+		console.log("check names", names)
+		console.log("check residentId", residentID)
+	}
 	return (
 		<div className="card bg-base-100 shadow-xl p-5 w-[30rem] rounded-md ">
 			<form className="w-full flex flex-col" onSubmit={submit}>
@@ -61,7 +90,7 @@ const AddTransac = () => {
 					className="select select-bordered w-full "
 					name="programId"
 					value={transactionData.programId}
-					onChange={(e) => handleChange(e, setTransactionData)}
+					onChange={(e) => handleChangeProgram(e)}
 				>
 					<option value=""></option>
 					{progSuccess && progData.data !== "No Data" ? (
@@ -74,21 +103,36 @@ const AddTransac = () => {
 						<option value=""></option>
 					)}
 				</select>
-
-				{transactionData.programId && (
-					<>
-						<h1>Benefeciary:</h1>
-						<ComboBox
-							options={names}
-							enableAutocomplete
-							style={{ width: "100%" }}
-							onSelect={(e) =>
-								setTransactionData((data) => ({ ...data, residentId: e.split("~")[0] }))
-							}
-						/>
-					</>
-				)}
-
+				<h1 className="pt-1 pb-1">Beneficiary:</h1>
+				<div className="h-5 pt-1 px-1 input input-bordered overflow-y-auto h-32 ...">
+					{transactionData.programId &&
+						names.map((resident: any,i:number) => (
+							<>
+								<div className="flex flex-row gap-2 m-1">
+									<input
+										type="checkbox"
+										name="residentId"
+										checked={resident.checked}
+										className="checkbox"
+										value={resident.id}
+										onChange={(e) => {
+											console.log(resident.checked);
+											
+											e.target.checked = !resident.checked;
+											resident.checked = !resident.checked;
+											
+											handleChangeID(e);
+										}}
+									/>
+									<label>{resident.id}~{resident.lname}, {resident.fname} {resident.mname} </label>
+								</div>
+							</>
+						))
+					}
+					{!transactionData.programId &&
+						<div className="text-secondary">Select a program first</div>
+					}
+				</div>
 				<h1>Schedule:</h1>
 				<select
 					className="select select-bordered w-full"

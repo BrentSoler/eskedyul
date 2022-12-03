@@ -16,19 +16,19 @@ export const SRegister = z.object({
   fname: z
     .string()
     .min(3, { message: "First name needs to be atleast 3 letters" })
-    .regex(/^[A-Za-z_ ]+$/, { message: "First name should only consist of letters" }),
+    .regex(/^[A-Za-z ]+$/, { message: "First name should only consist of letters" }),
   mname: z
     .union([
       z.string().length(0),
       z.string().min(2,{ message: "Middle name needs to be atleast 2 letters" }),
-      z.string().regex(/^[A-Za-z_ ]+$/, { message: "Middle name should only consist of letters" })
+      z.string().regex(/^[A-Za-z ]+$/, { message: "Middle name should only consist of letters" })
     ])
     .optional()
     .transform(e => e === "" ? undefined : e),
   lname: z
     .string()
     .min(2, { message: "Last name needs to be atleast 2 letters" })
-    .regex(/^[A-Za-z_ ]+$/, { message: "Last name should only consist of letters" }),
+    .regex(/^[A-Za-z ]+$/, { message: "Last name should only consist of letters" }),
   suffix: z.string(),
   sex: z.enum(["Male", "Female"]),
   mobileNo: z.string().regex(/^0(9)\d{9}$/, { message: "Invalid Phone No." }),
@@ -50,16 +50,16 @@ export const SRegisterResident = z.object({
   emgContName: z
     .string()
     .min(3, { message: "Emergency Contact Name needs to be atleast 3 letters" })
-    .regex(/^[A-Za-z_ ]+$/, { message: "Emergency Contact Name should only consist of letters" })
+    .regex(/^[A-Za-z i]+$/, { message: "Emergency Contact Name should only consist of letters" })
     .optional(),
   civilStatus: z.enum(["Single", "Married", "Divorced"]),
   birthdate: z.string(),
   birthPlace: z.string(),
   OSCAId: z
     .string()
-    .regex(/^[0-9]$/, { message: "OSCAID needs to be numbers only" })
+    .regex(/^[0-9]$/, { message: "OSCA ID needs to be numbers only" })
     .optional(),
-  empStatus: z.enum(["Employed", "Retired w/pension", "Retired wo/ pention"]),
+  empStatus: z.enum(["Employed", "Retired w/pension", "Retired wo/ pension"]),
   residencyStatus: z.enum(["6months of Residency", "Registered Voter"]),
   remarks: z
     .string()
