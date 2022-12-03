@@ -70,14 +70,27 @@ const AddTransac = () => {
 
 	const handleChangeID = (e: ChangeEvent<HTMLInputElement>) => {
 		console.log("value?: ", e.target.value)
+		
+		if(!e.target.checked){
+			e.target.checked = true;
+		}
+		if(e.target.checked){
+			e.target.checked = false;
+		}
+		
 
 		if (e.target.checked === true) {
 			setResidentID([...residentID, e.target.value]);
+			if(residentID.includes(e.target.value)){
+				let freshbrgyID = residentID.filter((val: string) => val !== e.target.value);
+				setResidentID([...freshbrgyID]);
+			}
 		}
 		else if (e.target.checked === false) {
 			let freshbrgyID = residentID.filter((val: string) => val !== e.target.value);
 			setResidentID([...freshbrgyID]);
 		}
+		
 		console.log("check names", names)
 		console.log("check residentId", residentID)
 	}
@@ -115,20 +128,13 @@ const AddTransac = () => {
 										className="checkbox"
 										value={resident.id}
 										onChange={(e) => {
-											if(!e.target.checked){
-											   e.target.checked = true;
-											}
-											if(e.target.checked){
-											   e.target.checked = false;
-											}
+											handleChangeID(e);
 											if(!resident.checked){
-											   resident.checked = true;
+												resident.checked = true;
 											}
 											if(resident.checked){
-											   resident.checked = false;
+												resident.checked = false;
 											}
-											handleChangeID(e)
-
 										}}
 									/>
 									<label>{resident.id}~{resident.lname}, {resident.fname} {resident.mname} </label>
