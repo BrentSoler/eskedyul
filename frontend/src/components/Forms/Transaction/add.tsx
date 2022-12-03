@@ -79,14 +79,10 @@ const AddTransac = () => {
 		}
 		
 
-		if (e.target.checked === true) {
+		if (e.target.checked !== true) {
 			setResidentID([...residentID, e.target.value]);
-			if(residentID.includes(e.target.value)){
-				let freshbrgyID = residentID.filter((val: string) => val !== e.target.value);
-				setResidentID([...freshbrgyID]);
-			}
 		}
-		else if (e.target.checked === false) {
+		else if (e.target.checked !== false) {
 			let freshbrgyID = residentID.filter((val: string) => val !== e.target.value);
 			setResidentID([...freshbrgyID]);
 		}
