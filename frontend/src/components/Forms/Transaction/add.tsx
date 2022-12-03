@@ -114,9 +114,9 @@ const AddTransac = () => {
 										checked={resident.checked}
 										className="checkbox"
 										value={resident.id}
-										onChange={(e) => {
-											e.target.checked = true;
-											resident.checked = true;
+										onClick={(e) => {
+											e.target.checked = !e.target.checked;
+											resident.checked = !resident.checked;
 											handleChangeID(e)
 
 										}}
