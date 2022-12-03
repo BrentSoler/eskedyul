@@ -117,14 +117,9 @@ const AddTransac = () => {
 										value={resident.id}
 										onChange={(e) => {
 											console.log(resident.checked);
-											if(!resident.checked){
-												e.target.checked = true;
-												resident.checked = true;
-											}
-											if(resident.checked){
-												e.target.checked = false;
-												resident.checked = false;
-											}
+											
+											e.target.checked = !resident.checked;
+											resident.checked = !resident.checked;
 											
 											handleChangeID(e);
 										}}
