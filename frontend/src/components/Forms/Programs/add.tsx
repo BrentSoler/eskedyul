@@ -162,6 +162,7 @@ const AddForm = () => {
 						<input
 							type="date"
 							name="date"
+							min = "2022-12-04"
 							autoComplete="off"
 							className="input input-bordered w-full"
 							value={schedData.date}

@@ -63,9 +63,7 @@ const Stats = ({
 					</div>
 				</div>
 				{/* <div className="stat-title">Program</div> */}
-				<div className ="tooltip tooltip-bottom" data-tip= {name}>
-					<div className="stat-value truncate" >{name}</div>
-				</div>
+				<div className="stat-value truncate w-full" >{name}</div>
 			</div>
 
 			<div className="stat">
