@@ -106,7 +106,7 @@ const AddTransac = () => {
 				<h1 className="pt-1 pb-1">Beneficiary:</h1>
 				<div className="h-5 pt-1 px-1 input input-bordered overflow-y-auto h-32 ...">
 					{transactionData.programId &&
-						names.map((resident: any) => (
+						names.map((resident: any,i:number) => (
 							<>
 								<div className="flex flex-row gap-2 m-1">
 									<input
@@ -125,10 +125,10 @@ const AddTransac = () => {
 											}
 											
 											if(!resident.checked){
-												resident.checked = true;
+												names[i].checked = true;
 											}
 											if(resident.checked){
-												resident.checked = false;
+												names[i].checked = false;
 											}
 											handleChangeID(e);
 										}}
