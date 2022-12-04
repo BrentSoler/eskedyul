@@ -20,7 +20,7 @@ export const SRegister = z.object({
   mname: z
     .union([
       z.string().length(0),
-      z.string().min(2,{ message: "Middle name needs to be atleast 2 letters" }),
+      z.string().min(2, { message: "Middle name needs to be atleast 2 letters" }),
       z.string().regex(/^[A-Za-z ]+$/, { message: "Middle name should only consist of letters" })
     ])
     .optional()
@@ -50,14 +50,14 @@ export const SRegisterResident = z.object({
   emgContName: z
     .string()
     .min(3, { message: "Emergency Contact Name needs to be atleast 3 letters" })
-    .regex(/^[A-Za-z i]+$/, { message: "Emergency Contact Name should only consist of letters" })
+    .regex(/^[A-Za-z ]+$/, { message: "Emergency Contact Name should only consist of letters" })
     .optional(),
   civilStatus: z.enum(["Single", "Married", "Divorced"]),
   birthdate: z.string(),
   birthPlace: z.string(),
   OSCAId: z
     .string()
-    .regex(/^[0-9]$/, { message: "OSCA ID needs to be numbers only" })
+    .min(6, { message: "OSCA ID needs to be numbers only" })
     .optional(),
   empStatus: z.enum(["Employed", "Retired w/pension", "Retired wo/ pension"]),
   residencyStatus: z.enum(["6months of Residency", "Registered Voter"]),
