@@ -18,7 +18,6 @@ export function exportUsersPDF({ data }) {
         "FIRST NAME": user.fname,
         "MIDDLE NAME": user.mname,
         "LAST NAME": user.lname,
-        "SUFFIX": user.suffix,
         "ROLE": user.role,
         "STATUS": user.status,
         "SEX": user.sex,
@@ -26,19 +25,17 @@ export function exportUsersPDF({ data }) {
         "EMAIL": user.email,
         "PRESENT ADDRESS": user.presAdd,
         "PERMANENT ADDRESS": user.permAdd,
-        "BRGY ID": user.brgyId,
-        "ID TYPE": user.idType,
-        "ID NO": user.idNo
+        "BRGY ID": user.brgyId
     }));
     //console.log("user data", userData)
     const unit = "pt";
-    const size = "A4";
+    const size = "legal";
     const orientation = "landscape";
 
-    const marginLeft = 40;
+    const marginLeft = 10;
     const doc = new jsPDF(orientation, unit, size);
 
-    doc.setFontSize(15);
+    doc.setFontSize(12);
 
     const title = "USERS";
     const headers = [Object.keys(userData[0])];

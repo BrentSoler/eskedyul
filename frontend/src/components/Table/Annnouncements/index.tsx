@@ -42,6 +42,7 @@ const AnnouncementsTable = () => {
             }
             return "No Data";
         }
+        
     }, [isSuccess, data, searchFilter, sort]);
     //PAGINATION
     const [itemOffset, setItemOffset] = useState(0);

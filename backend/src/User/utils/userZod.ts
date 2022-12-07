@@ -59,7 +59,7 @@ export const SRegisterResident = z.object({
     .string()
     // .min(3, { message: "OSCA ID needs to be numbers only" })
     .optional(),
-  empStatus: z.enum(["Employed", "Retired w/pension", "Retired wo/ pension"]),
+  empStatus: z.enum(["Employed", "Retired w/ pension", "Retired wo/ pension"]),
   residencyStatus: z.enum(["6months of Residency", "Registered Voter"]),
   remarks: z
     .string()

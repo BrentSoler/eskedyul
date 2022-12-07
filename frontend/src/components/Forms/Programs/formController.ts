@@ -49,6 +49,7 @@ const useFormController = (id: string) => {
 		async deleteSched(id: string) {
 			await model.deleteSched(id);
 		},
+		
 	};
 };
 

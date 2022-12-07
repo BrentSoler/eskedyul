@@ -70,7 +70,7 @@ const Dahsboard = () => {
 							</p>
 						</p>
 						<div className="modal-action">
-							<a href="#my-modal-3" className="btn">
+							<a href="#my-modal-3" className="btn-primary mt-10 rounded-lg py-2 px-3 w-max">
 								I Accept
 							</a>
 						</div>
@@ -102,7 +102,7 @@ const Dahsboard = () => {
 							impormasyon.
 						</p>
 						<div className="modal-action">
-							<a href="#" className="btn" onClick={() => stop()}>
+							<a href="#" className="btn-primary mt-10 rounded-lg py-2 px-3 w-max" onClick={() => stop()}>
 								I Accept
 							</a>
 						</div>

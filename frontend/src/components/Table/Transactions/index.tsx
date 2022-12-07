@@ -18,6 +18,7 @@ const TransactionTable = () => {
 	const handleFilteredData = useMemo(() => {
 		if (isSuccess) {
 			if (data.data !== "No Data") {
+
 				const sorted = data.data.sort((a: any, b: any) => {
 					return sort === "asc"
 						? a.residents.users.lname.localeCompare(b.residents.users.lname)
@@ -105,7 +106,7 @@ const TransactionTable = () => {
 					value={searchFilter}
 					className="input input-bordered w-full mt-3"
 				/>
-				<label className="flex items-center"> View </label>
+				<label className="flex items-center"> Status </label>
 				<select
 					placeholder="Status"
 					onChange={(e) => {
@@ -114,7 +115,7 @@ const TransactionTable = () => {
 					value={statusFilter}
 					className="input input-bordered w-full mt-3"
 				>
-					<option value=""></option>
+					<option value="--Please select one--" selected hidden>--Please select one--</option>
 					<option value="Pending">Pending</option>
 					<option value="Completed">Completed</option>
 					<option value="Cancelled">Cancelled</option>
@@ -209,6 +210,7 @@ const TransactionTable = () => {
 											<Link href={`/dashboard/transactions/edit/${transaction.id}`}>
 												<a className="btn btn-ghost">Edit</a>
 											</Link>
+
 										</td>
 									) : (
 										<></>

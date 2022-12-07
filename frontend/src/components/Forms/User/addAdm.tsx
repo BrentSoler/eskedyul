@@ -41,24 +41,25 @@ const AddAdm = () => {
 			<form className="w-full flex flex-col" onSubmit={submit}>
 				<div className="flex gap-3">
 					<div className="w-full">
-						<h1>Admin Type:</h1>
+						<h1>Admin Type <span className = "text-red-600">*</span></h1>
 						<select
 							className="select select-bordered w-full "
 							name="role"
 							value={data.role}
 							onChange={(e) => handleChange(e, setData)}
 						>
-							<option value=""></option>
+							<option value="--Please select one--" selected hidden>--Please select one--</option>
 							<option value="Brgy. Admin">Brgy. Admin</option>
 							<option value="Admin">Admin</option>
 							<option value="Master Admin">Master Admin</option>
 						</select>
 					</div>
 					<div className="w-full">
-						<h1>Email:</h1>
+						<h1>Email <span className = "text-red-600">*</span></h1>
 						<input
 							type="text"
 							name="email"
+							placeholder="Email"
 							value={data.email}
 							onChange={(e) => handleChange(e, setData)}
 							className="input input-bordered w-full"
@@ -67,9 +68,10 @@ const AddAdm = () => {
 				</div>
 				<div className="flex gap-3">
 					<div className="w-full">
-						<h1>Password:</h1>
+						<h1>Password <span className = "text-red-600">*</span></h1>
 						<input
 							type="password"
+							placeholder="Password"
 							className="input input-bordered w-full"
 							name="password"
 							value={data.password}
@@ -77,10 +79,11 @@ const AddAdm = () => {
 						/>
 					</div>
 					<div className="w-full">
-						<h1>Confirm Password:</h1>
+						<h1>Confirm Password <span className = "text-red-600">*</span></h1>
 						<input
 							type="password"
 							name="confPassword"
+							placeholder="Confirm Password"
 							value={data.confPassword}
 							onChange={(e) => handleChange(e, setData)}
 							className="input input-bordered w-full"
@@ -89,30 +92,33 @@ const AddAdm = () => {
 				</div>
 				<div className="flex gap-3">
 					<div className="w-full">
-						<h1>First Name:</h1>
+						<h1>First Name <span className = "text-red-600">*</span></h1>
 						<input
 							type="text"
 							className="input input-bordered w-full"
 							name="fname"
+							placeholder="First Name"
 							value={data.fname}
 							onChange={(e) => handleChange(e, setData)}
 						/>
 					</div>
 					<div className="w-full">
-						<h1>Middle Name:</h1>
+						<h1>Middle Name</h1>
 						<input
 							type="text"
 							name="mname"
+							placeholder="Middle Name"
 							value={data.mname}
 							onChange={(e) => handleChange(e, setData)}
 							className="input input-bordered w-full"
 						/>
 					</div>
 					<div className="w-full">
-						<h1>Last Name:</h1>
+						<h1>Last Name <span className = "text-red-600">*</span></h1>
 						<input
 							type="text"
 							name="lname"
+							placeholder="Last Name"
 							value={data.lname}
 							onChange={(e) => handleChange(e, setData)}
 							className="input input-bordered w-full"
@@ -121,14 +127,14 @@ const AddAdm = () => {
 				</div>
 				<div className="flex gap-3">
 					<div className="w-full">
-						<h1>Suffix:</h1>
+						<h1>Suffix <span className = "text-red-600">*</span></h1>
 						<select
 							className="select select-bordered w-full "
 							name="suffix"
 							value={data.suffix}
 							onChange={(e) => handleChange(e, setData)}
 						>
-							<option value=""></option>
+							<option value="--Please select one--" selected hidden>--Please select one--</option>
 							<option value="jr">jr</option>
 							<option value="Jr.">Jr.</option>
 							<option value="II">II</option>
@@ -137,14 +143,14 @@ const AddAdm = () => {
 						</select>
 					</div>
 					<div className="w-full">
-						<h1>Sex:</h1>
+						<h1>Sex <span className = "text-red-600">*</span></h1>
 						<select
 							className="select select-bordered w-full"
 							name="sex"
 							value={data.sex}
 							onChange={(e) => handleChange(e, setData)}
 						>
-							<option value=""></option>
+							<option value="--Please select one--" selected hidden>--Please select one--</option>
 							<option value="Male">Male</option>
 							<option value="Female">Female</option>
 						</select>
@@ -152,11 +158,12 @@ const AddAdm = () => {
 				</div>
 				<div className="flex gap-3">
 					<div className="w-full">
-						<h1>Mobile No:</h1>
+						<h1>Mobile No. <span className = "text-red-600">*</span></h1>
 						<input
 							type="number"
 							className="input input-bordered w-full"
 							name="mobileNo"
+							placeholder="091*******9"
 							value={data.mobileNo}
 							onChange={(e) => handleChange(e, setData)}
 						/>
@@ -164,21 +171,23 @@ const AddAdm = () => {
 				</div>
 				<div className="flex gap-3">
 					<div className="w-full">
-						<h1>Present Address:</h1>
+						<h1>Present Address <span className = "text-red-600">*</span></h1>
 						<input
 							type="text"
 							className="input input-bordered w-full"
 							name="presAdd"
+							placeholder="Present Address"
 							value={data.presAdd}
 							onChange={(e) => handleChange(e, setData)}
 						/>
 					</div>
 					<div className="w-full">
-						<h1>Permanent Address:</h1>
+						<h1>Permanent Address <span className = "text-red-600">*</span></h1>
 						<input
 							type="text"
 							className="input input-bordered w-full"
 							name="permAdd"
+							placeholder="Permanent Address"
 							value={data.permAdd}
 							onChange={(e) => handleChange(e, setData)}
 						/>
@@ -186,14 +195,14 @@ const AddAdm = () => {
 				</div>
 				<div className="flex gap-3">
 					<div className="w-full">
-						<h1>ID Type:</h1>
+						<h1>ID Type <span className = "text-red-600">*</span></h1>
 						<select
 							className="select select-bordered w-full "
 							name="idType"
 							value={data.idType}
 							onChange={(e) => handleChange(e, setData)}
 						>
-							<option value=""></option>
+							<option value="--Please select one--" selected hidden>--Please select one--</option>
 							<option value="Passport">Passport</option>
 							<option value="Birth Certificate">Birth Certificate</option>
 							<option value="Police Clearance">Police Clearance</option>
@@ -205,11 +214,12 @@ const AddAdm = () => {
 						</select>
 					</div>
 					<div className="w-full">
-						<h1>ID No:</h1>
+						<h1>ID No. <span className = "text-red-600">*</span></h1>
 						<input
 							type="text"
 							className="input input-bordered w-full"
 							name="idNo"
+							placeholder="ID No."
 							value={data.idNo}
 							onChange={(e) => handleChange(e, setData)}
 						/>
@@ -224,6 +234,7 @@ const AddAdm = () => {
 								type="text"
 								className="input input-bordered w-full"
 								name="remarks"
+								placeholder="Remarks"
 							/>
 						</div>
 					</div>
@@ -239,15 +250,15 @@ const AddAdm = () => {
 						Submit
 					</a>
 						<div className="modal" id="confirmModal">
-						<div className="modal-box">
-							<p className="py-4">Are you sure that all the data are correct and valid?</p>
-							<div className="modal-action">
-								<a href="#" className="btn-secondary mt-10 rounded-lg py-2 px-3 w-max">BACK</a>
-								<button className="btn-primary mt-10 rounded-lg py-2 px-3 w-max" type="submit">
-									Confirm
-								</button>
+							<div className="modal-box">
+								<p className="py-4">Are you sure that all the data are correct and valid?</p>
+								<div className="modal-action">
+									<a href="#" className="btn-secondary mt-10 rounded-lg py-2 px-3 w-max">Back</a>
+									<button className="btn-primary mt-10 rounded-lg py-2 px-3 w-max" type="submit">
+										Confirm
+									</button>
+								</div>
 							</div>
-						</div>
 						</div>
 				</div>
 			</form>

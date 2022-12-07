@@ -36,14 +36,13 @@ const EditTransac = ({ id }: { id?: string }) => {
 	return (
 		<div className="card bg-base-100 shadow-xl p-5 w-[30rem] rounded-md ">
 			<form className="w-full flex flex-col" onSubmit={submit}>
-				<h1>Status:</h1>
+				<h1>Status <span className = "text-red-600">*</span></h1>
 				<select
 					className="select select-bordered w-full "
 					name="status"
 					value={transactionData.status}
 					onChange={(e) => handleChange(e, setTransactionData)}
 				>
-					<option value=""></option>
 					<option value="Pending">Pending</option>
 					<option value="Completed">Completed</option>
 					<option value="Cancelled">Cancelled</option>
@@ -61,7 +60,7 @@ const EditTransac = ({ id }: { id?: string }) => {
 						<div className="modal-box">
 							<p className="py-4">Are you sure that all the data are correct and valid?</p>
 							<div className="modal-action">
-								<a href="#" className="btn-secondary mt-10 rounded-lg py-2 px-3 w-max">BACK</a>
+								<a href="#" className="btn-secondary mt-10 rounded-lg py-2 px-3 w-max">Back</a>
 								<button className="btn-primary mt-10 rounded-lg py-2 px-3 w-max" type="submit">
 									Confirm
 								</button>

@@ -15,8 +15,13 @@ const useTransactionController = () => {
             });
         },
         async deleteAnnouncement(id: string) {
+            console.log(id);
             await model.deleteAnnoun(id);
         },
+
+        async checkID(id:string) {
+            console.log(id);
+        }
     };
 };
 

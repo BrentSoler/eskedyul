@@ -124,7 +124,7 @@ const UsersTable = () => {
 					value={statusFilter}
 					className="input input-bordered mt-3"
 				>
-					<option value=""></option>
+					<option value="--Please select one--" selected hidden>--Please select one--</option>
 					<option value="1">Activated</option>
 					<option value="0">Inactivated</option>
 				</select>

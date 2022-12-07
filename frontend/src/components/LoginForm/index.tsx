@@ -8,6 +8,10 @@ const LoginForm = () => {
 		uid: "",
 		upswd: "",
 	});
+	const [passwordShown, setPasswordShown] = useState(false);
+	const togglePassword = () => {
+		setPasswordShown(!passwordShown);
+	  };
 
 	function submitHandler(e: FormEvent) {
 		e.preventDefault();
@@ -21,6 +25,7 @@ const LoginForm = () => {
 			<input
 				type="number"
 				name="uid"
+				placeholder="Mobile Number"
 				autoComplete="off"
 				className="input input-bordered"
 				value={loginData.uid}
@@ -28,8 +33,9 @@ const LoginForm = () => {
 			/>
 			<h1>Password:</h1>
 			<input
-				type="password"
+				type={passwordShown ? "text" : "password"}
 				name="upswd"
+				placeholder="Password"
 				className="input input-bordered"
 				value={loginData.upswd}
 				onChange={(e) => handleChange(e, setLoginData)}
@@ -41,9 +47,9 @@ const LoginForm = () => {
 					</a>
 				</Link>
 			</div>
-			<button className="btn-primary mt-10 rounded-lg py-2 px-3 w-max self-end" type="submit">
-				Submit
-			</button>
+				<button className="btn-primary mt-10 rounded-lg py-2 px-3 w-max self-end" type="submit">
+					Submit
+				</button>
 		</form>
 	);
 };

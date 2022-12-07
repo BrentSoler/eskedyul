@@ -2,6 +2,7 @@ import { FormEvent, useEffect, useState } from "react";
 import handleChange from "../../../hooks/handleChange";
 import useFormController from "./formController";
 import { toast } from "react-toastify";
+import Link from "next/link";
 
 const EditForm = ({ id }: { id?: string }) => {
 	const [programData, setProgramData] = useState({
@@ -65,70 +66,68 @@ const EditForm = ({ id }: { id?: string }) => {
 	return (
 		<div className="card bg-base-100 shadow-xl p-5 w-[30rem] rounded-md">
 			<form className="w-full flex flex-col" onSubmit={submitProgram}>
-				<h1>Status:</h1>
+				<h1>Status <span className = "text-red-600">*</span></h1>
 				<select
 					className="select select-bordered w-full"
 					name="status"
 					value={programData.status}
 					onChange={(e) => handleChange(e, setProgramData)}
 				>
-					<option value=""></option>
 					<option value="Pending">Pending</option>
 					<option value="Ongoing">On Going</option>
 					<option value="Completed">Completed</option>
 				</select>
-				<h1>Name:</h1>
+				<h1>Name <span className = "text-red-600">*</span></h1>
 				<input
 					type="text"
 					name="name"
+					placeholder="Name"
 					autoComplete="off"
 					className="input input-bordered w-full"
 					value={programData.name}
 					onChange={(e) => handleChange(e, setProgramData)}
 				/>
 
-				<h1>Details:</h1>
+				<h1>Details <span className = "text-red-600">*</span></h1>
 				<textarea
 					name="details"
+					placeholder="Details"
 					className="input input-bordered w-full pt-3 min-h-[5rem]"
 					value={programData.details}
 					onChange={(e) => handleChange(e, setProgramData)}
 				/>
 
-				<h1>View:</h1>
+				<h1>View <span className = "text-red-600">*</span></h1>
 				<select
 					className="select select-bordered w-full"
 					name="view"
 					value={programData.view}
 					onChange={(e) => handleChange(e, setProgramData)}
 				>
-					<option value=""></option>
 					<option value="All">All</option>
 					<option value="Brgy. Admin">Brgy. Admin</option>
 					<option value="Admin">Admin</option>
 					<option value="Master Admin">Master Admin</option>
 				</select>
 
-				<h1>Qualification:</h1>
+				<h1>Qualification <span className = "text-red-600">*</span></h1>
 				<select
 					className="select select-bordered w-full"
 					name="qualification"
 					value={programData.qualification}
 					onChange={(e) => handleChange(e, setProgramData)}
 				>
-					<option value=""></option>
 					<option value="6months of Residency">6months of Residency</option>
 					<option value="Registered Voter">Registered Voter</option>
 				</select>
 
-				<h1>Type:</h1>
+				<h1>Type <span className = "text-red-600">*</span></h1>
 				<select
 					className="select select-bordered w-full"
 					name="type"
 					value={programData.type}
 					onChange={(e) => handleChange(e, setProgramData)}
 				>
-					<option value=""></option>
 					<option value="Goods Aid">Goods Aid</option>
 					<option value="Financial Aid">Financial Aid</option>
 					<option value="Goods & Financial Aid">Goods & Financial Aid</option>
@@ -137,10 +136,11 @@ const EditForm = ({ id }: { id?: string }) => {
 				<div className="divider">Add Schedule</div>
 				<div className="flex gap-3">
 					<div>
-						<h1>Location:</h1>
+						<h1>Location <span className = "text-red-600">*</span></h1>
 						<input
 							type="text"
 							name="location"
+							placeholder="Location"
 							autoComplete="off"
 							className="input input-bordered w-full"
 							value={schedData.location}
@@ -148,7 +148,7 @@ const EditForm = ({ id }: { id?: string }) => {
 						/>
 					</div>
 					<div>
-						<h1>Start Time:</h1>
+						<h1>Start Time <span className = "text-red-600">*</span></h1>
 						<input
 							type="time"
 							name="startTime"
@@ -159,7 +159,7 @@ const EditForm = ({ id }: { id?: string }) => {
 						/>
 					</div>
 					<div>
-						<h1>End Time:</h1>
+						<h1>End Time <span className = "text-red-600">*</span></h1>
 						<input
 							type="time"
 							name="endTime"
@@ -172,7 +172,7 @@ const EditForm = ({ id }: { id?: string }) => {
 				</div>
 				<div className="flex items-end gap-7">
 					<div className="w-full">
-						<h1>Date:</h1>
+						<h1>Date <span className = "text-red-600">*</span></h1>
 						<input
 							type="date"
 							name="date"
@@ -198,11 +198,11 @@ const EditForm = ({ id }: { id?: string }) => {
 										Time: {sched.startTime} - {sched.endTime}
 									</h1>
 								</div>
-								<button
-									className="btn-error btn-ghost p-3"
-									onClick={() => controller.deleteSched(sched.id)}
-									type="button"
-								>
+								<a href = "#confirmModal">
+									<button
+										className="btn-error btn-ghost p-3"
+										type="button"
+									>
 									<svg
 										xmlns="http://www.w3.org/2000/svg"
 										fill="none"
@@ -218,6 +218,24 @@ const EditForm = ({ id }: { id?: string }) => {
 										/>
 									</svg>
 								</button>
+								</a>
+
+								<div className="flex gap-3">
+									<div className="modal" id="confirmModal">
+										<div className="modal-box">
+											<p className="py-4">Are you sure that you want to delete this record?</p>
+											<div className="modal-action">
+												<a href="#" className="btn-secondary mt-10 rounded-lg py-2 px-3 w-max">Back</a>
+												<button className="btn-primary mt-10 rounded-lg py-2 px-3 w-max" 
+													onClick={() => controller.deleteSched(sched.id)}
+													type="submit"
+												>
+													Confirm
+												</button>
+											</div>
+										</div>
+									</div>
+								</div>
 							</div>
 							<div className="divider"></div>
 						</div>
@@ -228,6 +246,12 @@ const EditForm = ({ id }: { id?: string }) => {
 						<div className="divider"></div>
 					</>
 				)}
+				<div className="flex gap-3">
+					<Link href={`/dashboard/programs`}>
+						<button className="btn-secondary mt-10 rounded-lg py-2 px-3 w-max" type="submit">
+							Back
+						</button>
+					</Link>
 				<a href="#confirmModal" className="btn-primary mt-10 rounded-lg py-2 px-3 w-max" type="submit">
 						Submit
 					</a>
@@ -235,13 +259,14 @@ const EditForm = ({ id }: { id?: string }) => {
 						<div className="modal-box">
 							<p className="py-4">Are you sure that all the data are correct and valid?</p>
 							<div className="modal-action">
-								<a href="#" className="btn-secondary mt-10 rounded-lg py-2 px-3 w-max">BACK</a>
+								<a href="#" className="btn-secondary mt-10 rounded-lg py-2 px-3 w-max">Back</a>
 								<button className="btn-primary mt-10 rounded-lg py-2 px-3 w-max" type="submit">
 									Confirm
 								</button>
 							</div>
 						</div>
 						</div>
+				</div>
 			</form>
 		</div>
 	);

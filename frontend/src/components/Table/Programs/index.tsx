@@ -41,7 +41,7 @@ const ProgramsTable = () => {
 				);
 
 				const typeSort = viewSort.filter((d: any) =>
-					d.type.toString().includes(searchFilter.toString())
+					d.type.toString().toLowerCase().includes(searchFilter.toString().toLowerCase())
 				);
 
 				const qualificationSort = viewSort.filter((d: any) =>
@@ -105,7 +105,7 @@ const ProgramsTable = () => {
 							value={viewFilter}
 							className="input input-bordered mt-3"
 						>
-							<option value=""></option>
+							<option value="--Please select one--" selected hidden>--Please select one--</option>
 							<option value="Brgy. Admin">Brgy. Admin</option>
 							<option value="Admin">Admin</option>
 							<option value="Master Admin">Master Admin</option>
@@ -121,7 +121,7 @@ const ProgramsTable = () => {
 					value={statusFilter}
 					className="input input-bordered mt-3"
 				>
-					<option value=""></option>
+					<option value="--Please select one--" selected hidden>--Please select one--</option>
 					<option value="Pending">Pending</option>
 					<option value="Completed">Completed</option>
 					<option value="Cancelled">Cancelled</option>

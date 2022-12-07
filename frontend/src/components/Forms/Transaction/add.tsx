@@ -85,14 +85,14 @@ const AddTransac = () => {
 	return (
 		<div className="card bg-base-100 shadow-xl p-5 w-[30rem] rounded-md ">
 			<form className="w-full flex flex-col" onSubmit={submit}>
-				<h1>Programs:</h1>
+				<h1>Programs <span className = "text-red-600">*</span></h1>
 				<select
 					className="select select-bordered w-full "
 					name="programId"
 					value={transactionData.programId}
 					onChange={(e) => handleChangeProgram(e)}
 				>
-					<option value=""></option>
+					<option value="--Please select one--" selected hidden>--Please select one--</option>
 					{progSuccess && progData.data !== "No Data" ? (
 						progData.data.map((prog: any) => (
 							<option value={prog.id} key={prog.id}>
@@ -100,10 +100,10 @@ const AddTransac = () => {
 							</option>
 						))
 					) : (
-						<option value=""></option>
+						<option value="--No Data--">--No Data--</option>
 					)}
 				</select>
-				<h1 className="pt-1 pb-1">Beneficiary:</h1>
+				<h1 className="pt-1 pb-1">Beneficiary <span className = "text-red-600">*</span></h1>
 				<div className="h-5 pt-1 px-1 input input-bordered overflow-y-auto h-32 ...">
 					{transactionData.programId &&
 						names.map((resident: any,i:number) => (
@@ -133,14 +133,14 @@ const AddTransac = () => {
 						<div className="text-secondary">Select a program first</div>
 					}
 				</div>
-				<h1>Schedule:</h1>
+				<h1>Schedule <span className = "text-red-600">*</span></h1>
 				<select
 					className="select select-bordered w-full"
 					name="scheduleId"
 					value={transactionData.scheduleId}
 					onChange={(e) => handleChange(e, setTransactionData)}
 				>
-					<option value=""></option>
+					<option value="--Please select one--" selected hidden>--Please select one--</option>
 					{schedData && schedSuccess && schedData.data !== "No Data" ? (
 						schedData.schedule.map((sched: any) => (
 							<option value={sched.id} key={sched.id} className="flex flex-col h-max">
@@ -165,7 +165,7 @@ const AddTransac = () => {
 						<div className="modal-box">
 							<p className="py-4">Are you sure that all the data are correct and valid?</p>
 							<div className="modal-action">
-								<a href="#" className="btn-secondary mt-10 rounded-lg py-2 px-3 w-max">BACK</a>
+								<a href="#" className="btn-secondary mt-10 rounded-lg py-2 px-3 w-max">Back</a>
 								<button className="btn-primary mt-10 rounded-lg py-2 px-3 w-max" type="submit">
 									Confirm
 								</button>

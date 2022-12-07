@@ -6,7 +6,7 @@ export const SAnnouncements = z.object({
     .min(3, { message: "Title needs to be atleast 3 letters long" }),
   details: z
     .string()
-    .min(3, { message: "Title needs to be atleast 3 letters long" }),
+    .min(3, { message: "Details needs to be atleast 3 letters long" }),
   barangay: z.string(),
 });
 

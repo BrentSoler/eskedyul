@@ -49,14 +49,11 @@ const NavBar = ({ cb, visible }: { cb: any; visible: boolean }) => {
 					)
 				</h1>
 				<div className="flex">
+					<a href = "#logoutModal">
 					<button
 						type="button"
 						className="btn btn-ghost tooltip tooltip-bottom items-center flex w-min"
 						data-tip="Logout"
-						onClick={() => {
-							logout();
-							router.push("/");
-						}}
 					>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
@@ -73,6 +70,27 @@ const NavBar = ({ cb, visible }: { cb: any; visible: boolean }) => {
 							/>
 						</svg>
 					</button>
+					
+					<div className="flex gap-3">
+						<div className="modal" id="logoutModal">
+							<div className="modal-box">
+								<p className="py-4">Are you sure that you want to logout?</p>
+								<div className="modal-action">
+									<a href="#" className="btn-secondary mt-10 rounded-lg py-2 px-3 w-max">Back</a>
+										<button className="btn-primary mt-10 rounded-lg py-2 px-3 w-max" 
+											onClick={() => {
+													logout();
+													router.push("/");
+												}}													
+											type="submit"
+										>
+											Confirm
+										</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					</a>
 				</div>
 			</div>
 		</div>
