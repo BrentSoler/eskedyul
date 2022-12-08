@@ -4,6 +4,7 @@ import "react-responsive-combo-box/dist/index.css";
 import AuthStore from "../../../store/authStore";
 import useFormController from "./formController";
 import Link from "next/link";
+
 const AddAdm = () => {
 	const [data, setData] = useState({
 		role: "",
@@ -77,6 +78,7 @@ const AddAdm = () => {
 							value={data.password}
 							onChange={(e) => handleChange(e, setData)}
 						/>
+						
 					</div>
 					<div className="w-full">
 						<h1>Confirm Password <span className = "text-red-600">*</span></h1>

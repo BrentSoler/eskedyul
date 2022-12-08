@@ -203,6 +203,7 @@ const AddForm = () => {
 									<button
 										className="btn-error btn-ghost p-3"
 										type="button"
+										onClick={() => controller.deleteSched(sched.id)}
 									>
 									<svg
 										xmlns="http://www.w3.org/2000/svg"

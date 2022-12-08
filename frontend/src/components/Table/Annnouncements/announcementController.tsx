@@ -14,6 +14,7 @@ const useTransactionController = () => {
                 },
             });
         },
+        
         async deleteAnnouncement(id: string) {
             console.log(id);
             await model.deleteAnnoun(id);

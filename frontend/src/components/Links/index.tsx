@@ -1,8 +1,11 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
+import AuthStore from "../../store/authStore";
 
 const Links = () => {
 	const router = useRouter();
+	const role = AuthStore((state) => state.userData.role);
+
 	return (
 		<div className="flex flex-col items-start justify-center text-lg gap-4">
 			<Link href="/dashboard/landing">
@@ -102,6 +105,8 @@ const Links = () => {
 					Transactions
 				</a>
 			</Link>
+
+			{role !== "Master Admin" ? <></> :
 			<Link href="/dashboard/announcements">
 				<a
 					className={`${router.pathname.includes("/dashboard/announcements") ? "font-bold" : "font-light"
@@ -119,6 +124,7 @@ const Links = () => {
 					Announcements	
 				</a>
 			</Link>
+			}
 			<Link href="/dashboard/privacypolicy">
 				<a
 					className={`${router.pathname.includes("/dashboard/privacypolicy") ? "font-bold" : "font-light"

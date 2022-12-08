@@ -198,10 +198,10 @@ const EditForm = ({ id }: { id?: string }) => {
 										Time: {sched.startTime} - {sched.endTime}
 									</h1>
 								</div>
-								<a href = "#confirmModal">
 									<button
 										className="btn-error btn-ghost p-3"
 										type="button"
+										onClick={() => controller.deleteSched(sched.id)}
 									>
 									<svg
 										xmlns="http://www.w3.org/2000/svg"
@@ -218,16 +218,14 @@ const EditForm = ({ id }: { id?: string }) => {
 										/>
 									</svg>
 								</button>
-								</a>
 
-								<div className="flex gap-3">
+								{/* <div className="flex gap-3">
 									<div className="modal" id="confirmModal">
 										<div className="modal-box">
 											<p className="py-4">Are you sure that you want to delete this record?</p>
 											<div className="modal-action">
 												<a href="#" className="btn-secondary mt-10 rounded-lg py-2 px-3 w-max">Back</a>
 												<button className="btn-primary mt-10 rounded-lg py-2 px-3 w-max" 
-													onClick={() => controller.deleteSched(sched.id)}
 													type="submit"
 												>
 													Confirm
@@ -235,7 +233,7 @@ const EditForm = ({ id }: { id?: string }) => {
 											</div>
 										</div>
 									</div>
-								</div>
+								</div> */}
 							</div>
 							<div className="divider"></div>
 						</div>
