@@ -36,8 +36,8 @@ const TransactionTable = () => {
 					}
 					if (sortBy === "date") {
 						return sort === "asc"
-							? new Date(a.schedule.date) - new Date(b.schedule.date)
-							: new Date(b.schedule.date) - new Date(a.schedule.date);
+							? new Date(a.schedule.date).valueOf() - new Date(b.schedule.date).valueOf()
+							: new Date(b.schedule.date).valueOf() - new Date(a.schedule.date).valueOf();
 					}
 				});
 
