@@ -49,47 +49,50 @@ const NavBar = ({ cb, visible }: { cb: any; visible: boolean }) => {
 					)
 				</h1>
 				<div className="flex">
-					<a href = "#logoutModal">
-					<button
-						type="button"
-						className="btn btn-ghost tooltip tooltip-bottom items-center flex w-min"
-						data-tip="Logout"
-					>
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							fill="none"
-							viewBox="0 0 24 24"
-							strokeWidth={1.5}
-							stroke="currentColor"
-							className="w-6 h-6"
+					<a href="#logoutModal">
+						<button
+							type="button"
+							className="btn btn-ghost tooltip tooltip-bottom items-center flex w-min"
+							data-tip="Logout"
 						>
-							<path
-								strokeLinecap="round"
-								strokeLinejoin="round"
-								d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"
-							/>
-						</svg>
-					</button>
-					
-					<div className="flex gap-3">
-						<div className="modal" id="logoutModal">
-							<div className="modal-box">
-								<p className="py-4">Are you sure that you want to logout?</p>
-								<div className="modal-action">
-									<a href="#" className="btn-secondary mt-10 rounded-lg py-2 px-3 w-max">Back</a>
-										<button className="btn-primary mt-10 rounded-lg py-2 px-3 w-max" 
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								fill="none"
+								viewBox="0 0 24 24"
+								strokeWidth={1.5}
+								stroke="currentColor"
+								className="w-6 h-6"
+							>
+								<path
+									strokeLinecap="round"
+									strokeLinejoin="round"
+									d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"
+								/>
+							</svg>
+						</button>
+
+						<div className="flex gap-3">
+							<div className="modal" id="logoutModal">
+								<div className="modal-box">
+									<p className=" text-black">Are you sure that you want to logout?</p>
+									<div className="modal-action">
+										<a href="#" className="btn-secondary mt-10 rounded-lg py-2 px-3 w-max">
+											Back
+										</a>
+										<button
+											className="btn-primary mt-10 rounded-lg py-2 px-3 w-max"
 											onClick={() => {
-													logout();
-													router.push("/");
-												}}													
+												logout();
+												router.push("/");
+											}}
 											type="submit"
 										>
 											Confirm
 										</button>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
 					</a>
 				</div>
 			</div>

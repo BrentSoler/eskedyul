@@ -3,7 +3,7 @@ import Link from "next/link";
 import AuthStore from "../../../store/authStore";
 import useFormController from "../../Forms/Transaction/formController";
 import useTransactionController from "./userController";
-import ReactPaginate from 'react-paginate'
+import ReactPaginate from "react-paginate";
 
 const UsersTable = () => {
 	const brgyId = AuthStore((state) => state.userData.brgyId);
@@ -21,9 +21,8 @@ const UsersTable = () => {
 
 	const [activeIndex, setActiveIndex] = useState(1);
 	const handleClick = (index: number) => setActiveIndex(index);
-	const checkActive = (index: number, className: string) => activeIndex === index ? className : "";
-
-
+	const checkActive = (index: number, className: string) =>
+		activeIndex === index ? className : "";
 
 	// filter function useMemo
 	const handleFilteredData = useMemo(() => {
@@ -69,25 +68,27 @@ const UsersTable = () => {
 
 				return searchFilter === ""
 					? sorted
-					: [...new Set([...fnameSort, ...mnameSort, ...lnameSort, ...mobileNoSort, ...brgyIdSort])];
+					: [...new Set([...fnameSort, ...mnameSort, ...lnameSort, ...mobileNoSort, ...brgyIdSort])]
+							.length > 0
+					? [...new Set([...fnameSort, ...mnameSort, ...lnameSort, ...mobileNoSort, ...brgyIdSort])]
+					: "No Results Found";
 			}
 
 			return "No Data";
 		}
-		console.log("check data", data)
 	}, [data, isSuccess, searchFilter, roleFilter, statusFilter, sort]);
 
 	const handleRoleChange = (index: number, role: string) => {
 		handleClick(index);
 		setRoleFilter(role);
-		setItemOffset(0)
-	}
+		setItemOffset(0);
+	};
 	//PAGINATION
 	const [itemOffset, setItemOffset] = useState(0);
 	const itemsPerPage = 10;
 	const endOffset = itemOffset + itemsPerPage;
 	console.log(`Loading items from ${itemOffset} to ${endOffset}`);
-	console.log("check 1", handleFilteredData)
+	console.log("check 1", handleFilteredData);
 	let currentItems: any[] = [];
 	let pageCount = 0;
 	if (isSuccess === true && handleFilteredData !== "No data") {
@@ -98,16 +99,16 @@ const UsersTable = () => {
 	//@ts-ignore
 	const handlePageClick = (event) => {
 		const newOffset = (event.selected * itemsPerPage) % handleFilteredData.length;
-		console.log(
-			`User requested page number ${event.selected}, which is offset ${newOffset}`
-		);
+		console.log(`User requested page number ${event.selected}, which is offset ${newOffset}`);
 		setItemOffset(newOffset);
 	};
 	return (
 		<>
 			<div className="flex gap-3">
 				<input
-					placeholder={`Search Name, ${role === "Master Admin" ? "Barangay ID," : ""} or Mobile No.`}
+					placeholder={`Search Name, ${
+						role === "Master Admin" ? "Barangay ID," : ""
+					} or Mobile No.`}
 					type="text"
 					onChange={(e) => {
 						setSearchFilter(e.target.value);
@@ -124,43 +125,63 @@ const UsersTable = () => {
 					value={statusFilter}
 					className="input input-bordered mt-3"
 				>
-					<option value="--Please select one--" selected hidden>--Please select one--</option>
+					<option value="--Please select one--" selected hidden>
+						--Please select one--
+					</option>
 					<option value="1">Activated</option>
 					<option value="0">Inactivated</option>
 				</select>
 			</div>
 			<div className="w-full mt-4 mb-4 p-1 bg-base-200" />
 
-			{role !== "Brgy. Admin" ?
+			{role !== "Brgy. Admin" ? (
 				<>
-					<div className='w-full  mt-4 mb-4 p-1'>
-						<div className='p-0 grid'>
+					<div className="w-full  mt-4 mb-4 p-1">
+						<div className="p-0 grid">
 							<div className="tabs z-10 -mb-px">
-								<a className={`tab tab-lg gap-2 ${checkActive(1, "tab-active  tab-bordered")}`}
-									onClick={() => { handleRoleChange(1, "Resident") }}>
+								<a
+									className={`tab tab-lg gap-2 ${checkActive(1, "tab-active  tab-bordered")}`}
+									onClick={() => {
+										handleRoleChange(1, "Resident");
+									}}
+								>
 									Resident
 								</a>
-								<a className={`tab tab-lg gap-2 ${checkActive(2, "tab-active tab-bordered")}`}
-									onClick={() => { handleRoleChange(2, "Brgy. Admin") }}>
+								<a
+									className={`tab tab-lg gap-2 ${checkActive(2, "tab-active tab-bordered")}`}
+									onClick={() => {
+										handleRoleChange(2, "Brgy. Admin");
+									}}
+								>
 									Brgy. Admin
 								</a>
-								<a className={`tab tab-lg gap-2 ${checkActive(3, "tab-active tab-bordered")}`}
-									onClick={() => { handleRoleChange(3, "Admin") }}>
+								<a
+									className={`tab tab-lg gap-2 ${checkActive(3, "tab-active tab-bordered")}`}
+									onClick={() => {
+										handleRoleChange(3, "Admin");
+									}}
+								>
 									Admin
 								</a>
-								{role === "Admin" ? <></> :
-									<a className={`tab tab-lg gap-2 ${checkActive(4, "tab-active tab-bordered")}`}
-										onClick={() => { handleRoleChange(4, "Master Admin") }}>
+								{role === "Admin" ? (
+									<></>
+								) : (
+									<a
+										className={`tab tab-lg gap-2 ${checkActive(4, "tab-active tab-bordered")}`}
+										onClick={() => {
+											handleRoleChange(4, "Master Admin");
+										}}
+									>
 										Master Admin
 									</a>
-								}
+								)}
 							</div>
 						</div>
 					</div>
 				</>
-				:
+			) : (
 				<></>
-			}
+			)}
 			<div className="w-full mt-4 overflow-x-auto m-auto">
 				<table className="table w-full m-auto">
 					<thead>
@@ -217,7 +238,9 @@ const UsersTable = () => {
 								<td className="text-center"></td>
 							</tr>
 						)}
-						{isSuccess && handleFilteredData !== "No Data" ? (
+						{isSuccess &&
+						handleFilteredData !== "No Data" &&
+						handleFilteredData !== "No Results Found" ? (
 							currentItems.map((user: any) => (
 								<tr key={user.id}>
 									<td className="">{`${user.lname}, ${user.fname} ${user.mname}`}</td>
@@ -238,22 +261,46 @@ const UsersTable = () => {
 
 									<td>
 										<Link
-											href={`/dashboard/users/edit/${user.role === "Resident" ? "resident" : "admin"
-												}/${user.id}`}
+											href={`/dashboard/users/edit/${
+												user.role === "Resident" ? "resident" : "admin"
+											}/${user.id}`}
 										>
 											<a className="btn btn-ghost">Edit</a>
 										</Link>
 									</td>
 								</tr>
 							))
+						) : handleFilteredData === "No Results Found" ? (
+							<tr>
+								<td className="">No Results Found</td>
+								<td className="w-[15rem] truncate"></td>
+								<td className="w-[15rem] truncate"></td>
+
+								<td className="w-[15rem] truncate"></td>
+								<td className="text-center"></td>
+								<td className="w-[15rem] truncate"></td>
+
+								<td></td>
+							</tr>
 						) : (
-							<tr className="btn btn-ghost">No Data</tr>
+							<tr>
+								<td className="">No Data</td>
+								<td className="w-[15rem] truncate"></td>
+								<td className="w-[15rem] truncate"></td>
+
+								<td className="w-[15rem] truncate"></td>
+								<td className="text-center"></td>
+								<td className="w-[15rem] truncate"></td>
+
+								<td></td>
+							</tr>
 						)}
 					</tbody>
 				</table>
 			</div>
 			<div className="flex flex-row justify-center pt-2">
-				<ReactPaginate className="rounded-none"
+				<ReactPaginate
+					className="rounded-none"
 					breakLabel="..."
 					breakClassName="btn btn-md p-0 rounded-none border-none"
 					breakLinkClassName="btn btn-md bg-primary border-none rounded-none"
@@ -272,7 +319,6 @@ const UsersTable = () => {
 					activeClassName="btn btn-md bg-secondary"
 				/>
 			</div>
-
 		</>
 	);
 };
