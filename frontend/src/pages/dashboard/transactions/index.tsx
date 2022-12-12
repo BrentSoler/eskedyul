@@ -28,7 +28,27 @@ const ProgramsPage = () => {
 					</Link>
 				)}
 				{role === "Master Admin" && (
-					<button className="btn btn-primary" onClick={() => { exportTransactionsPDF(data) }}>Export PDF</button>
+					<a href = "#chooseModal">
+						<button className="btn btn-primary">Export PDF</button>
+						<div className="modal" id="chooseModal">
+							<div className="modal-box">
+								<p className="py-4">Choose a program to export: </p>
+								<select
+										className="select select-bordered w-full"
+										name="programId"
+									>
+										<option value =""></option>
+										<option value ="">Program</option>
+									</select>
+								<div className="modal-action">
+									<a href="#" className="btn-secondary mt-10 rounded-lg py-2 px-3 w-max">Back</a>
+									<button className="btn-primary mt-10 rounded-lg py-2 px-3 w-max" type="submit" onClick={() => { exportTransactionsPDF(data) }}>
+										Export
+									</button>
+								</div>
+							</div>
+						</div>
+					</a>		
 				)}
 			</div>
 

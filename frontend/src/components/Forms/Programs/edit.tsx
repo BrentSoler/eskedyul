@@ -182,7 +182,7 @@ const EditForm = ({ id }: { id?: string }) => {
 							onChange={(e) => handleChange(e, setSchedData)}
 						/>
 					</div>
-					<button className="btn-primary rounded-lg py-2 px-3" onClick={submitSched} type="button">
+					<button className="btn-primary rounded-lg py-2 px-3" onClick={submitSched} type="submit">
 						Add
 					</button>
 				</div>
@@ -227,6 +227,7 @@ const EditForm = ({ id }: { id?: string }) => {
 												<a href="#" className="btn-secondary mt-10 rounded-lg py-2 px-3 w-max">Back</a>
 												<button className="btn-primary mt-10 rounded-lg py-2 px-3 w-max" 
 													type="submit"
+													onClick = {() => controller.deleteSched(sched.id)}
 												>
 													Confirm
 												</button>
@@ -250,7 +251,7 @@ const EditForm = ({ id }: { id?: string }) => {
 							Back
 						</button>
 					</Link>
-				<a href="#confirmModal" className="btn-primary mt-10 rounded-lg py-2 px-3 w-max" type="submit">
+				<a href="#confirmModal" className="btn-primary mt-10 rounded-lg py-2 px-3 w-max" type="buttonsubmit">
 						Submit
 					</a>
 						<div className="modal" id="confirmModal">

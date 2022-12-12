@@ -1,7 +1,8 @@
 import { z } from "zod";
-import { DateTime } from "luxon";
 
-export const SCreateSchedule = z.object({
+
+export const SCreateSchedule = z.object(
+  {
   startTime: z.string(),
   endTime: z.string(),
   date: z.string(),

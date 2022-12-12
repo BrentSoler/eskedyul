@@ -4,6 +4,7 @@ import AuthStore from "../../../store/authStore";
 import useTransactionController from "./transactionController";
 import getStatusColor from "../../../hooks/useStatusColor";
 import ReactPaginate from 'react-paginate'
+
 const TransactionTable = () => {
 	const brgyId = AuthStore((state) => state.userData.brgyId);
 	const controller = useTransactionController();

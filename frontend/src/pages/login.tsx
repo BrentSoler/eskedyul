@@ -18,7 +18,7 @@ const Home: NextPage = () => {
 		<div className="hero min-h-screen bg-base-200">
 			<div className="hero-content flex flex-col lg:flex-row items-center justify-between">
 				<div className="text-center lg:text-right">
-					<h1 className="font-bold text-5xl text-primary">ESKEDYUL</h1>
+					<h1 className="font-bold text-5xl text-primary">E-SKEDYUL</h1>
 					<h1 className="p-1">Office of Senior Citizens Affairs - Manila.</h1>
 				</div>
 				<div className="card flex-shrink-0 w-[23rem] shadow-2xl bg-base-100">
