@@ -47,12 +47,14 @@ const ForgotPasswordForm = () => {
                         type={passwordType}
                         name="upswd"
                         placeholder="Password"
-                        className="input input-bordered"
+                        className="input input-bordered border-r-0 rounded-r-none w-full"
                         value={forgotLoginData.upswd}
                         onChange={(e) => handleChange(e, setForgotLoginData)}
                     />
                     
-                    <button className="btn btn-ghost" onClick={togglePassword} type="button">
+                    <button className="input input-bordered border-l-0 rounded-l-none" 
+                        onClick={togglePassword} 
+                        type="button">
                     { passwordType==="password"? 
                         <svg 
                         xmlns="http://www.w3.org/2000/svg" 
