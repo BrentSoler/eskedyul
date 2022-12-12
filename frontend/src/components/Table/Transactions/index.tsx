@@ -10,6 +10,7 @@ const TransactionTable = () => {
 	const brgyId = AuthStore((state) => state.userData.brgyId);
 	const controller = useTransactionController();
 	const role = AuthStore((state) => state.userData.role);
+	const [id, setID] = useState();
 	const { data, isSuccess, isLoading, refetch } = controller.getTransaction(brgyId);
 
 	const [searchFilter, setSearchFilter] = useState("");
@@ -154,8 +155,8 @@ const TransactionTable = () => {
 				<table className="table w-full m-auto">
 					<thead>
 						<tr>
-							<th className="sticky top-0 px-6 py-3">ID</th>
-							<th className="sticky top-0 px-6 py-3 flex justify-between items-center">
+							<th className="top-0 px-6 py-3">ID</th>
+							<th className="top-0 px-6 py-3 flex justify-between items-center">
 								BENEFICIARY
 								<label className="swap swap-rotate">
 									<input
@@ -197,8 +198,8 @@ const TransactionTable = () => {
 									</svg>
 								</label>
 							</th>
-							<th className="sticky top-0 px-6 py-3">BRGY. ID</th>
-							<th className="sticky top-0 px-6 py-3 flex justify-between items-center">
+							<th className="top-0 px-6 py-3">BRGY. ID</th>
+							<th className="top-0 px-6 py-3 flex justify-between items-center">
 								Program Name
 								<label className="swap swap-rotate">
 									<input
@@ -240,8 +241,8 @@ const TransactionTable = () => {
 									</svg>
 								</label>
 							</th>
-							<th className="sticky top-0 px-6 py-3">LOCATION</th>
-							<th className="sticky top-0 px-6 py-3 flex justify-between items-center">
+							<th className="top-0 px-6 py-3">LOCATION</th>
+							<th className="top-0 px-6 py-3 flex justify-between items-center">
 								Date
 								<label className="swap swap-rotate">
 									<input
@@ -281,8 +282,8 @@ const TransactionTable = () => {
 									</svg>
 								</label>
 							</th>
-							<th className="sticky top-0 px-6 py-3 w-[5rem]">time</th>
-							<th className="sticky top-0 px-6 py-3 w-[8rem]">STATUS</th>
+							<th className="top-0 px-6 py-3 w-[5rem]">time</th>
+							<th className="top-0 px-6 py-3 w-[8rem]">STATUS</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -337,62 +338,114 @@ const TransactionTable = () => {
 											<label
 												tabIndex={999}
 												className={`card p-0 px-1 py-1 ${getStatusColor(`${transaction.status}`)}`}
+												onClick={() => setID(transaction.id)}
 											>
 												{transaction.status}
 											</label>
 
-											{role === "Brgy. Admin" && (
+											{role === "Brgy. Admin" && id === transaction.id ? (
 												<ul
 													tabIndex={999}
 													className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 text-black "
 												>
-													<li
-														onClick={() => {
-															formController.updateTransaction({
-																id: transaction.id,
-																residentId: transaction.residentId,
-																scheduleId: transaction.scheduleId,
-																programId: transaction.programId,
-																status: "Pending",
-															});
-															setTimeout(() => refetch(), 500);
-														}}
-													>
-														<a>Pending</a>
+													<li>
+														<label htmlFor={transaction.id + "Pending"}>Pending</label>
 													</li>
-													<li
-														onClick={() => {
-															formController.updateTransaction({
-																id: transaction.id,
-																residentId: transaction.residentId,
-																scheduleId: transaction.scheduleId,
-																programId: transaction.programId,
-																status: "Completed",
-															});
-
-															setTimeout(() => refetch(), 500);
-														}}
-													>
-														<a>Completed</a>
+													<li>
+														<label htmlFor={transaction.id + "Completed"}>Completed</label>
 													</li>
-													<li
-														onClick={() => {
-															formController.updateTransaction({
-																id: transaction.id,
-																residentId: transaction.residentId,
-																scheduleId: transaction.scheduleId,
-																programId: transaction.programId,
-																status: "Cancelled",
-															});
-															setTimeout(() => refetch(), 500);
-														}}
-													>
-														<a>Cancelled</a>
+													<li>
+														<label htmlFor={transaction.id + "Cancelled"}>Cancelled</label>
 													</li>
 												</ul>
+											) : (
+												<></>
 											)}
 										</div>
 									</td>
+
+									<input type="checkbox" id={transaction.id + "Pending"} className="modal-toggle" />
+									<label htmlFor={transaction.id + "Pending"} className="modal cursor-pointer">
+										<label className="modal-box relative" htmlFor="">
+											<h3 className="text-lg ">Are you sure you want to update?</h3>
+											<div className="modal-action">
+												<label
+													className="btn btn-primary"
+													onClick={() => {
+														formController.updateTransaction({
+															id: transaction.id,
+															residentId: transaction.residentId,
+															scheduleId: transaction.scheduleId,
+															programId: transaction.programId,
+															status: "Pending",
+														});
+														setTimeout(() => refetch(), 1000);
+													}}
+													htmlFor={transaction.id + "Pending"}
+												>
+													Confirm
+												</label>
+											</div>
+										</label>
+									</label>
+
+									<input
+										type="checkbox"
+										id={transaction.id + "Completed"}
+										className="modal-toggle"
+									/>
+									<label htmlFor={transaction.id + "Completed"} className="modal cursor-pointer">
+										<label className="modal-box relative" htmlFor="">
+											<h3 className="text-lg ">Are you sure you want to update?</h3>
+											<div className="modal-action">
+												<label
+													className="btn btn-primary"
+													onClick={() => {
+														formController.updateTransaction({
+															id: transaction.id,
+															residentId: transaction.residentId,
+															scheduleId: transaction.scheduleId,
+															programId: transaction.programId,
+															status: "Completed",
+														});
+														setTimeout(() => refetch(), 1000);
+													}}
+													htmlFor={transaction.id + "Completed"}
+												>
+													Confirm
+												</label>
+											</div>
+										</label>
+									</label>
+
+									<input
+										type="checkbox"
+										id={transaction.id + "Cancelled"}
+										className="modal-toggle"
+									/>
+									<label htmlFor={transaction.id + "Cancelled"} className="modal cursor-pointer">
+										<label className="modal-box relative" htmlFor="">
+											<h3 className="text-lg ">Are you sure you want to update?</h3>
+											<div className="modal-action">
+												<label
+													className="btn btn-primary"
+													onClick={() => {
+														formController.updateTransaction({
+															id: transaction.id,
+															residentId: transaction.residentId,
+															scheduleId: transaction.scheduleId,
+															programId: transaction.programId,
+															status: "Cancelled",
+														});
+														setTimeout(() => refetch(), 1000);
+													}}
+													htmlFor={transaction.id + "Cancelled"}
+												>
+													Confirm
+												</label>
+											</div>
+										</label>
+									</label>
 								</tr>
 							))
 						) : handleFilteredData === "No Results Found" ? (
