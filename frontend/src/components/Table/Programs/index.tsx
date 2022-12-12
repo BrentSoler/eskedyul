@@ -3,7 +3,7 @@ import Link from "next/link";
 import AuthStore from "../../../store/authStore";
 import useProgramController from "./programController";
 import getStatusColor from "../../../hooks/useStatusColor";
-import ReactPaginate from 'react-paginate'
+import ReactPaginate from "react-paginate";
 const ProgramsTable = () => {
 	const brgyId = AuthStore((state) => state.userData.brgyId);
 	const role = AuthStore((state) => state.userData.role);
@@ -56,7 +56,9 @@ const ProgramsTable = () => {
 
 				return searchFilter === ""
 					? viewSort
-					: [...new Set([...nameSort, ...typeSort, ...qualificationSort, ...brgyIdSort])];
+					: [...new Set([...nameSort, ...typeSort, ...qualificationSort, ...brgyIdSort])].length > 0
+					? [...new Set([...nameSort, ...typeSort, ...qualificationSort, ...brgyIdSort])]
+					: "No Results Found";
 			}
 			return "No Data";
 		}
@@ -66,7 +68,7 @@ const ProgramsTable = () => {
 	const itemsPerPage = 10;
 	const endOffset = itemOffset + itemsPerPage;
 	console.log(`Loading items from ${itemOffset} to ${endOffset}`);
-	console.log("check 1", handleFilteredData)
+	console.log("check 1", handleFilteredData);
 	let currentItems: any[] = [];
 	let pageCount = 0;
 	if (isSuccess === true && handleFilteredData !== "No data") {
@@ -77,16 +79,16 @@ const ProgramsTable = () => {
 	//@ts-ignore
 	const handlePageClick = (event) => {
 		const newOffset = (event.selected * itemsPerPage) % handleFilteredData.length;
-		console.log(
-			`User requested page number ${event.selected}, which is offset ${newOffset}`
-		);
+		console.log(`User requested page number ${event.selected}, which is offset ${newOffset}`);
 		setItemOffset(newOffset);
 	};
 	return (
 		<>
 			<div className="flex gap-3">
 				<input
-					placeholder={`Search Name, ${role === "Master Admin" ? "Barangay ID," : ""} Type or Qualifications.`}
+					placeholder={`Search Name, ${
+						role === "Master Admin" ? "Barangay ID," : ""
+					} Type or Qualifications.`}
 					type="text"
 					onChange={(e) => {
 						setSearchFilter(e.target.value);
@@ -105,7 +107,9 @@ const ProgramsTable = () => {
 							value={viewFilter}
 							className="input input-bordered mt-3"
 						>
-							<option value="--Please select one--" selected hidden>--Please select one--</option>
+							<option value="--Please select one--" selected hidden>
+								--Please select one--
+							</option>
 							<option value="Brgy. Admin">Brgy. Admin</option>
 							<option value="Admin">Admin</option>
 							<option value="Master Admin">Master Admin</option>
@@ -121,7 +125,9 @@ const ProgramsTable = () => {
 					value={statusFilter}
 					className="input input-bordered mt-3"
 				>
-					<option value="--Please select one--" selected hidden>--Please select one--</option>
+					<option value="--Please select one--" selected hidden>
+						--Please select one--
+					</option>
 					<option value="Pending">Pending</option>
 					<option value="Completed">Completed</option>
 					<option value="Cancelled">Cancelled</option>
@@ -185,7 +191,9 @@ const ProgramsTable = () => {
 								<td className="text-center"></td>
 							</tr>
 						)}
-						{isSuccess && handleFilteredData !== "No Data" ? (
+						{isSuccess &&
+						handleFilteredData !== "No Data" &&
+						handleFilteredData !== "No Results Found" ? (
 							currentItems.map((program: any) => (
 								<tr key={program.id}>
 									<td className="">{program.name}</td>
@@ -207,26 +215,29 @@ const ProgramsTable = () => {
 									)}
 									{role === "Master Admin" && (
 										<td>
-											{/* <a href="#confirmModal" className="btn-primary mt-10 rounded-lg py-2 px-3 w-max" type="submit">
-												Delete
-											</a>
-												<div className="modal" id="confirmModal">
-													<div className="modal-box">
-														<p className="py-4">Are you sure that you want to delete this record?</p>
-														<div className="modal-action">
-															<a href="#" className="btn-secondary mt-10 rounded-lg py-2 px-3 w-max">Back</a>
-															<button className="btn-primary mt-10 rounded-lg py-2 px-3 w-max" 
-																	type="submit" 
-																 onClick={() => controller.deleteProgram(program.id)}>
-																Confirm
-															</button>
-														</div>
+											<input type="checkbox" id={program.id} className="modal-toggle" />
+											<div className="modal" id={program.id}>
+												<div className="modal-box">
+													<p className="py-4">Are you sure that you want to delete this record?</p>
+													<div className="modal-action">
+														<label
+															htmlFor={program.id}
+															className="btn-secondary mt-10 rounded-lg py-2 px-3 w-max"
+														>
+															Back
+														</label>
+														<button
+															className="btn-primary mt-10 rounded-lg py-2 px-3 w-max"
+															type="submit"
+															onClick={() => controller.deleteProgram(program.id)}
+														>
+															Confirm
+														</button>
 													</div>
-												</div> */}
-											 <button
-												className="btn btn-ghost"
-												onClick={() => controller.deleteProgram(program.id)}
-											>
+												</div>
+											</div>
+
+											<label htmlFor={program.id} className="btn btn-ghost">
 												<svg
 													xmlns="http://www.w3.org/2000/svg"
 													fill="none"
@@ -241,19 +252,42 @@ const ProgramsTable = () => {
 														d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
 													/>
 												</svg>
-											</button> 
+											</label>
 										</td>
 									)}
 								</tr>
 							))
+						) : handleFilteredData === "No Results Found" ? (
+							<tr>
+								<td className="">No Results Found</td>
+								<td className="w-[15rem] truncate"></td>
+								<td className="w-[15rem] truncate"></td>
+
+								<td className="w-[15rem] truncate"></td>
+								<td className="text-center"></td>
+								<td className="w-[15rem] truncate"></td>
+
+								<td></td>
+							</tr>
 						) : (
-							<tr className="btn btn-ghost">No Data</tr>
+							<tr>
+								<td className="">No Data</td>
+								<td className="w-[15rem] truncate"></td>
+								<td className="w-[15rem] truncate"></td>
+
+								<td className="w-[15rem] truncate"></td>
+								<td className="text-center"></td>
+								<td className="w-[15rem] truncate"></td>
+
+								<td></td>
+							</tr>
 						)}
 					</tbody>
 				</table>
 			</div>
 			<div className="flex flex-row justify-center pt-2">
-				<ReactPaginate className="rounded-none"
+				<ReactPaginate
+					className="rounded-none"
 					breakLabel="..."
 					breakClassName="btn btn-md p-0 rounded-none border-none"
 					breakLinkClassName="btn btn-md bg-primary border-none rounded-none"

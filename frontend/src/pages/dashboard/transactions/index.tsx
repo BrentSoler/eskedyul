@@ -1,17 +1,24 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import TransactionTable from "../../../components/Table/Transactions";
 import AuthStore from "../../../store/authStore";
 import useTransactionController from "../../../components/Table/Transactions/transactionController";
 import { exportTransactionsPDF } from "../../../hooks/useExportPdf";
+import useProgramController from "../../../components/Table/Programs/programController";
+
 const ProgramsPage = () => {
 	const router = useRouter();
 	const token = AuthStore((state) => state.userData.token);
 	const role = AuthStore((state) => state.userData.role);
 	const brgyId = AuthStore((state) => state.userData.brgyId);
+	const programController = useProgramController(brgyId);
 	const controller = useTransactionController();
 	const { data } = controller.getTransaction(brgyId);
+	const [program, setProgram] = useState("");
+
+	const { data: progData, isSuccess } = programController.getPrograms(brgyId);
+
 	useEffect(() => {
 		if (token === "") {
 			router.push("/");
@@ -28,31 +35,47 @@ const ProgramsPage = () => {
 					</Link>
 				)}
 				{role === "Master Admin" && (
-					<a href = "#chooseModal">
-						<button className="btn btn-primary">Export PDF</button>
-						<div className="modal" id="chooseModal">
-							<div className="modal-box">
-								<p className="py-4">Choose a program to export: </p>
-								<select
-										className="select select-bordered w-full"
-										name="programId"
-									>
-										<option value =""></option>
-										<option value ="">Program</option>
-									</select>
-								<div className="modal-action">
-									<a href="#" className="btn-secondary mt-10 rounded-lg py-2 px-3 w-max">Back</a>
-									<button className="btn-primary mt-10 rounded-lg py-2 px-3 w-max" type="submit" onClick={() => { exportTransactionsPDF(data) }}>
-										Export
-									</button>
-								</div>
-							</div>
-						</div>
-					</a>		
+					<label className="btn btn-primary" htmlFor="TransacPDF">
+						Export PDF
+					</label>
 				)}
 			</div>
 
 			<TransactionTable />
+
+			<input type="checkbox" id="TransacPDF" className="modal-toggle" />
+			<label htmlFor="TransacPDF" className="modal cursor-pointer">
+				<label className="modal-box relative" htmlFor="">
+					<p className="py-4">Select a program to export: </p>
+					<select
+						className="select select-bordered w-full max-w-xs"
+						onChange={(e) => {
+							setProgram(e.target.value);
+						}}
+					>
+					<option value="--Please select one--" selected hidden>--Please select one--</option>
+						{isSuccess &&
+							progData.data.map((program: any) => (
+								<option key={program.id} value={program.name}>
+									{program.name}
+								</option>
+							))}
+					</select>
+					<p className="py-4">
+						<div className ="modal-action">
+						<label
+							className="btn btn-primary rounded-lg py-2 px-3 w-max self-end"
+							onClick={() => {
+								exportTransactionsPDF(data, program);
+							}}
+							htmlFor="TransacPDF"
+						>
+							Print PDF
+						</label>
+						</div>
+					</p>
+				</label>
+			</label>
 		</div>
 	);
 };

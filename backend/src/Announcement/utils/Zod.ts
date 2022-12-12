@@ -1,5 +1,6 @@
 import { z } from "zod";
 
+
 export const SAnnouncements = z.object({
   title: z
     .string()
