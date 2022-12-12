@@ -173,7 +173,7 @@ const AddForm = () => {
 							onChange={(e) => handleChange(e, setSchedData)}
 						/>
 					</div>
-					<a href="#addModal" className="btn-primary mt-10 rounded-lg py-2 px-3 w-max self-endbtn-primary rounded-lg py-2 px-3" type="submit">
+					<a href="#addModal" className="btn-primary mt-10 rounded-lg py-2 px-3 w-max self-end" type="submit">
 						Add
 					</a>
 						<div className="modal" id="addModal">
@@ -181,7 +181,7 @@ const AddForm = () => {
 							<p className="py-4">Are you sure that all the data are correct and valid?</p>
 							<div className="modal-action">
 								<a href="#" className="btn-secondary mt-10 rounded-lg py-2 px-3 w-max">Back</a>
-								<button className="btn-primary mt-10 rounded-lg py-2 px-3 w-max" onClick={submitSched} type="submit">
+								<button className="btn-primary mt-10 rounded-lg py-2 px-3 w-max" onClick={submitSched} type="button">
 									Confirm
 								</button>
 							</div>
