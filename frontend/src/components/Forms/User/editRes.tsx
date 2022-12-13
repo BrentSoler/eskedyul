@@ -296,6 +296,8 @@ const EditRes = ({ id }: { id?: string }) => {
 							type="date"
 							className="input input-bordered w-full"
 							name="birthdate"
+							min = "1922-01-01"
+							max = "1962-12-13"
 							value={residentData.birthdate}
 							onChange={(e) => handleChange(e, setResidentData)}
 						/>
